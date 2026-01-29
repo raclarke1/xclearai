@@ -10,10 +10,10 @@ The Utah business landscape is evolving faster than ever. From the tech corridor
 
 ## The Problem with Traditional IT
 
-Most small businesses still rely on "break-fix" IT support—something breaks, you call someone, they fix it. This approach has three major problems:
+Most small businesses still rely on "break-fix" IT support—something breaks, you call someone, they fix it. According to [Gartner's research](https://www.gartner.com/en/information-technology), this reactive approach costs businesses 3-4x more than proactive managed services. This approach has three major problems:
 
 1. **Reactive, not proactive** — By the time you notice an issue, damage is already done
-2. **Expensive downtime** — Every hour your systems are down costs money
+2. **Expensive downtime** — [Industry estimates](https://www.ibm.com/reports/data-breach) put the average cost of IT downtime at $5,600 per minute for small businesses
 3. **No strategic value** — Your IT person fixes problems but doesn't help you grow
 
 Sound familiar? You're not alone. We hear this from Utah business owners every week.
@@ -28,12 +28,14 @@ Traditional monitoring tools flood you with alerts. AI-powered monitoring learns
 
 ### Cybersecurity That Adapts
 
-Utah businesses face the same cyber threats as Fortune 500 companies, but without the security budget. AI levels the playing field by:
+Utah businesses face the same cyber threats as Fortune 500 companies, but without the security budget. According to [CISA's 2025 threat report](https://www.cisa.gov/topics/cyber-threats-and-advisories), small businesses are increasingly targeted because attackers know they have weaker defenses. AI levels the playing field by:
 
 - Detecting unusual patterns that signal a breach
 - Automatically blocking suspicious activity
 - Learning from global threat data in real-time
 - Adapting to new attack methods instantly
+
+The [FBI's Internet Crime Complaint Center (IC3)](https://www.ic3.gov/) reports that business email compromise alone cost companies over $2.9 billion in 2023. AI-powered email security can catch these attacks before they succeed.
 
 ### Automation That Saves Hours
 
