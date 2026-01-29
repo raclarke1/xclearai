@@ -1,58 +1,122 @@
-# XclearAI - AI Automation for Small Business
+# XclearAI - IT Services & AI Automation
+# Utah's Premier AI-Powered IT Company
+# https://xclearai.com
 
-> XclearAI deploys intelligent AI assistants for small businesses in Utah and nationwide. We automate email management, scheduling, customer support, and repetitive tasks so business owners can focus on growth.
+> XclearAI is a Utah-based IT company and managed service provider (MSP) that combines traditional IT services with cutting-edge AI automation. We help small and medium businesses future-proof their technology infrastructure.
 
 ## Company Overview
 
 - **Name:** XclearAI
-- **Location:** Utah, USA
+- **Type:** IT Services Company / Managed Service Provider (MSP)
+- **Location:** Lehi, Utah (serving Salt Lake City, Provo, and nationwide)
 - **Phone:** (385) 336-6005
 - **Email:** info@xclearai.com
 - **Website:** https://xclearai.com
 
-## What We Do
+## IT Services
 
-XclearAI provides AI automation services for small businesses. We deploy custom AI assistants that handle:
+### Managed IT Services
+- 24/7 monitoring and support
+- Proactive maintenance
+- Help desk support
+- IT infrastructure management
+- Vendor management
 
-1. **Email Management** - Inbox triage, prioritization, automated responses
-2. **Scheduling & Booking** - 24/7 appointment scheduling without phone tag
-3. **Customer Support** - AI chatbots that answer FAQs instantly
-4. **Document Processing** - Forms, intake, data entry automation
-5. **Follow-up Automation** - Never miss a lead or deadline
-6. **CRM Integration** - Keep systems synced and data current
+### Cybersecurity
+- Firewall management
+- Threat detection and response
+- Security audits and assessments
+- Employee security training
+- Compliance support (HIPAA, PCI, SOC2)
 
-## Industries We Serve
+### Cloud Services
+- Cloud migration
+- Microsoft 365 / Google Workspace
+- Cloud backup and disaster recovery
+- Hybrid cloud solutions
+
+### Network Solutions
+- Enterprise networking
+- WiFi solutions
+- SD-WAN
+- Network security
+
+### VoIP & Communications
+- Business phone systems
+- Unified communications
+- Video conferencing
+- Call center solutions
+
+### IT Consulting
+- Technology roadmapping
+- Digital transformation
+- IT budgeting and planning
+- Vendor selection
+
+## AI Automation Services
+
+### Email Management
+- AI-powered inbox triage
+- Automatic categorization
+- Smart response suggestions
+- Priority alerts
+
+### Intelligent Scheduling
+- 24/7 appointment booking
+- Calendar integration
+- Automatic reminders
+- Rescheduling automation
+
+### Customer Support Bots
+- AI chatbots for FAQs
+- Lead qualification
+- Ticket routing
+- 24/7 availability
+
+### Workflow Automation
+- Business process automation
+- CRM integration
+- Document processing
+- Task automation
+
+## Why XclearAI?
+
+1. **AI-Powered IT** - We use AI to proactively prevent issues, not just react
+2. **Local Utah Team** - Based in Lehi, serving the Wasatch Front and beyond
+3. **Future-Proof Approach** - Stay ahead of technology trends
+4. **Small Business Focus** - Right-sized solutions, not enterprise bloat
+5. **Combined Expertise** - Traditional IT + modern AI automation
+
+## Industries Served
 
 - Law Firms
-- Real Estate Agencies
 - Medical & Dental Practices
+- Real Estate
 - Accounting Firms
-- Contractors & Home Services
+- Contractors
 - Insurance Agencies
-- Consulting Firms
-- Property Management Companies
-
-## How It Works
-
-1. **Discovery Call** - 30-minute consultation to understand your workflows
-2. **Custom Setup** - We configure AI with your tools, voice, and processes
-3. **Go Live** - Your AI starts working; we monitor and optimize continuously
-
-## Why Choose XclearAI
-
-- Utah-based company with local support
-- Custom AI solutions (not one-size-fits-all)
-- Quick deployment (days, not months)
-- Ongoing optimization and support
-- Focus on small business needs and budgets
+- Property Management
+- Professional Services
 
 ## Contact
 
-Ready to automate your business? 
+Ready to future-proof your IT?
 
-- Schedule a consultation: https://xclearai.com/contact
-- Call us: (385) 336-6005
+- Schedule consultation: https://xclearai.com/contact
+- Call: (385) 336-6005
 - Email: info@xclearai.com
+
+## Service Areas
+
+- Lehi, UT
+- Salt Lake City, UT
+- Provo, UT
+- Orem, UT
+- Sandy, UT
+- Draper, UT
+- American Fork, UT
+- Pleasant Grove, UT
+- Nationwide (remote support)
 
 ## Pages
 
@@ -60,4 +124,7 @@ Ready to automate your business?
 - Services: https://xclearai.com/services
 - About: https://xclearai.com/about
 - Contact: https://xclearai.com/contact
-- Existing Customers (Xclear Networks): https://xclearai.com/existing-customers
+
+## Keywords
+
+IT services Utah, managed IT services, MSP Utah, managed service provider, IT company Utah, AI automation, cybersecurity Utah, cloud services Utah, IT support Lehi, IT consulting Salt Lake City, future-proof IT, AI-powered IT, small business IT support

@@ -8,21 +8,27 @@ interface Props {
 
 const { 
   title, 
-  description = "AI automation for small businesses. We deploy intelligent assistants that handle emails, scheduling, and repetitive tasks — so you can focus on growth.",
+  description = "Utah's premier AI-powered IT company. Managed IT services, cybersecurity, cloud solutions, and intelligent automation for small businesses. Future-proof your business with XclearAI.",
   canonical = Astro.url.href,
-  image = "https://xclearai.com/og-image.png"
+  image = "https://xclearai.com/og-image.png",
+  keywords = ""
 } = Astro.props;
 
 const siteTitle = `${title} | XclearAI`;
 const siteName = "XclearAI";
 
-// JSON-LD Structured Data
+// Default keywords - IT + AI focused
+const defaultKeywords = "IT services Utah, managed IT services, MSP Utah, IT company Utah, AI automation, managed service provider, IT support Utah, cybersecurity Utah, cloud services, AI-powered IT, future-proof IT, small business IT, IT consulting Utah, network solutions, business automation, IT infrastructure, tech support Utah, Lehi IT company, Salt Lake City IT services";
+const finalKeywords = keywords || defaultKeywords;
+
+// JSON-LD Structured Data - Enhanced for IT Services
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "ProfessionalService"],
   "@id": "https://xclearai.com/#organization",
   "name": "XclearAI",
-  "description": "AI automation for small businesses. We deploy intelligent assistants that handle emails, scheduling, and repetitive tasks.",
+  "alternateName": ["Xclear AI", "XclearAI IT Services"],
+  "description": "Utah-based IT company offering managed IT services, cybersecurity, cloud solutions, and AI-powered business automation. We help small businesses future-proof their technology.",
   "url": "https://xclearai.com",
   "logo": "https://xclearai.com/favicon.svg",
   "image": "https://xclearai.com/og-image.png",
@@ -30,10 +36,33 @@ const organizationSchema = {
   "email": "info@xclearai.com",
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Utah",
+    "streetAddress": "2600 N Ashton Blvd #200B",
+    "addressLocality": "Lehi",
+    "addressRegion": "UT",
+    "postalCode": "84043",
     "addressCountry": "US"
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 40.4141,
+    "longitude": -111.8508
+  },
   "areaServed": [
+    {
+      "@type": "City",
+      "name": "Lehi",
+      "containedInPlace": { "@type": "State", "name": "Utah" }
+    },
+    {
+      "@type": "City", 
+      "name": "Salt Lake City",
+      "containedInPlace": { "@type": "State", "name": "Utah" }
+    },
+    {
+      "@type": "City",
+      "name": "Provo",
+      "containedInPlace": { "@type": "State", "name": "Utah" }
+    },
     {
       "@type": "State",
       "name": "Utah"
@@ -51,44 +80,126 @@ const organizationSchema = {
     "closes": "17:00"
   },
   "sameAs": [],
-  "serviceType": [
+  "knowsAbout": [
+    "Managed IT Services",
+    "Cybersecurity",
+    "Cloud Computing",
     "AI Automation",
-    "Business Process Automation",
-    "Email Management",
-    "Customer Support Automation",
-    "Appointment Scheduling"
-  ]
+    "Network Infrastructure",
+    "VoIP Systems",
+    "IT Consulting",
+    "Business Process Automation"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "IT and AI Services",
+    "itemListElement": [
+      {
+        "@type": "OfferCatalog",
+        "name": "IT Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Managed IT Services" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cybersecurity Solutions" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Cloud Services" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Network Solutions" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "VoIP & Communications" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "IT Consulting" } }
+        ]
+      },
+      {
+        "@type": "OfferCatalog",
+        "name": "AI Automation",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Email Management Automation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Intelligent Scheduling" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Customer Support Bots" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Workflow Automation" } }
+        ]
+      }
+    ]
+  }
 };
 
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "AI Business Automation",
+  "serviceType": ["Managed IT Services", "AI Business Automation", "Cybersecurity Services"],
   "provider": {
     "@type": "LocalBusiness",
-    "name": "XclearAI"
+    "name": "XclearAI",
+    "@id": "https://xclearai.com/#organization"
   },
-  "areaServed": {
-    "@type": "Country",
-    "name": "United States"
-  },
-  "description": "Custom AI assistants for small businesses that automate email, scheduling, customer support, and repetitive tasks.",
+  "areaServed": [
+    { "@type": "State", "name": "Utah" },
+    { "@type": "Country", "name": "United States" }
+  ],
+  "description": "Comprehensive IT services and AI automation for small businesses. Managed IT support, cybersecurity, cloud solutions, and intelligent automation to future-proof your business.",
   "offers": {
     "@type": "Offer",
-    "availability": "https://schema.org/InStock"
+    "availability": "https://schema.org/InStock",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "priceCurrency": "USD"
+    }
   }
 };
 
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "XclearAI",
+  "name": "XclearAI - IT Services & AI Automation",
   "url": "https://xclearai.com",
   "description": description,
   "publisher": {
     "@type": "Organization",
-    "name": "XclearAI"
+    "name": "XclearAI",
+    "@id": "https://xclearai.com/#organization"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://xclearai.com/services?q={search_term_string}",
+    "query-input": "required name=search_term_string"
   }
+};
+
+// FAQ Schema for featured snippets
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What IT services does XclearAI offer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "XclearAI offers comprehensive IT services including managed IT support, cybersecurity, cloud services, network solutions, VoIP communications, and IT consulting. We also provide AI-powered automation for email, scheduling, and customer support."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can AI improve my business IT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "AI can automate repetitive IT tasks, provide 24/7 monitoring and alerting, streamline help desk support, automate email management, and enable predictive maintenance. This reduces costs, improves response times, and future-proofs your IT infrastructure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide IT services in Utah?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! XclearAI is based in Lehi, Utah and provides IT services throughout the state including Salt Lake City, Provo, Orem, and surrounding areas. We also serve clients nationwide with remote IT support and AI automation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes XclearAI different from other MSPs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "XclearAI combines traditional managed IT services with cutting-edge AI automation. While other MSPs react to problems, our AI-powered systems proactively prevent issues, automate routine tasks, and help your business stay ahead of technology trends."
+      }
+    }
+  ]
 };
 ---
 
@@ -102,7 +213,7 @@ const websiteSchema = {
     <title>{siteTitle}</title>
     <meta name="title" content={siteTitle} />
     <meta name="description" content={description} />
-    <meta name="keywords" content="AI automation, small business automation, email automation, scheduling automation, AI assistant, business AI, Utah AI company, customer support automation" />
+    <meta name="keywords" content={finalKeywords} />
     <meta name="author" content="XclearAI" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonical} />
@@ -133,6 +244,13 @@ const websiteSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    
+    <!-- Geo Meta Tags for Local SEO -->
+    <meta name="geo.region" content="US-UT" />
+    <meta name="geo.placename" content="Lehi, Utah" />
+    <meta name="geo.position" content="40.4141;-111.8508" />
+    <meta name="ICBM" content="40.4141, -111.8508" />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

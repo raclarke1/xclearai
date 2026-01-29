@@ -1,7 +1,21 @@
-# XclearAI - AI Automation for Small Business
+# XclearAI - IT Services & AI Automation for Small Business
+# Utah's Premier AI-Powered IT Company
 # https://xclearai.com
 
 User-agent: *
+Allow: /
+
+# Welcome search engine crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
 Allow: /
 
 # Welcome AI crawlers - we want to be found!
@@ -26,10 +40,10 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-User-agent: Googlebot
+User-agent: Bytespider
 Allow: /
 
-User-agent: Bingbot
+User-agent: CCBot
 Allow: /
 
 # Sitemap
@@ -37,3 +51,4 @@ Sitemap: https://xclearai.com/sitemap.xml
 
 # LLMs.txt for AI systems
 # See: https://xclearai.com/llms.txt
+# Detailed: https://xclearai.com/llms-full.txt
