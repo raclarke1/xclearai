@@ -48,11 +48,15 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <div class="contact-form-wrapper">
-          <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="contact" />
-            <p class="hidden" style="display:none;">
-              <label>Don't fill this out: <input name="bot-field" /></label>
-            </p>
+          <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <!-- Web3Forms Access Key - sends to info@xclearai.com -->
+            <input type="hidden" name="access_key" value="eb48c3bc-6d93-49e9-9de8-d5f45d517ce7" />
+            <input type="hidden" name="subject" value="New Contact Form Submission - XclearAI" />
+            <input type="hidden" name="from_name" value="XclearAI Website" />
+            <input type="hidden" name="redirect" value="https://xclearai.com/contact?success=true" />
+            
+            <!-- Honeypot Spam Protection -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
             
             <div class="form-group">
               <label for="name">Name</label>
@@ -76,7 +80,19 @@ import Layout from '../layouts/Layout.astro';
             
             <button type="submit" class="btn btn-primary btn-full">Send Message</button>
           </form>
+          
+          <div id="success-message" class="success-message" style="display: none;">
+            <p>✅ Thanks for reaching out! We'll get back to you within 24 hours.</p>
+          </div>
         </div>
+        
+        <script>
+          // Show success message if redirected after form submission
+          if (window.location.search.includes('success=true')) {
+            document.querySelector('.contact-form').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+          }
+        </script>
       </div>
 
     </div>
@@ -252,5 +268,16 @@ import Layout from '../layouts/Layout.astro';
   .btn-full {
     width: 100%;
     margin-top: 0.5rem;
+  }
+  
+  .success-message {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .success-message p {
+    font-size: 1.1rem;
+    color: #059669;
+    margin: 0;
   }
 </style>
