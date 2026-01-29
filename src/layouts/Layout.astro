@@ -484,32 +484,49 @@ const websiteSchema = {
   }
   
   @media (max-width: 768px) {
+    .nav-container {
+      position: relative;
+    }
+    
     .nav-links {
-      display: none;
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
+      width: 100vw;
+      height: 100vh;
       background: var(--bg-primary);
       flex-direction: column;
       justify-content: center;
       align-items: center;
       gap: 2rem;
-      z-index: 99;
+      z-index: 1000;
+      display: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
     
     .nav-links.mobile-open {
       display: flex;
+      opacity: 1;
+      visibility: visible;
     }
     
     .nav-links a {
+      font-size: 1.5rem;
+      padding: 0.5rem 1rem;
+    }
+    
+    .nav-links .nav-cta {
+      margin-top: 1rem;
+      padding: 1rem 2rem;
       font-size: 1.25rem;
     }
     
     .mobile-menu {
       display: flex;
-      z-index: 101;
+      z-index: 1001;
+      position: relative;
     }
     
     .mobile-menu.active span:nth-child(1) {
