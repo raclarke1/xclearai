@@ -98,7 +98,9 @@ Questions to ask before choosing the cheapest option:
 
 ## How XclearAI Approaches Pricing
 
-We believe in straightforward pricing without hidden fees. Our managed IT services start at **$125/user/month** and include:
+We believe every business is different, so we don't do one-size-fits-all pricing. Instead, we work with each company to build a package that fits their actual needs — not upsell services they'll never use.
+
+Our rates are competitive with Utah market pricing, and every package includes:
 
 - Unlimited help desk support
 - 24/7 monitoring and alerting
