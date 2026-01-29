@@ -157,6 +157,62 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
+  <section class="better-together">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge combo-badge">Better Together</span>
+        <h2>IT + AI: The Future-Proof Approach</h2>
+        <p class="section-intro">Why settle for one when you can have both working in harmony?</p>
+      </div>
+      
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+            </svg>
+          </div>
+          <h3>Seamless Integration</h3>
+          <p>AI automation that works with your existing IT infrastructure. No silos, no conflicts — just technology that works together.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+            </svg>
+          </div>
+          <h3>Single Point of Contact</h3>
+          <p>One team for networks, security, cloud, AND AI automation. Simplify your vendor relationships and get faster support.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <h3>Proactive Security</h3>
+          <p>AI-powered monitoring that detects threats before they become problems. Your network protected 24/7 by intelligent systems.</p>
+        </div>
+        
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+            </svg>
+          </div>
+          <h3>Multi-Location Ready</h3>
+          <p>AI assistants that work across all your connected sites, providing consistent service and support everywhere you operate.</p>
+        </div>
+      </div>
+      
+      <div class="combo-highlight">
+        <p><strong>The XclearAI difference:</strong> Most IT companies react to problems. Most AI vendors don't understand infrastructure. We bring both together — reliable IT foundations with intelligent automation on top. That's how you future-proof your business.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="cta-section">
     <div class="container">
       <h2>Not Sure Where to Start?</h2>
@@ -342,8 +398,103 @@ import Layout from '../layouts/Layout.astro';
     font-size: 1.1rem;
   }
   
+  /* Better Together Section */
+  .better-together {
+    padding: 5rem 0;
+    background: var(--bg-primary);
+    transition: background 0.3s ease;
+  }
+  
+  .combo-badge {
+    background: linear-gradient(135deg, var(--accent-light) 0%, #f3e8ff 100%);
+    color: #7c3aed;
+    border: 1px solid #c4b5fd;
+  }
+  
+  [data-theme="dark"] .combo-badge {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+    color: #a78bfa;
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+  
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .benefit-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: all 0.2s;
+  }
+  
+  .benefit-card:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .benefit-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  }
+  
+  .benefit-icon svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+  
+  .benefit-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+  
+  .benefit-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .combo-highlight {
+    background: linear-gradient(135deg, var(--accent-light) 0%, #f3e8ff 100%);
+    border: 1px solid var(--accent-border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  [data-theme="dark"] .combo-highlight {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    border-color: rgba(139, 92, 246, 0.3);
+  }
+  
+  .combo-highlight p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+  
+  .combo-highlight strong {
+    color: var(--text-primary);
+  }
+
   @media (max-width: 768px) {
-    .services-grid {
+    .services-grid,
+    .benefits-grid {
       grid-template-columns: 1fr;
     }
   }
