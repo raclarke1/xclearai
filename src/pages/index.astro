@@ -1,0 +1,331 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="AI Automation for Small Business">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">AI-Powered Business Automation</div>
+      <h1>Your Business Runs<br/><span class="gradient">24/7</span> — Even When You Don't</h1>
+      <p class="hero-sub">We deploy intelligent AI assistants that handle emails, scheduling, customer inquiries, and repetitive tasks — so you can focus on what matters: growing your business.</p>
+      <div class="hero-cta">
+        <a href="/contact" class="btn btn-primary">Get Started</a>
+        <a href="/services" class="btn btn-secondary">See How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="features-container">
+      <h2>What We Automate</h2>
+      <p class="section-sub">Our AI assistants handle the tasks that eat up your day</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📧</div>
+          <h3>Email Triage</h3>
+          <p>AI reads, categorizes, and drafts responses to your emails. You approve — we send.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>Smart Scheduling</h3>
+          <p>Clients book directly with your AI. No back-and-forth. No double-bookings.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Customer Support</h3>
+          <p>Instant responses to FAQs, lead qualification, and seamless handoff to your team.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Intake & Forms</h3>
+          <p>Collect client information, process documents, and update your systems automatically.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <h3>Reminders & Follow-ups</h3>
+          <p>Never miss a deadline. AI tracks appointments and sends timely reminders.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>CRM Updates</h3>
+          <p>Your data stays current. AI logs calls, updates records, and syncs across tools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div class="how-container">
+      <h2>How It Works</h2>
+      <p class="section-sub">Get up and running in days, not months</p>
+      
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Discovery Call</h3>
+          <p>We learn your workflows, pain points, and goals. 30 minutes is all it takes.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Custom Setup</h3>
+          <p>We deploy and configure your AI assistant with your tools, voice, and processes.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Go Live</h3>
+          <p>Your AI starts working. We monitor, optimize, and adjust as your business evolves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="industries">
+    <div class="industries-container">
+      <h2>Built for Your Industry</h2>
+      <p class="section-sub">AI that understands your business</p>
+      
+      <div class="industry-tags">
+        <span>Law Firms</span>
+        <span>Real Estate</span>
+        <span>Medical & Dental</span>
+        <span>Accounting</span>
+        <span>Contractors</span>
+        <span>Insurance</span>
+        <span>Consulting</span>
+        <span>Property Management</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Ready to Automate?</h2>
+      <p>Book a free consultation and see what AI can do for your business.</p>
+      <a href="/contact" class="btn btn-primary btn-lg">Schedule Your Call</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+  }
+  
+  .hero-content {
+    max-width: 800px;
+  }
+  
+  .hero-badge {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    color: #60a5fa;
+  }
+  
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  
+  .gradient {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .hero-sub {
+    font-size: 1.25rem;
+    opacity: 0.7;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+  
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary {
+    background: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+  }
+  
+  .btn-secondary {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.15);
+  }
+  
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Features */
+  .features {
+    padding: 6rem 2rem;
+    background: #111;
+  }
+  
+  .features-container, .how-container, .industries-container, .cta-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .section-sub {
+    opacity: 0.6;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    text-align: left;
+  }
+  
+  .feature-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: all 0.2s;
+  }
+  
+  .feature-card:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+  
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-card p {
+    opacity: 0.7;
+    font-size: 0.95rem;
+  }
+  
+  /* How it works */
+  .how-it-works {
+    padding: 6rem 2rem;
+  }
+  
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .step {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .step-num {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+  }
+  
+  .step h3 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .step p {
+    opacity: 0.7;
+  }
+  
+  /* Industries */
+  .industries {
+    padding: 6rem 2rem;
+    background: #111;
+  }
+  
+  .industry-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+  
+  .industry-tags span {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+  }
+  
+  /* CTA */
+  .cta-section {
+    padding: 6rem 2rem;
+    background: radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+  }
+  
+  .cta-container p {
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+  }
+</style>
+</Layout>

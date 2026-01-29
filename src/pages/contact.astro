@@ -1,0 +1,248 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Us" description="Get in touch with Xclear AI. Book a free consultation to see how AI automation can help your business.">
+  <section class="page-hero">
+    <h1>Let's Talk</h1>
+    <p>Book a free consultation or send us a message</p>
+  </section>
+
+  <section class="contact-content">
+    <div class="container">
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h2>Get in Touch</h2>
+          <p>Ready to automate your business? We'd love to hear from you. Book a free 30-minute consultation to discuss your needs.</p>
+          
+          <div class="contact-methods">
+            <div class="contact-method">
+              <span class="method-icon">📧</span>
+              <div>
+                <h4>Email</h4>
+                <a href="mailto:info@xclearai.com">info@xclearai.com</a>
+              </div>
+            </div>
+            
+            <div class="contact-method">
+              <span class="method-icon">📞</span>
+              <div>
+                <h4>Phone</h4>
+                <a href="tel:+13853366005">(385) 336-6005</a>
+              </div>
+            </div>
+            
+            <div class="contact-method">
+              <span class="method-icon">📍</span>
+              <div>
+                <h4>Location</h4>
+                <p>Utah, USA</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="response-time">
+            <p>💬 We typically respond within 24 hours</p>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="hidden" style="display:none;">
+              <label>Don't fill this out: <input name="bot-field" /></label>
+            </p>
+            
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name" />
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="you@company.com" />
+            </div>
+            
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Your company (optional)" />
+            </div>
+            
+            <div class="form-group">
+              <label for="message">How can we help?</label>
+              <textarea id="message" name="message" rows="4" required placeholder="Tell us about your business and what you'd like to automate..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+  }
+  
+  .page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-hero p {
+    opacity: 0.7;
+    font-size: 1.25rem;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .contact-content {
+    padding: 4rem 0 6rem;
+  }
+  
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+  
+  .contact-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-info > p {
+    opacity: 0.75;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+  
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .contact-method {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .method-icon {
+    font-size: 1.5rem;
+  }
+  
+  .contact-method h4 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.5;
+    margin-bottom: 0.25rem;
+  }
+  
+  .contact-method a, .contact-method p {
+    opacity: 0.9;
+    margin: 0;
+  }
+  
+  .contact-method a:hover {
+    color: #3b82f6;
+  }
+  
+  .response-time {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+  }
+  
+  .response-time p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  
+  .contact-form-wrapper {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .form-group input, .form-group textarea {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+  }
+  
+  .form-group input::placeholder, .form-group textarea::placeholder {
+    color: rgba(255,255,255,0.4);
+  }
+  
+  .btn {
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary {
+    background: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #2563eb;
+  }
+  
+  .btn-full {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+</style>

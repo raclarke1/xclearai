@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Services" description="AI automation services for small businesses. Email triage, scheduling, customer support, and more.">
+  <section class="page-hero">
+    <h1>Our Services</h1>
+    <p>AI-powered automation tailored to your business</p>
+  </section>
+
+  <section class="services-detail">
+    <div class="container">
+      
+      <div class="service-block">
+        <div class="service-content">
+          <h2>📧 Email Management</h2>
+          <p class="service-lead">Spend less time in your inbox and more time on what matters.</p>
+          <ul>
+            <li>Automatic email categorization and prioritization</li>
+            <li>Smart draft responses for common inquiries</li>
+            <li>Daily inbox briefings delivered to you</li>
+            <li>Spam and newsletter filtering</li>
+            <li>Urgent email alerts via text or Slack</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-block">
+        <div class="service-content">
+          <h2>📅 Intelligent Scheduling</h2>
+          <p class="service-lead">No more back-and-forth. Clients book, you show up.</p>
+          <ul>
+            <li>24/7 booking via chat, email, or web</li>
+            <li>Automatic calendar sync and conflict detection</li>
+            <li>Smart reminders and follow-ups</li>
+            <li>Rescheduling handled automatically</li>
+            <li>Integration with Google, Outlook, Calendly</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-block">
+        <div class="service-content">
+          <h2>💬 Customer Support Bot</h2>
+          <p class="service-lead">Instant responses, qualified leads, happy customers.</p>
+          <ul>
+            <li>24/7 instant answers to common questions</li>
+            <li>Lead qualification and intake</li>
+            <li>Seamless handoff to your team when needed</li>
+            <li>Multi-channel: website, SMS, WhatsApp, social</li>
+            <li>Learns your business and improves over time</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-block">
+        <div class="service-content">
+          <h2>📋 Document & Intake Processing</h2>
+          <p class="service-lead">Collect, process, and organize — automatically.</p>
+          <ul>
+            <li>Smart intake forms that adapt to responses</li>
+            <li>Document collection and organization</li>
+            <li>Automatic data entry into your systems</li>
+            <li>Deadline tracking and reminders</li>
+            <li>Secure file handling and storage</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="service-block">
+        <div class="service-content">
+          <h2>🔄 Workflow Automation</h2>
+          <p class="service-lead">Connect your tools. Automate your processes.</p>
+          <ul>
+            <li>CRM updates and data sync</li>
+            <li>Automated task creation and assignment</li>
+            <li>Custom workflows for your specific processes</li>
+            <li>Integration with 1000+ apps via Zapier/Make</li>
+            <li>Real-time notifications and alerts</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Not Sure Where to Start?</h2>
+      <p>Book a free 30-minute consultation. We'll identify your biggest time-wasters and show you exactly how AI can help.</p>
+      <a href="/contact" class="btn btn-primary btn-lg">Book Your Free Consultation</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+  }
+  
+  .page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-hero p {
+    opacity: 0.7;
+    font-size: 1.25rem;
+  }
+  
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .services-detail {
+    padding: 4rem 0;
+  }
+  
+  .service-block {
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .service-block:last-child {
+    border-bottom: none;
+  }
+  
+  .service-content h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .service-lead {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-content ul {
+    list-style: none;
+  }
+  
+  .service-content li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    opacity: 0.8;
+  }
+  
+  .service-content li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #3b82f6;
+  }
+  
+  .cta-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: #111;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-section p {
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary {
+    background: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+  }
+  
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+</style>

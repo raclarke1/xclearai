@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About Us" description="Xclear AI brings enterprise-grade AI automation to small businesses in Utah and beyond.">
+  <section class="page-hero">
+    <h1>About Xclear AI</h1>
+    <p>Enterprise AI made accessible for small business</p>
+  </section>
+
+  <section class="about-content">
+    <div class="container">
+      
+      <div class="story-block">
+        <h2>Our Story</h2>
+        <p>Xclear AI was born from a simple observation: small businesses are drowning in administrative work while big companies automate everything.</p>
+        <p>We're here to level the playing field.</p>
+        <p>With over a decade of experience in IT infrastructure and technology consulting, we've helped businesses of all sizes optimize their operations. Now we're bringing the power of AI automation to the companies that need it most — local businesses, professional services firms, and growing teams.</p>
+      </div>
+
+      <div class="values-block">
+        <h2>What We Believe</h2>
+        <div class="values-grid">
+          <div class="value-card">
+            <h3>🎯 Results Over Hype</h3>
+            <p>AI is a tool, not magic. We focus on measurable outcomes — hours saved, leads captured, tasks automated.</p>
+          </div>
+          <div class="value-card">
+            <h3>🤝 Partnership, Not Projects</h3>
+            <p>We don't just set it and forget it. We optimize, adjust, and grow with your business.</p>
+          </div>
+          <div class="value-card">
+            <h3>🔒 Your Data, Your Control</h3>
+            <p>We take security seriously. Your business data stays private and protected.</p>
+          </div>
+          <div class="value-card">
+            <h3>💡 Simple by Design</h3>
+            <p>Powerful AI shouldn't be complicated. We make automation accessible and understandable.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="connection-block">
+        <h2>Part of the Xclear Networks Family</h2>
+        <p>Xclear AI is powered by <strong>Xclear Networks</strong>, a trusted name in IT services and technology solutions. Our foundation in IT infrastructure means we understand how businesses actually work — and where automation can make the biggest impact.</p>
+        <p>Whether you need AI automation, IT support, or both, we've got you covered.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Let's Talk</h2>
+      <p>Ready to see what AI can do for your business? Let's start with a conversation.</p>
+      <a href="/contact" class="btn btn-primary btn-lg">Get in Touch</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+  }
+  
+  .page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .page-hero p {
+    opacity: 0.7;
+    font-size: 1.25rem;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .about-content {
+    padding: 4rem 0;
+  }
+  
+  .story-block, .values-block, .connection-block {
+    margin-bottom: 4rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  p {
+    opacity: 0.85;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .value-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  .value-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .value-card p {
+    font-size: 0.95rem;
+    opacity: 0.7;
+    margin-bottom: 0;
+  }
+  
+  .connection-block {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    padding: 2rem;
+    border-radius: 12px;
+  }
+  
+  .cta-section {
+    padding: 6rem 2rem;
+    text-align: center;
+    background: #111;
+  }
+  
+  .cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-section p {
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  .btn-primary {
+    background: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+  }
+  
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+</style>
