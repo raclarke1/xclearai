@@ -122,7 +122,7 @@ import Layout from '../layouts/Layout.astro';
     justify-content: center;
     text-align: center;
     padding: 2rem;
-    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
   }
   
   .hero-content {
@@ -131,13 +131,14 @@ import Layout from '../layouts/Layout.astro';
   
   .hero-badge {
     display: inline-block;
-    background: rgba(59, 130, 246, 0.2);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: #dbeafe;
+    border: 1px solid #93c5fd;
     padding: 0.5rem 1rem;
     border-radius: 50px;
     font-size: 0.875rem;
     margin-bottom: 1.5rem;
-    color: #60a5fa;
+    color: #1d4ed8;
+    font-weight: 500;
   }
   
   h1 {
@@ -145,10 +146,11 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1.5rem;
+    color: #1a1a2e;
   }
   
   .gradient {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -156,7 +158,7 @@ import Layout from '../layouts/Layout.astro';
   
   .hero-sub {
     font-size: 1.25rem;
-    opacity: 0.7;
+    color: #6b7280;
     max-width: 600px;
     margin: 0 auto 2rem;
   }
@@ -176,22 +178,25 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .btn-primary {
-    background: #3b82f6;
+    background: #2563eb;
     color: white;
   }
   
   .btn-primary:hover {
-    background: #2563eb;
+    background: #1d4ed8;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   }
   
   .btn-secondary {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #374151;
   }
   
   .btn-secondary:hover {
-    background: rgba(255,255,255,0.15);
+    background: #f9fafb;
+    border-color: #d1d5db;
   }
   
   .btn-lg {
@@ -202,7 +207,7 @@ import Layout from '../layouts/Layout.astro';
   /* Features */
   .features {
     padding: 6rem 2rem;
-    background: #111;
+    background: #f8fafc;
   }
   
   .features-container, .how-container, .industries-container, .cta-container {
@@ -214,10 +219,11 @@ import Layout from '../layouts/Layout.astro';
   h2 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    color: #1a1a2e;
   }
   
   .section-sub {
-    opacity: 0.6;
+    color: #6b7280;
     margin-bottom: 3rem;
     font-size: 1.1rem;
   }
@@ -230,16 +236,18 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .feature-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: white;
+    border: 1px solid #e5e7eb;
     padding: 2rem;
     border-radius: 12px;
     transition: all 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   
   .feature-card:hover {
-    background: rgba(255,255,255,0.05);
-    border-color: rgba(59, 130, 246, 0.3);
+    border-color: #93c5fd;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
   }
   
   .feature-icon {
@@ -250,16 +258,18 @@ import Layout from '../layouts/Layout.astro';
   .feature-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
+    color: #1a1a2e;
   }
   
   .feature-card p {
-    opacity: 0.7;
+    color: #6b7280;
     font-size: 0.95rem;
   }
   
   /* How it works */
   .how-it-works {
     padding: 6rem 2rem;
+    background: white;
   }
   
   .steps {
@@ -277,7 +287,7 @@ import Layout from '../layouts/Layout.astro';
   .step-num {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -285,20 +295,22 @@ import Layout from '../layouts/Layout.astro';
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0 auto 1rem;
+    color: white;
   }
   
   .step h3 {
     margin-bottom: 0.5rem;
+    color: #1a1a2e;
   }
   
   .step p {
-    opacity: 0.7;
+    color: #6b7280;
   }
   
   /* Industries */
   .industries {
     padding: 6rem 2rem;
-    background: #111;
+    background: #f8fafc;
   }
   
   .industry-tags {
@@ -309,21 +321,29 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .industry-tags span {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: white;
+    border: 1px solid #e5e7eb;
     padding: 0.75rem 1.5rem;
     border-radius: 50px;
     font-size: 0.95rem;
+    color: #374151;
+    transition: all 0.2s;
+  }
+  
+  .industry-tags span:hover {
+    border-color: #93c5fd;
+    background: #f0f9ff;
+    color: #1d4ed8;
   }
   
   /* CTA */
   .cta-section {
     padding: 6rem 2rem;
-    background: radial-gradient(ellipse at bottom, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+    background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
   }
   
   .cta-container p {
-    opacity: 0.7;
+    color: #6b7280;
     margin-bottom: 2rem;
     font-size: 1.1rem;
   }

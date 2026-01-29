@@ -62,16 +62,17 @@ import Layout from '../layouts/Layout.astro';
   .page-hero {
     text-align: center;
     padding: 8rem 2rem 4rem;
-    background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
   }
   
   .page-hero h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
+    color: #1a1a2e;
   }
   
   .page-hero p {
-    opacity: 0.7;
+    color: #6b7280;
     font-size: 1.25rem;
   }
   
@@ -83,6 +84,7 @@ import Layout from '../layouts/Layout.astro';
   
   .about-content {
     padding: 4rem 0;
+    background: white;
   }
   
   .story-block, .values-block, .connection-block {
@@ -92,10 +94,11 @@ import Layout from '../layouts/Layout.astro';
   h2 {
     font-size: 1.75rem;
     margin-bottom: 1.5rem;
+    color: #1a1a2e;
   }
   
   p {
-    opacity: 0.85;
+    color: #4b5563;
     margin-bottom: 1rem;
     font-size: 1.05rem;
     line-height: 1.7;
@@ -108,43 +111,55 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .value-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
     padding: 1.5rem;
     border-radius: 12px;
+    transition: all 0.2s;
+  }
+  
+  .value-card:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
   }
   
   .value-card h3 {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
+    color: #1a1a2e;
   }
   
   .value-card p {
     font-size: 0.95rem;
-    opacity: 0.7;
+    color: #6b7280;
     margin-bottom: 0;
   }
   
   .connection-block {
-    background: rgba(59, 130, 246, 0.1);
-    border: 1px solid rgba(59, 130, 246, 0.2);
+    background: #f0f9ff;
+    border: 1px solid #bfdbfe;
     padding: 2rem;
     border-radius: 12px;
+  }
+  
+  .connection-block strong {
+    color: #1d4ed8;
   }
   
   .cta-section {
     padding: 6rem 2rem;
     text-align: center;
-    background: #111;
+    background: #f8fafc;
   }
   
   .cta-section h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: #1a1a2e;
   }
   
   .cta-section p {
-    opacity: 0.7;
+    color: #6b7280;
     margin-bottom: 2rem;
   }
   
@@ -157,13 +172,14 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .btn-primary {
-    background: #3b82f6;
+    background: #2563eb;
     color: white;
   }
   
   .btn-primary:hover {
-    background: #2563eb;
+    background: #1d4ed8;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   }
   
   .btn-lg {

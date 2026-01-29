@@ -23,14 +23,20 @@ const { title, description = "AI automation for small businesses. We deploy inte
     <nav class="nav">
       <div class="nav-container">
         <a href="/" class="logo">
-          <span class="logo-x">X</span>clear AI
+          <span class="logo-accent">X</span>clear <span class="logo-accent">AI</span>
         </a>
         <div class="nav-links">
           <a href="/">Home</a>
           <a href="/services">Services</a>
+          <a href="/existing-customers">Xclear Networks</a>
           <a href="/about">About</a>
           <a href="/contact" class="nav-cta">Get Started</a>
         </div>
+        <button class="mobile-menu" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
     
@@ -41,7 +47,7 @@ const { title, description = "AI automation for small businesses. We deploy inte
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <span class="logo"><span class="logo-x">X</span>clear AI</span>
+          <span class="logo"><span class="logo-accent">X</span>clear <span class="logo-accent">AI</span></span>
           <p>AI automation for small businesses.</p>
         </div>
         <div class="footer-links">
@@ -49,6 +55,7 @@ const { title, description = "AI automation for small businesses. We deploy inte
             <h4>Company</h4>
             <a href="/about">About Us</a>
             <a href="/services">Services</a>
+            <a href="/existing-customers">Xclear Networks</a>
             <a href="/contact">Contact</a>
           </div>
           <div class="footer-col">
@@ -79,8 +86,8 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   body {
-    background: #0a0a0a;
-    color: #e5e5e5;
+    background: #ffffff;
+    color: #1a1a2e;
     line-height: 1.6;
   }
   
@@ -95,9 +102,10 @@ const { title, description = "AI automation for small businesses. We deploy inte
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   
   .nav-container {
@@ -112,10 +120,11 @@ const { title, description = "AI automation for small businesses. We deploy inte
   .logo {
     font-size: 1.5rem;
     font-weight: 700;
+    color: #1a1a2e;
   }
   
-  .logo-x {
-    color: #3b82f6;
+  .logo-accent {
+    color: #2563eb;
   }
   
   .nav-links {
@@ -125,24 +134,43 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   .nav-links a {
-    opacity: 0.8;
-    transition: opacity 0.2s;
+    color: #4b5563;
+    transition: color 0.2s;
+    font-weight: 500;
   }
   
   .nav-links a:hover {
-    opacity: 1;
+    color: #2563eb;
   }
   
   .nav-cta {
-    background: #3b82f6;
+    background: #2563eb;
+    color: white !important;
     padding: 0.5rem 1.25rem;
     border-radius: 6px;
     font-weight: 500;
-    opacity: 1 !important;
   }
   
   .nav-cta:hover {
-    background: #2563eb;
+    background: #1d4ed8;
+    color: white !important;
+  }
+  
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  .mobile-menu span {
+    width: 24px;
+    height: 2px;
+    background: #1a1a2e;
+    border-radius: 2px;
   }
   
   main {
@@ -151,8 +179,8 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   .footer {
-    background: #111;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    background: #f8fafc;
+    border-top: 1px solid #e5e7eb;
     padding: 4rem 2rem 2rem;
   }
   
@@ -162,7 +190,7 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   .footer-brand p {
-    opacity: 0.6;
+    color: #6b7280;
     margin-top: 0.5rem;
   }
   
@@ -176,32 +204,35 @@ const { title, description = "AI automation for small businesses. We deploy inte
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    opacity: 0.5;
+    color: #9ca3af;
     margin-bottom: 1rem;
   }
   
   .footer-col a, .footer-col p {
     display: block;
-    opacity: 0.7;
+    color: #6b7280;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
   }
   
   .footer-col a:hover {
-    opacity: 1;
+    color: #2563eb;
   }
   
   .footer-bottom {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    opacity: 0.5;
+    border-top: 1px solid #e5e7eb;
+    color: #9ca3af;
     font-size: 0.875rem;
   }
   
   @media (max-width: 768px) {
     .nav-links {
-      gap: 1rem;
+      display: none;
+    }
+    .mobile-menu {
+      display: flex;
     }
     .footer-links {
       flex-direction: column;
