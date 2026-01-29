@@ -213,7 +213,8 @@ import Layout from '../layouts/Layout.astro';
     justify-content: center;
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+    background: linear-gradient(180deg, var(--gradient-start) 0%, var(--bg-primary) 100%);
+    transition: background 0.3s ease;
   }
   
   .hero-content {
@@ -232,12 +233,18 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 500;
   }
   
+  [data-theme="dark"] .hero-badge {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #34d399;
+  }
+  
   h1 {
     font-size: clamp(2.5rem, 6vw, 3.5rem);
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .gradient {
@@ -249,7 +256,7 @@ import Layout from '../layouts/Layout.astro';
   
   .hero-sub {
     font-size: 1.2rem;
-    color: #6b7280;
+    color: var(--text-muted);
     max-width: 650px;
     margin: 0 auto 2rem;
   }
@@ -269,25 +276,25 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .btn-primary {
-    background: #2563eb;
+    background: var(--accent);
     color: white;
   }
   
   .btn-primary:hover {
-    background: #1d4ed8;
+    background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    box-shadow: var(--shadow-md);
   }
   
   .btn-secondary {
-    background: white;
-    border: 1px solid #e5e7eb;
-    color: #374151;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
   }
   
   .btn-secondary:hover {
-    background: #f9fafb;
-    border-color: #d1d5db;
+    background: var(--bg-secondary);
+    border-color: var(--border-hover);
   }
   
   .btn-lg {
@@ -304,12 +311,12 @@ import Layout from '../layouts/Layout.astro';
   h2 {
     font-size: 2.25rem;
     margin-bottom: 0.5rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
     text-align: center;
   }
   
   .section-sub {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 3rem;
     font-size: 1.1rem;
     text-align: center;
@@ -318,7 +325,8 @@ import Layout from '../layouts/Layout.astro';
   /* Transition Section */
   .transition {
     padding: 5rem 2rem;
-    background: white;
+    background: var(--bg-primary);
+    transition: background 0.3s ease;
   }
   
   .timeline {
@@ -330,12 +338,13 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .timeline-item {
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 2rem;
     max-width: 350px;
     text-align: center;
+    transition: all 0.3s ease;
   }
   
   .timeline-icon {
@@ -358,17 +367,17 @@ import Layout from '../layouts/Layout.astro';
   .timeline-arrow svg {
     width: 32px;
     height: 32px;
-    color: #2563eb;
+    color: var(--accent);
   }
   
   .timeline-content h3 {
     font-size: 1.5rem;
     margin-bottom: 0.75rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .timeline-content p {
-    color: #6b7280;
+    color: var(--text-muted);
   }
   
   .timeline-arrow {
@@ -380,13 +389,14 @@ import Layout from '../layouts/Layout.astro';
   .timeline-arrow svg {
     width: 40px;
     height: 40px;
-    color: #2563eb;
+    color: var(--accent);
   }
   
   /* Benefits Section */
   .benefits {
     padding: 5rem 2rem;
-    background: #f8fafc;
+    background: var(--bg-secondary);
+    transition: background 0.3s ease;
   }
   
   .benefits-grid {
@@ -396,22 +406,22 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .benefit-card {
-    background: white;
-    border: 1px solid #e5e7eb;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 2rem;
     transition: all 0.2s;
   }
   
   .benefit-card:hover {
-    border-color: #93c5fd;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-md);
     transform: translateY(-2px);
   }
   
   .benefit-card.highlight {
-    background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);
-    border-color: #93c5fd;
+    background: var(--accent-light);
+    border-color: var(--accent-border);
   }
   
   .benefit-icon {
@@ -434,18 +444,19 @@ import Layout from '../layouts/Layout.astro';
   .benefit-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .benefit-card p {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 0.95rem;
   }
   
   /* Use Cases Section */
   .use-cases {
     padding: 5rem 2rem;
-    background: white;
+    background: var(--bg-primary);
+    transition: background 0.3s ease;
   }
   
   .use-cases-grid {
@@ -456,9 +467,10 @@ import Layout from '../layouts/Layout.astro';
   
   .use-case {
     padding: 1.5rem;
-    border-left: 3px solid #2563eb;
-    background: #f8fafc;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-secondary);
     border-radius: 0 8px 8px 0;
+    transition: background 0.3s ease;
   }
   
   .use-case-header {
@@ -488,18 +500,19 @@ import Layout from '../layouts/Layout.astro';
   .use-case h3 {
     font-size: 1.1rem;
     margin: 0;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .use-case p {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 0.95rem;
   }
   
   /* Testimonial */
   .testimonial {
     padding: 4rem 2rem;
-    background: #f8fafc;
+    background: var(--bg-secondary);
+    transition: background 0.3s ease;
   }
   
   blockquote {
@@ -511,13 +524,13 @@ import Layout from '../layouts/Layout.astro';
   blockquote p {
     font-size: 1.5rem;
     font-style: italic;
-    color: #374151;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 1.5rem;
   }
   
   cite {
-    color: #6b7280;
+    color: var(--text-muted);
     font-style: normal;
     font-weight: 500;
   }
@@ -525,8 +538,9 @@ import Layout from '../layouts/Layout.astro';
   /* CTA Section */
   .cta-section {
     padding: 5rem 2rem;
-    background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--gradient-start) 100%);
     text-align: center;
+    transition: background 0.3s ease;
   }
   
   .cta-container {
@@ -535,7 +549,7 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .cta-container p {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 2rem;
     font-size: 1.1rem;
   }

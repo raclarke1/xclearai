@@ -121,17 +121,18 @@ import Layout from '../layouts/Layout.astro';
   .page-hero {
     text-align: center;
     padding: 8rem 2rem 4rem;
-    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+    background: linear-gradient(180deg, var(--gradient-start) 0%, var(--bg-primary) 100%);
+    transition: background 0.3s ease;
   }
   
   .page-hero h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .page-hero p {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 1.25rem;
   }
   
@@ -143,7 +144,8 @@ import Layout from '../layouts/Layout.astro';
   
   .contact-content {
     padding: 4rem 0 6rem;
-    background: white;
+    background: var(--bg-primary);
+    transition: background 0.3s ease;
   }
   
   .contact-grid {
@@ -162,11 +164,11 @@ import Layout from '../layouts/Layout.astro';
   .contact-info h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .contact-info > p {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 2rem;
     line-height: 1.7;
   }
@@ -204,24 +206,24 @@ import Layout from '../layouts/Layout.astro';
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #9ca3af;
+    color: var(--text-faint);
     margin-bottom: 0.25rem;
   }
   
   .contact-method a, .contact-method p {
-    color: #374151;
+    color: var(--text-secondary);
     margin: 0;
   }
   
   .contact-method a:hover {
-    color: #2563eb;
+    color: var(--accent);
   }
   
   .response-time {
     margin-top: 2rem;
     padding: 1rem;
-    background: #f0f9ff;
-    border: 1px solid #bfdbfe;
+    background: var(--accent-light);
+    border: 1px solid var(--accent-border);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -235,25 +237,26 @@ import Layout from '../layouts/Layout.astro';
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #dbeafe;
+    background: var(--accent-light);
+    border: 1px solid var(--accent-border);
     flex-shrink: 0;
   }
   
   .response-icon svg {
     width: 18px;
     height: 18px;
-    color: #2563eb;
+    color: var(--accent);
   }
   
   .response-time p {
     margin: 0;
     font-size: 0.95rem;
-    color: #1d4ed8;
+    color: var(--accent);
   }
   
   .contact-form-wrapper {
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 2rem;
   }
@@ -273,27 +276,28 @@ import Layout from '../layouts/Layout.astro';
   .form-group label {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #374151;
+    color: var(--text-secondary);
   }
   
   .form-group input, .form-group textarea {
-    background: white;
-    border: 1px solid #d1d5db;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
     border-radius: 6px;
     padding: 0.75rem 1rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
     font-size: 1rem;
     font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
   
   .form-group input:focus, .form-group textarea:focus {
     outline: none;
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
   }
   
   .form-group input::placeholder, .form-group textarea::placeholder {
-    color: #9ca3af;
+    color: var(--text-faint);
   }
   
   .btn {
@@ -307,13 +311,13 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .btn-primary {
-    background: #2563eb;
+    background: var(--accent);
     color: white;
   }
   
   .btn-primary:hover {
-    background: #1d4ed8;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    background: var(--accent-hover);
+    box-shadow: var(--shadow-md);
   }
   
   .btn-full {
@@ -330,5 +334,9 @@ import Layout from '../layouts/Layout.astro';
     font-size: 1.1rem;
     color: #059669;
     margin: 0;
+  }
+  
+  [data-theme="dark"] .success-message p {
+    color: #34d399;
   }
 </style>

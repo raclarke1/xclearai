@@ -166,17 +166,18 @@ import Layout from '../layouts/Layout.astro';
   .page-hero {
     text-align: center;
     padding: 8rem 2rem 4rem;
-    background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+    background: linear-gradient(180deg, var(--gradient-start) 0%, var(--bg-primary) 100%);
+    transition: background 0.3s ease;
   }
   
   .page-hero h1 {
     font-size: 3rem;
     margin-bottom: 0.5rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .page-hero p {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 1.25rem;
   }
   
@@ -188,11 +189,12 @@ import Layout from '../layouts/Layout.astro';
   
   .services-section {
     padding: 5rem 0;
-    background: white;
+    background: var(--bg-primary);
+    transition: background 0.3s ease;
   }
   
   .services-section.alt {
-    background: #f8fafc;
+    background: var(--bg-secondary);
   }
   
   .section-header {
@@ -212,8 +214,9 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .ai-badge {
-    background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
-    color: #1d4ed8;
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent-border);
   }
   
   .it-badge {
@@ -221,14 +224,19 @@ import Layout from '../layouts/Layout.astro';
     color: #166534;
   }
   
+  [data-theme="dark"] .it-badge {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+  }
+  
   .section-header h2 {
     font-size: 2.25rem;
     margin-bottom: 0.5rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .section-intro {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 1.1rem;
   }
   
@@ -239,16 +247,16 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .service-card {
-    background: white;
-    border: 1px solid #e5e7eb;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 2rem;
     transition: all 0.3s ease;
   }
   
   .service-card:hover {
-    border-color: transparent;
-    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.12);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-lg);
     transform: translateY(-4px);
   }
   
@@ -276,11 +284,11 @@ import Layout from '../layouts/Layout.astro';
   .service-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .service-card p {
-    color: #6b7280;
+    color: var(--text-muted);
     font-size: 0.95rem;
     line-height: 1.6;
   }
@@ -288,17 +296,18 @@ import Layout from '../layouts/Layout.astro';
   .cta-section {
     padding: 6rem 2rem;
     text-align: center;
-    background: linear-gradient(180deg, #ffffff 0%, #f0f9ff 100%);
+    background: linear-gradient(180deg, var(--bg-primary) 0%, var(--gradient-start) 100%);
+    transition: background 0.3s ease;
   }
   
   .cta-section h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .cta-section p {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 2rem;
     max-width: 600px;
     margin-left: auto;
@@ -314,14 +323,14 @@ import Layout from '../layouts/Layout.astro';
   }
   
   .btn-primary {
-    background: #2563eb;
+    background: var(--accent);
     color: white;
   }
   
   .btn-primary:hover {
-    background: #1d4ed8;
+    background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    box-shadow: var(--shadow-md);
   }
   
   .btn-lg {
