@@ -14,16 +14,21 @@ const { title, description = "AI automation for small businesses. We deploy inte
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} | Xclear AI</title>
+    <title>{title} | XclearAI</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script is:inline>
+      // Check for saved theme preference or default to light
+      const theme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
   </head>
   <body>
     <nav class="nav">
       <div class="nav-container">
         <a href="/" class="logo">
-          <span class="logo-accent">X</span>clear <span class="logo-accent">AI</span>
+          <span class="logo-accent">X</span>clear<span class="logo-accent">AI</span>
         </a>
         <div class="nav-links">
           <a href="/">Home</a>
@@ -31,6 +36,15 @@ const { title, description = "AI automation for small businesses. We deploy inte
           <a href="/existing-customers">Xclear Networks</a>
           <a href="/about">About</a>
           <a href="/contact" class="nav-cta">Get Started</a>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
         </div>
         <button class="mobile-menu" aria-label="Menu">
           <span></span>
@@ -47,7 +61,7 @@ const { title, description = "AI automation for small businesses. We deploy inte
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <span class="logo"><span class="logo-accent">X</span>clear <span class="logo-accent">AI</span></span>
+          <span class="logo"><span class="logo-accent">X</span>clear<span class="logo-accent">AI</span></span>
           <p>AI automation for small businesses.</p>
         </div>
         <div class="footer-links">
@@ -66,14 +80,82 @@ const { title, description = "AI automation for small businesses. We deploy inte
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 Xclear AI. All rights reserved.</p>
+          <p>&copy; 2026 XclearAI. All rights reserved.</p>
         </div>
       </div>
     </footer>
+
+    <script is:inline>
+      const toggle = document.getElementById('theme-toggle');
+      toggle.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    </script>
   </body>
 </html>
 
 <style is:global>
+  /* Theme Variables */
+  :root,
+  [data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f0f9ff;
+    --bg-card: #ffffff;
+    --bg-nav: rgba(255, 255, 255, 0.95);
+    
+    --text-primary: #1a1a2e;
+    --text-secondary: #4b5563;
+    --text-muted: #6b7280;
+    --text-faint: #9ca3af;
+    
+    --border-color: #e5e7eb;
+    --border-hover: #93c5fd;
+    
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-light: #dbeafe;
+    --accent-border: #93c5fd;
+    
+    --gradient-start: #f0f9ff;
+    --gradient-end: #ffffff;
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(37, 99, 235, 0.1);
+    --shadow-lg: 0 10px 40px rgba(37, 99, 235, 0.12);
+  }
+  
+  [data-theme="dark"] {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #111118;
+    --bg-tertiary: #0f0f1a;
+    --bg-card: #16161f;
+    --bg-nav: rgba(10, 10, 15, 0.95);
+    
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-faint: #64748b;
+    
+    --border-color: #1e293b;
+    --border-hover: #3b82f6;
+    
+    --accent: #3b82f6;
+    --accent-hover: #60a5fa;
+    --accent-light: rgba(59, 130, 246, 0.15);
+    --accent-border: rgba(59, 130, 246, 0.3);
+    
+    --gradient-start: #0f0f1a;
+    --gradient-end: #0a0a0f;
+    
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -86,9 +168,10 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   body {
-    background: #ffffff;
-    color: #1a1a2e;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
   }
   
   a {
@@ -102,10 +185,11 @@ const { title, description = "AI automation for small businesses. We deploy inte
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--bg-nav);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid #e5e7eb;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
   
   .nav-container {
@@ -120,11 +204,11 @@ const { title, description = "AI automation for small businesses. We deploy inte
   .logo {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1a1a2e;
+    color: var(--text-primary);
   }
   
   .logo-accent {
-    color: #2563eb;
+    color: var(--accent);
   }
   
   .nav-links {
@@ -134,17 +218,17 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   .nav-links a {
-    color: #4b5563;
+    color: var(--text-secondary);
     transition: color 0.2s;
     font-weight: 500;
   }
   
   .nav-links a:hover {
-    color: #2563eb;
+    color: var(--accent);
   }
   
   .nav-cta {
-    background: #2563eb;
+    background: var(--accent);
     color: white !important;
     padding: 0.5rem 1.25rem;
     border-radius: 6px;
@@ -152,8 +236,39 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   .nav-cta:hover {
-    background: #1d4ed8;
+    background: var(--accent-hover);
     color: white !important;
+  }
+  
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  
+  .theme-toggle:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+  
+  .theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+  }
+  
+  [data-theme="light"] .moon-icon {
+    display: none;
+  }
+  
+  [data-theme="dark"] .sun-icon {
+    display: none;
   }
   
   .mobile-menu {
@@ -169,7 +284,7 @@ const { title, description = "AI automation for small businesses. We deploy inte
   .mobile-menu span {
     width: 24px;
     height: 2px;
-    background: #1a1a2e;
+    background: var(--text-primary);
     border-radius: 2px;
   }
   
@@ -179,9 +294,10 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   .footer {
-    background: #f8fafc;
-    border-top: 1px solid #e5e7eb;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
     padding: 4rem 2rem 2rem;
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
   
   .footer-container {
@@ -190,7 +306,7 @@ const { title, description = "AI automation for small businesses. We deploy inte
   }
   
   .footer-brand p {
-    color: #6b7280;
+    color: var(--text-muted);
     margin-top: 0.5rem;
   }
   
@@ -204,26 +320,26 @@ const { title, description = "AI automation for small businesses. We deploy inte
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #9ca3af;
+    color: var(--text-faint);
     margin-bottom: 1rem;
   }
   
   .footer-col a, .footer-col p {
     display: block;
-    color: #6b7280;
+    color: var(--text-muted);
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
   }
   
   .footer-col a:hover {
-    color: #2563eb;
+    color: var(--accent);
   }
   
   .footer-bottom {
     margin-top: 3rem;
     padding-top: 2rem;
-    border-top: 1px solid #e5e7eb;
-    color: #9ca3af;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-faint);
     font-size: 0.875rem;
   }
   
