@@ -15,37 +15,45 @@
 
 ## IT Services
 
-### Managed IT Services
-- 24/7 monitoring and support
-- Proactive maintenance
-- Help desk support
-- IT infrastructure management
-- Vendor management
+### Enterprise Networking
+- LAN & WAN design and deployment
+- WiFi & wireless solutions
+- SD-WAN for multi-location businesses
+- Server & storage infrastructure
+- Data center solutions
 
 ### Cybersecurity
-- Firewall management
-- Threat detection and response
-- Security audits and assessments
-- Employee security training
-- Compliance support (HIPAA, PCI, SOC2)
+- Firewalls & perimeter security
+- Endpoint protection (EDR, antivirus)
+- Identity & access management (MFA, SSO)
+- Email security (phishing, DMARC)
+- Security monitoring & SIEM
+- Compliance (HIPAA, PCI-DSS, SOC 2, CMMC)
 
-### Cloud Services
-- Cloud migration
-- Microsoft 365 / Google Workspace
-- Cloud backup and disaster recovery
-- Hybrid cloud solutions
+### Cloud & SaaS
+- Cloud migration (AWS, Azure, GCP)
+- SaaS management & optimization
+- Microsoft 365 deployment
+- Backup & disaster recovery (DRaaS)
 
-### Network Solutions
-- Enterprise networking
-- WiFi solutions
-- SD-WAN
-- Network security
+### Business Applications
+- CRM implementation (Salesforce, HubSpot, Dynamics)
+- ERP systems (NetSuite, SAP, Dynamics 365)
+- Data lakes & data warehouses
+- Business intelligence (Power BI, Tableau)
 
-### VoIP & Communications
-- Business phone systems
-- Unified communications
-- Video conferencing
+### Managed IT Services
+- 24/7 help desk support
+- Remote monitoring & management
+- Patch management
+- Proactive maintenance
+- Vendor management
+
+### Unified Communications
+- VoIP & business phone systems
+- Video conferencing (Zoom, Teams, Webex)
 - Call center solutions
+- Conference room AV
 
 ### IT Consulting
 - Technology roadmapping
