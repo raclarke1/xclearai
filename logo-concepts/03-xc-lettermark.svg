@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="xcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" rx="40" fill="url(#xcGrad)"/>
+  
+  <!-- X letterform -->
+  <path d="M35 45 L65 45 L85 75 L105 45 L135 45 L100 100 L135 155 L105 155 L85 125 L65 155 L35 155 L70 100 Z" 
+        fill="white"/>
+  
+  <!-- C letterform integrated -->
+  <path d="M120 70 
+           C155 70 175 90 175 100 
+           C175 110 155 130 120 130
+           L120 110
+           C140 110 150 105 150 100
+           C150 95 140 90 120 90
+           Z" 
+        fill="white" opacity="0.9"/>
+  
+  <!-- AI sparkle -->
+  <circle cx="165" cy="55" r="8" fill="#93c5fd"/>
+  <circle cx="175" cy="70" r="5" fill="#60a5fa" opacity="0.7"/>
+  <circle cx="158" cy="42" r="4" fill="#bfdbfe" opacity="0.8"/>
+</svg>

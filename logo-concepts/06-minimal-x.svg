@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="minGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" rx="40" fill="url(#minGrad)"/>
+  
+  <!-- Ultra clean X with rounded ends -->
+  <line x1="55" y1="55" x2="145" y2="145" stroke="white" stroke-width="24" stroke-linecap="round"/>
+  <line x1="145" y1="55" x2="55" y2="145" stroke="white" stroke-width="24" stroke-linecap="round"/>
+  
+  <!-- Subtle AI indicator - single elegant dot -->
+  <circle cx="160" cy="40" r="10" fill="white" opacity="0.9"/>
+  <circle cx="160" cy="40" r="5" fill="url(#minGrad)"/>
+</svg>

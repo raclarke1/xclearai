@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="50%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="200" rx="40" fill="url(#sparkGrad)"/>
+  
+  <!-- Clean bold X -->
+  <path d="M45 40 L80 40 L100 70 L120 40 L155 40 L120 100 L155 160 L120 160 L100 130 L80 160 L45 160 L80 100 Z" 
+        fill="white"/>
+  
+  <!-- AI Sparkles -->
+  <!-- Large sparkle -->
+  <path d="M165 35 L168 45 L178 48 L168 51 L165 61 L162 51 L152 48 L162 45 Z" fill="white"/>
+  
+  <!-- Medium sparkle -->
+  <path d="M175 70 L177 76 L183 78 L177 80 L175 86 L173 80 L167 78 L173 76 Z" fill="#93c5fd"/>
+  
+  <!-- Small sparkle -->
+  <path d="M155 25 L156 29 L160 30 L156 31 L155 35 L154 31 L150 30 L154 29 Z" fill="#bfdbfe"/>
+  
+  <!-- Dot accents -->
+  <circle cx="180" cy="55" r="3" fill="#60a5fa"/>
+  <circle cx="150" cy="40" r="2" fill="white" opacity="0.7"/>
+</svg>

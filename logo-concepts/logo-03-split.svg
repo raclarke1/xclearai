@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100">
+  <defs>
+    <linearGradient id="splitGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Xclear -->
+  <text x="0" y="68" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="58" font-weight="600" fill="#1e40af">Xclear</text>
+  
+  <!-- Divider dot -->
+  <circle cx="195" cy="55" r="5" fill="#3b82f6"/>
+  
+  <!-- AI -->
+  <text x="215" y="68" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="58" font-weight="700" fill="url(#splitGrad)">AI</text>
+</svg>

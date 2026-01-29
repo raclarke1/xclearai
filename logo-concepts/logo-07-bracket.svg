@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100">
+  <defs>
+    <linearGradient id="bracketGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Opening bracket -->
+  <text x="0" y="72" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="68" font-weight="300" fill="#3b82f6">[</text>
+  
+  <!-- Main text -->
+  <text x="28" y="68" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="58" font-weight="600" fill="#1e40af">Xclear</text>
+  <text x="215" y="68" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="58" font-weight="700" fill="url(#bracketGrad)">AI</text>
+  
+  <!-- Closing bracket -->
+  <text x="290" y="72" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="68" font-weight="300" fill="#3b82f6">]</text>
+</svg>

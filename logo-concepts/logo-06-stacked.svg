@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">
+  <defs>
+    <linearGradient id="stackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Stacked layout -->
+  <text x="0" y="50" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="52" font-weight="700" fill="url(#stackGrad)">Xclear</text>
+  <text x="0" y="100" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="52" font-weight="300" letter-spacing="12" fill="#3b82f6">AI</text>
+</svg>

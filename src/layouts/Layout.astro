@@ -268,7 +268,7 @@ const faqSchema = {
     <nav class="nav">
       <div class="nav-container">
         <a href="/" class="logo">
-          <span class="logo-accent">X</span>clear<span class="logo-accent">AI</span>
+          <img src="/logo.svg" alt="XclearAI" class="logo-img" />
         </a>
         <div class="nav-links">
           <a href="/">Home</a>
@@ -301,7 +301,7 @@ const faqSchema = {
     <footer class="footer">
       <div class="footer-container">
         <div class="footer-brand">
-          <span class="logo"><span class="logo-accent">X</span>clear<span class="logo-accent">AI</span></span>
+          <img src="/logo.svg" alt="XclearAI" class="footer-logo-img" />
           <p>AI automation for small businesses.</p>
         </div>
         <div class="footer-links">
@@ -462,13 +462,30 @@ const faqSchema = {
   }
   
   .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    display: flex;
+    align-items: center;
   }
   
-  .logo-accent {
-    color: var(--accent);
+  .logo-img {
+    height: 32px;
+    width: auto;
+  }
+  
+  .footer-logo-img {
+    height: 28px;
+    width: auto;
+  }
+  
+  /* Adjust logo for dark mode */
+  [data-theme="dark"] .logo-img,
+  [data-theme="dark"] .footer-logo-img {
+    filter: brightness(1.4) saturate(1.2);
+  }
+  
+  @media (max-width: 480px) {
+    .logo-img {
+      height: 26px;
+    }
   }
   
   .nav-links {
