@@ -2,9 +2,94 @@
 interface Props {
   title: string;
   description?: string;
+  canonical?: string;
+  image?: string;
 }
 
-const { title, description = "AI automation for small businesses. We deploy intelligent assistants that handle emails, scheduling, and repetitive tasks — so you can focus on growth." } = Astro.props;
+const { 
+  title, 
+  description = "AI automation for small businesses. We deploy intelligent assistants that handle emails, scheduling, and repetitive tasks — so you can focus on growth.",
+  canonical = Astro.url.href,
+  image = "https://xclearai.com/og-image.png"
+} = Astro.props;
+
+const siteTitle = `${title} | XclearAI`;
+const siteName = "XclearAI";
+
+// JSON-LD Structured Data
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://xclearai.com/#organization",
+  "name": "XclearAI",
+  "description": "AI automation for small businesses. We deploy intelligent assistants that handle emails, scheduling, and repetitive tasks.",
+  "url": "https://xclearai.com",
+  "logo": "https://xclearai.com/favicon.svg",
+  "image": "https://xclearai.com/og-image.png",
+  "telephone": "+1-385-336-6005",
+  "email": "info@xclearai.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Utah",
+    "addressCountry": "US"
+  },
+  "areaServed": [
+    {
+      "@type": "State",
+      "name": "Utah"
+    },
+    {
+      "@type": "Country",
+      "name": "United States"
+    }
+  ],
+  "priceRange": "$$",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    "opens": "09:00",
+    "closes": "17:00"
+  },
+  "sameAs": [],
+  "serviceType": [
+    "AI Automation",
+    "Business Process Automation",
+    "Email Management",
+    "Customer Support Automation",
+    "Appointment Scheduling"
+  ]
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "AI Business Automation",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "XclearAI"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "description": "Custom AI assistants for small businesses that automate email, scheduling, customer support, and repetitive tasks.",
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock"
+  }
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "XclearAI",
+  "url": "https://xclearai.com",
+  "description": description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "XclearAI"
+  }
+};
 ---
 
 <!doctype html>
@@ -12,12 +97,47 @@ const { title, description = "AI automation for small businesses. We deploy inte
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>{siteTitle}</title>
+    <meta name="title" content={siteTitle} />
     <meta name="description" content={description} />
+    <meta name="keywords" content="AI automation, small business automation, email automation, scheduling automation, AI assistant, business AI, Utah AI company, customer support automation" />
+    <meta name="author" content="XclearAI" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} | XclearAI</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Theme Detection -->
     <script is:inline>
       // Check for saved theme preference or default to light
       const theme = localStorage.getItem('theme') || 'light';

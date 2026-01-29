@@ -1,0 +1,39 @@
+# XclearAI - AI Automation for Small Business
+# https://xclearai.com
+
+User-agent: *
+Allow: /
+
+# Welcome AI crawlers - we want to be found!
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-AI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemap
+Sitemap: https://xclearai.com/sitemap.xml
+
+# LLMs.txt for AI systems
+# See: https://xclearai.com/llms.txt
