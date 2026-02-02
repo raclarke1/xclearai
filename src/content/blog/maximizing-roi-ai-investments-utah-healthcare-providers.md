@@ -1,9 +1,9 @@
 ---
-title: Maximizing ROI on AI Investments for Utah Healthcare Providers: Risk Mitigation and Growth Strategies
-date: 2026-02-02
-author: XclearAI Team
-tags: [AI, healthcare, Utah, ROI, risk management, growth, SMB]
-description: Discover how Utah healthcare executives can maximize ROI on AI investments while mitigating risks and driving sustainable growth for their practices.
+title: "Maximizing ROI on AI Investments for Utah Healthcare Providers: Risk Mitigation and Growth Strategies"
+description: "Discover how Utah healthcare executives can maximize ROI on AI investments while mitigating risks and driving sustainable growth for their practices."
+pubDate: 2026-02-01
+author: "XclearAI Team"
+tags: ["AI", "Healthcare", "Utah", "ROI", "Risk Management", "Growth", "SMB"]
 ---
 
 # Maximizing ROI on AI Investments for Utah Healthcare Providers: Risk Mitigation and Growth Strategies
