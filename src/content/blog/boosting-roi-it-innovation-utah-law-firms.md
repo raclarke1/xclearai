@@ -1,6 +1,6 @@
 ---
 title: Boosting ROI Through IT Innovation in Utah Law Firms: Risk Management and Growth Strategies
-date: 2026-02-09
+date: 2026-02-02
 tags: ["IT innovation", "Utah law firms", "ROI", "risk management", "business growth"]
 ---
 
