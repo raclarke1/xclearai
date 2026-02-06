@@ -11,7 +11,12 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, remarkPluginFrontmatter } = await post.render();
+
+// Calculate reading time (approx 200 words per minute)
+const content = post.body;
+const words = content.split(/\s+/).length;
+const readingTime = Math.ceil(words / 200);
 
 function formatDate(date: Date) {
   return date.toLocaleDateString('en-US', {
@@ -20,6 +25,68 @@ function formatDate(date: Date) {
     day: 'numeric'
   });
 }
+
+function formatDateISO(date: Date) {
+  return date.toISOString().split('T')[0];
+}
+
+// BlogPosting Schema
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": post.data.image || "https://xclearai.com/og-image.png",
+  "datePublished": post.data.pubDate.toISOString(),
+  "dateModified": post.data.pubDate.toISOString(),
+  "author": {
+    "@type": "Organization",
+    "name": "XclearAI",
+    "url": "https://xclearai.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "XclearAI",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://xclearai.com/logo.svg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": `https://xclearai.com/blog/${post.slug}`
+  },
+  "keywords": post.data.tags.join(", "),
+  "wordCount": words,
+  "articleBody": post.data.description,
+  "inLanguage": "en-US"
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://xclearai.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://xclearai.com/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": post.data.title,
+      "item": `https://xclearai.com/blog/${post.slug}`
+    }
+  ]
+};
 ---
 
 <Layout 
@@ -27,22 +94,43 @@ function formatDate(date: Date) {
   description={post.data.description}
   keywords={post.data.tags.join(', ')}
 >
-  <article class="blog-post">
+  <!-- BlogPosting Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  
+  <article class="blog-post" itemscope itemtype="https://schema.org/BlogPosting">
+    <meta itemprop="headline" content={post.data.title} />
+    <meta itemprop="description" content={post.data.description} />
+    <meta itemprop="datePublished" content={post.data.pubDate.toISOString()} />
+    <meta itemprop="author" content="XclearAI" />
+    
     <header class="post-header">
       <div class="container">
-        <a href="/blog" class="back-link">← Back to Blog</a>
+        <!-- Breadcrumb Navigation -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li aria-current="page">{post.data.title.length > 50 ? post.data.title.substring(0, 50) + '...' : post.data.title}</li>
+          </ol>
+        </nav>
+        
         <div class="post-meta">
-          <time datetime={post.data.pubDate.toISOString()}>
+          <time datetime={post.data.pubDate.toISOString()} itemprop="datePublished">
             {formatDate(post.data.pubDate)}
           </time>
-          <span class="author">by {post.data.author}</span>
+          <span class="separator">•</span>
+          <span class="reading-time">{readingTime} min read</span>
+          <span class="separator">•</span>
+          <span class="author" itemprop="author">by {post.data.author}</span>
         </div>
-        <h1>{post.data.title}</h1>
+        <h1 itemprop="name">{post.data.title}</h1>
         <p class="post-description">{post.data.description}</p>
         {post.data.tags.length > 0 && (
           <div class="post-tags">
             {post.data.tags.map(tag => (
-              <span class="tag">{tag}</span>
+              <span class="tag" itemprop="keywords">{tag}</span>
             ))}
           </div>
         )}
@@ -51,11 +139,11 @@ function formatDate(date: Date) {
     
     {post.data.image && (
       <div class="post-image-container">
-        <img src={post.data.image} alt={post.data.title} class="post-image" />
+        <img src={post.data.image} alt={post.data.title} class="post-image" itemprop="image" />
       </div>
     )}
     
-    <div class="post-content">
+    <div class="post-content" itemprop="articleBody">
       <div class="container">
         <Content />
       </div>
@@ -89,23 +177,66 @@ function formatDate(date: Date) {
     background: linear-gradient(180deg, var(--gradient-start) 0%, var(--bg-primary) 100%);
   }
   
-  .back-link {
-    color: var(--accent);
-    font-size: 0.9rem;
+  /* Breadcrumb Styles */
+  .breadcrumb {
     margin-bottom: 2rem;
-    display: inline-block;
   }
   
-  .back-link:hover {
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+  }
+  
+  .breadcrumb li:not(:last-child)::after {
+    content: "›";
+    margin: 0 0.5rem;
+    color: var(--text-faint);
+  }
+  
+  .breadcrumb a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  
+  .breadcrumb a:hover {
     text-decoration: underline;
+  }
+  
+  .breadcrumb li[aria-current="page"] {
+    color: var(--text-secondary);
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   .post-meta {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     color: var(--text-muted);
     font-size: 0.9rem;
     margin-bottom: 1rem;
+    align-items: center;
+  }
+  
+  .post-meta .separator {
+    color: var(--text-faint);
+  }
+  
+  .reading-time {
+    color: var(--accent);
+    font-weight: 500;
   }
   
   .post-header h1 {
@@ -273,6 +404,10 @@ function formatDate(date: Date) {
   @media (max-width: 768px) {
     .post-header h1 {
       font-size: 2rem;
+    }
+    
+    .breadcrumb li[aria-current="page"] {
+      max-width: 120px;
     }
   }
 </style>

@@ -2,43 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://xclearai.com/</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://xclearai.com/services</loc>
-    <lastmod>2026-01-29</lastmod>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/blog</loc>
-    <lastmod>2026-02-02</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://xclearai.com/contact</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/blog/why-utah-businesses-need-ai-powered-it</loc>
-    <lastmod>2025-01-29</lastmod>
+    <loc>https://xclearai.com/about</loc>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/blog/how-much-does-managed-it-cost-utah</loc>
-    <lastmod>2025-01-29</lastmod>
+    <loc>https://xclearai.com/blog</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <!-- Blog Posts -->
+  <url>
+    <loc>https://xclearai.com/blog/construction-mobile-workforce-it-utah</loc>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/blog/ransomware-protection-utah-small-business</loc>
-    <lastmod>2026-01-29</lastmod>
+    <loc>https://xclearai.com/blog/boosting-roi-it-innovation-utah-law-firms</loc>
+    <lastmod>2026-02-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/blog/5-signs-outgrown-break-fix-it-support</loc>
-    <lastmod>2026-02-01</lastmod>
+    <loc>https://xclearai.com/blog/healthcare-it-budgeting-guide-utah-cfos</loc>
+    <lastmod>2026-02-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xclearai.com/blog/hipaa-compliant-marketing-utah-healthcare-providers</loc>
+    <lastmod>2026-02-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -49,20 +62,26 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/contact</loc>
-    <lastmod>2026-01-29</lastmod>
+    <loc>https://xclearai.com/blog/5-signs-outgrown-break-fix-it-support</loc>
+    <lastmod>2026-02-01</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/about</loc>
+    <loc>https://xclearai.com/blog/ransomware-protection-utah-small-business</loc>
     <lastmod>2026-01-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://xclearai.com/blog/boosting-roi-it-innovation-utah-law-firms</loc>
-    <lastmod>2026-02-02</lastmod>
+    <loc>https://xclearai.com/blog/how-much-does-managed-it-cost-utah</loc>
+    <lastmod>2026-01-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://xclearai.com/blog/why-utah-businesses-need-ai-powered-it</loc>
+    <lastmod>2026-01-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
