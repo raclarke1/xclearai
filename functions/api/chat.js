@@ -46,13 +46,12 @@ export async function onRequestPost(context) {
 
     let reply = null;
 
-    // Option 1: Anthropic API (if key is set)
+    // Option 1: Anthropic API
     const anthropicKey = context.env.ANTHROPIC_API_KEY;
-    if (anthropicKey && !reply) {
+    if (anthropicKey) {
       try {
         const systemMsg = allMessages.find(m => m.role === 'system')?.content || '';
         const chatMsgs = allMessages.filter(m => m.role !== 'system');
-        
         const res = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
           headers: {
@@ -70,15 +69,13 @@ export async function onRequestPost(context) {
         if (res.ok) {
           const data = await res.json();
           reply = data.content?.[0]?.text || null;
-        } else {
-          console.error('Anthropic:', res.status, await res.text());
         }
       } catch (e) {
         console.error('Anthropic error:', e.message);
       }
     }
 
-    // Option 2: Workers AI (free, built into Cloudflare)
+    // Option 2: Workers AI (free fallback)
     if (!reply && context.env.AI) {
       try {
         const result = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
@@ -92,16 +89,15 @@ export async function onRequestPost(context) {
     }
 
     if (!reply) {
-      return new Response(JSON.stringify({ 
-        error: 'AI temporarily unavailable',
-        debug: `anthropic_key=${!!anthropicKey}, workers_ai=${!!context.env.AI}`
-      }), { status: 500, headers: corsHeaders });
+      return new Response(JSON.stringify({ error: 'AI temporarily unavailable' }), {
+        status: 500, headers: corsHeaders,
+      });
     }
 
     return new Response(JSON.stringify({ reply }), { headers: corsHeaders });
   } catch (err) {
     console.error('Chat error:', err);
-    return new Response(JSON.stringify({ error: 'Something went wrong', debug: err.message }), {
+    return new Response(JSON.stringify({ error: 'Something went wrong' }), {
       status: 500, headers: corsHeaders,
     });
   }
@@ -123,36 +119,14 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
   }
 
   try {
-    // Summarize with whatever AI is available
+    // Summarize the lead
     let lead = { summary: 'Chat ended', leadScore: 5 };
-    
     const summaryPrompt = {
       role: 'user',
       content: `Analyze this chat and return JSON with: name, company, industry, email, phone (or "Unknown"/null), painPoints (array), interest, leadScore (1-10), summary (2-3 sentences). ONLY valid JSON.\n\n${messages.map(m => `${m.role === 'user' ? 'Visitor' : 'AI'}: ${m.content}`).join('\n')}`
     };
 
-    const anthropicKey = context.env.ANTHROPIC_API_KEY;
-    if (anthropicKey) {
-      try {
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'x-api-key': anthropicKey,
-            'anthropic-version': '2023-06-01',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 500,
-            messages: [summaryPrompt],
-          }),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          try { lead = JSON.parse(data.content[0].text); } catch {}
-        }
-      } catch {}
-    } else if (context.env.AI) {
+    if (context.env.AI) {
       try {
         const result = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
           messages: [{ role: 'system', content: 'Return only valid JSON.' }, summaryPrompt],
@@ -162,40 +136,68 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
       } catch {}
     }
 
-    // Email via MailChannels (free on Cloudflare)
+    // Build transcript
     const transcript = messages.map(m =>
-      `<p><strong>${m.role === 'user' ? 'Visitor' : 'XClear AI'}:</strong> ${m.content}</p>`
-    ).join('');
+      `${m.role === 'user' ? ':bust_in_silhouette: *Visitor*' : ':robot_face: *XClear AI*'}: ${m.content}`
+    ).join('\n');
 
-    const emailHtml = `<div style="font-family:Arial;max-width:600px;">
-      <div style="background:#1e1b4b;color:white;padding:20px;border-radius:8px 8px 0 0;">
-        <h2 style="margin:0;">New Chat Lead — Score ${lead.leadScore || '?'}/10</h2>
-      </div>
-      <div style="background:#f8fafc;padding:20px;border:1px solid #e2e8f0;">
-        <p><b>Name:</b> ${lead.name || 'Unknown'} | <b>Company:</b> ${lead.company || 'Unknown'}</p>
-        <p><b>Industry:</b> ${lead.industry || 'Unknown'} | <b>Interest:</b> ${lead.interest || 'General'}</p>
-        <p><b>Email:</b> ${lead.email || 'N/A'} | <b>Phone:</b> ${lead.phone || 'N/A'}</p>
-        <p><i>${lead.summary || ''}</i></p>
-      </div>
-      <div style="background:white;padding:20px;border:1px solid #e2e8f0;border-top:0;">
-        <h3>Transcript</h3>
-        <div style="background:#f1f5f9;padding:16px;border-radius:8px;font-size:13px;">${transcript}</div>
-      </div>
-    </div>`;
+    const stars = '★'.repeat(Math.min(lead.leadScore || 0, 10)) + '☆'.repeat(10 - Math.min(lead.leadScore || 0, 10));
 
-    try {
-      await fetch('https://api.mailchannels.net/tx/v1/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          personalizations: [{ to: [{ email: 'ryan@xclearnetworks.com' }] }],
-          from: { email: 'chat@xclearai.com', name: 'XClear AI Chat' },
-          subject: `Chat Lead: ${lead.name || 'Unknown'} — Score ${lead.leadScore || '?'}/10`,
-          content: [{ type: 'text/html', value: emailHtml }],
-        }),
-      });
-    } catch (e) {
-      console.error('Email error:', e.message);
+    // Post to Slack via webhook
+    const webhookUrl = context.env.SLACK_WEBHOOK_URL;
+    if (webhookUrl) {
+      const slackPayload = {
+        blocks: [
+          {
+            type: 'header',
+            text: { type: 'plain_text', text: `🔔 New Chat Lead — Score ${lead.leadScore || '?'}/10`, emoji: true }
+          },
+          {
+            type: 'section',
+            fields: [
+              { type: 'mrkdwn', text: `*Name:*\n${lead.name || 'Unknown'}` },
+              { type: 'mrkdwn', text: `*Company:*\n${lead.company || 'Unknown'}` },
+              { type: 'mrkdwn', text: `*Industry:*\n${lead.industry || 'Unknown'}` },
+              { type: 'mrkdwn', text: `*Score:*\n${stars}` },
+              { type: 'mrkdwn', text: `*Email:*\n${lead.email || 'Not provided'}` },
+              { type: 'mrkdwn', text: `*Phone:*\n${lead.phone || 'Not provided'}` },
+            ]
+          },
+          {
+            type: 'section',
+            text: { type: 'mrkdwn', text: `*Interest:* ${lead.interest || 'General'}` }
+          },
+          lead.painPoints?.length ? {
+            type: 'section',
+            text: { type: 'mrkdwn', text: `*Pain Points:*\n${lead.painPoints.map(p => `• ${p}`).join('\n')}` }
+          } : null,
+          lead.summary && lead.summary !== 'Chat ended' ? {
+            type: 'section',
+            text: { type: 'mrkdwn', text: `*Summary:* _${lead.summary}_` }
+          } : null,
+          { type: 'divider' },
+          {
+            type: 'section',
+            text: { type: 'mrkdwn', text: `*Full Transcript (${messages.length} messages):*\n${transcript}` }
+          },
+          {
+            type: 'context',
+            elements: [
+              { type: 'mrkdwn', text: `📍 ${visitorInfo?.page || 'xclearai.com'} | ${visitorInfo?.referrer ? `Ref: ${visitorInfo.referrer}` : 'Direct'} | ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })} MST` }
+            ]
+          }
+        ].filter(Boolean)
+      };
+
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(slackPayload),
+        });
+      } catch (e) {
+        console.error('Slack webhook error:', e.message);
+      }
     }
 
     return new Response(JSON.stringify({ ok: true, lead }), { headers: corsHeaders });
