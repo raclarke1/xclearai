@@ -48,31 +48,35 @@ export async function onRequestPost(context) {
       ...messages.slice(-20),
     ];
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const systemMsg = apiMessages.find(m => m.role === 'system')?.content || '';
+    const chatMsgs = apiMessages.filter(m => m.role !== 'system');
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${context.env.OPENAI_API_KEY}`,
+        'x-api-key': context.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: apiMessages,
+        model: 'claude-3-5-haiku-latest',
         max_tokens: 300,
-        temperature: 0.7,
+        system: systemMsg,
+        messages: chatMsgs,
       }),
     });
 
     const data = await response.json();
 
     if (data.error) {
-      console.error('OpenAI error:', JSON.stringify(data.error));
+      console.error('Anthropic error:', JSON.stringify(data.error));
       return new Response(JSON.stringify({ error: 'AI temporarily unavailable' }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    return new Response(JSON.stringify({ reply: data.choices[0].message.content }), {
+    return new Response(JSON.stringify({ reply: data.content[0].text }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   } catch (err) {
@@ -102,41 +106,38 @@ async function handleEndChat(messages, visitorInfo, env, corsHeaders) {
   }
 
   try {
-    const summaryResponse = await fetch('https://api.openai.com/v1/chat/completions', {
+    const summaryResponse = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${env.OPENAI_API_KEY}`,
+        'x-api-key': env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          {
-            role: 'system',
-            content: `Analyze this chat and extract a lead summary. Return JSON:
+        model: 'claude-3-5-haiku-latest',
+        max_tokens: 500,
+        system: `Analyze this chat and extract a lead summary. Return JSON:
 - name, company, industry, size, email, phone (or "Unknown"/null)
 - painPoints: array
 - interest: services interested in
 - leadScore: 1-10
 - summary: 2-3 sentences
-Return ONLY valid JSON.`
-          },
+Return ONLY valid JSON.`,
+        messages: [
           {
             role: 'user',
             content: messages.map(m => `${m.role === 'user' ? 'Visitor' : 'AI'}: ${m.content}`).join('\n')
           }
         ],
-        max_tokens: 500,
-        temperature: 0.3,
       }),
     });
 
     const summaryData = await summaryResponse.json();
     let lead = {};
     try {
-      lead = JSON.parse(summaryData.choices[0].message.content);
+      lead = JSON.parse(summaryData.content[0].text);
     } catch {
-      lead = { summary: summaryData.choices[0]?.message?.content || 'Parse failed' };
+      lead = { summary: summaryData.content?.[0]?.text || 'Parse failed' };
     }
 
     // Format and send email via MailChannels (free on CF Workers/Pages)
