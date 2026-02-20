@@ -66,16 +66,16 @@ export async function onRequestPost(context) {
       }),
     });
 
-    const data = await response.json();
-
-    if (data.error || data.type === 'error') {
-      console.error('Anthropic error:', JSON.stringify(data));
-      const debugMsg = data.error?.message || data.message || JSON.stringify(data).slice(0, 200);
-      return new Response(JSON.stringify({ error: 'AI temporarily unavailable', debug: debugMsg }), {
+    if (!response.ok) {
+      const errText = await response.text();
+      console.error('Anthropic error:', response.status, errText);
+      return new Response(JSON.stringify({ error: 'AI temporarily unavailable', debug: `HTTP ${response.status}: ${errText.slice(0, 300)}` }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+
+    const data = await response.json();
 
     if (!data.content || !data.content[0]) {
       console.error('Unexpected response:', JSON.stringify(data));
