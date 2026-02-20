@@ -173,9 +173,10 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
 
     // Send via Resend (free 100/day)
     const resendKey = context.env.RESEND_API_KEY;
+    let emailStatus = 'no_key';
     if (resendKey) {
       try {
-        await fetch('https://api.resend.com/emails', {
+        const emailRes = await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${resendKey}`,
@@ -188,12 +189,16 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
             html: emailHtml,
           }),
         });
+        const emailResult = await emailRes.json();
+        emailStatus = emailRes.ok ? 'sent' : JSON.stringify(emailResult);
+        console.log('Resend result:', emailStatus);
       } catch (e) {
+        emailStatus = e.message;
         console.error('Resend error:', e.message);
       }
     }
 
-    return new Response(JSON.stringify({ ok: true, lead }), { headers: corsHeaders });
+    return new Response(JSON.stringify({ ok: true, lead, emailStatus }), { headers: corsHeaders });
   } catch (err) {
     console.error('End chat error:', err);
     return new Response(JSON.stringify({ ok: true }), { headers: corsHeaders });
