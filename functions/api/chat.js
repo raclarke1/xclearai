@@ -10,11 +10,7 @@ ABOUT XCLEAR AI:
 
 YOUR ROLE:
 1. Answer questions about XClear AI's services clearly and concisely
-2. Naturally qualify leads by learning about their business:
-   - What industry/business they're in
-   - Company size (employees)
-   - What challenges they face (repetitive tasks, missed calls, slow processes)
-   - Current tech setup
+2. Naturally qualify leads by learning about their business
 3. Guide toward booking a free AI audit
 4. Be conversational, helpful, and professional — not pushy
 5. Keep responses SHORT (2-3 sentences max unless they ask for detail)
@@ -25,74 +21,88 @@ QUALIFYING APPROACH:
 - After 3-4 exchanges, suggest scheduling a free AI audit
 - If they want to talk to someone: "I can have Ryan reach out directly — what's the best email or phone to reach you?"
 
-IMPORTANT: You ARE the XClear AI chatbot. This is a live demo of exactly what we build for clients. If someone asks "is this an AI?" — yes, and it's an example of what we deploy for businesses like theirs.
-
-Never make up capabilities we don't have. Never discuss pricing specifics beyond the ranges above.`;
+You ARE the XClear AI chatbot — a live demo of what we build for clients.
+Never make up capabilities. Never discuss pricing beyond the ranges above.`;
 
 export async function onRequestPost(context) {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
+    'Content-Type': 'application/json',
   };
 
   try {
     const { messages, action, visitorInfo } = await context.request.json();
 
     if (action === 'end-chat') {
-      return handleEndChat(messages, visitorInfo, context.env, corsHeaders);
+      return handleEndChat(messages, visitorInfo, context, corsHeaders);
     }
 
-    const apiMessages = [
+    const allMessages = [
       { role: 'system', content: SYSTEM_PROMPT },
-      ...messages.slice(-20),
+      ...(messages || []).slice(-20),
     ];
 
-    const systemMsg = apiMessages.find(m => m.role === 'system')?.content || '';
-    const chatMsgs = apiMessages.filter(m => m.role !== 'system');
+    let reply = null;
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': context.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'claude-3-haiku-20240307',
-        max_tokens: 300,
-        system: systemMsg,
-        messages: chatMsgs,
-      }),
-    });
-
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error('Anthropic error:', response.status, errText);
-      return new Response(JSON.stringify({ error: 'AI temporarily unavailable', debug: `HTTP ${response.status}: ${errText.slice(0, 300)}` }), {
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+    // Option 1: Anthropic API (if key is set)
+    const anthropicKey = context.env.ANTHROPIC_API_KEY;
+    if (anthropicKey && !reply) {
+      try {
+        const systemMsg = allMessages.find(m => m.role === 'system')?.content || '';
+        const chatMsgs = allMessages.filter(m => m.role !== 'system');
+        
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'x-api-key': anthropicKey,
+            'anthropic-version': '2023-06-01',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 300,
+            system: systemMsg,
+            messages: chatMsgs,
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          reply = data.content?.[0]?.text || null;
+        } else {
+          console.error('Anthropic:', res.status, await res.text());
+        }
+      } catch (e) {
+        console.error('Anthropic error:', e.message);
+      }
     }
 
-    const data = await response.json();
-
-    if (!data.content || !data.content[0]) {
-      console.error('Unexpected response:', JSON.stringify(data));
-      return new Response(JSON.stringify({ error: 'AI temporarily unavailable', debug: 'No content in response' }), {
-        status: 500,
-        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-      });
+    // Option 2: Workers AI (free, built into Cloudflare)
+    if (!reply && context.env.AI) {
+      try {
+        const result = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+          messages: allMessages,
+          max_tokens: 300,
+        });
+        reply = result.response;
+      } catch (e) {
+        console.error('Workers AI error:', e.message);
+      }
     }
 
-    return new Response(JSON.stringify({ reply: data.content[0].text }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    if (!reply) {
+      return new Response(JSON.stringify({ 
+        error: 'AI temporarily unavailable',
+        debug: `anthropic_key=${!!anthropicKey}, workers_ai=${!!context.env.AI}`
+      }), { status: 500, headers: corsHeaders });
+    }
+
+    return new Response(JSON.stringify({ reply }), { headers: corsHeaders });
   } catch (err) {
     console.error('Chat error:', err);
-    return new Response(JSON.stringify({ error: 'Something went wrong' }), {
-      status: 500,
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    return new Response(JSON.stringify({ error: 'Something went wrong', debug: err.message }), {
+      status: 500, headers: corsHeaders,
     });
   }
 }
@@ -107,95 +117,90 @@ export async function onRequestOptions() {
   });
 }
 
-async function handleEndChat(messages, visitorInfo, env, corsHeaders) {
+async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
   if (!messages || messages.length < 3) {
-    return new Response(JSON.stringify({ ok: true }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    return new Response(JSON.stringify({ ok: true }), { headers: corsHeaders });
   }
 
   try {
-    const summaryResponse = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'x-api-key': env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'claude-3-haiku-20240307',
-        max_tokens: 500,
-        system: `Analyze this chat and extract a lead summary. Return JSON:
-- name, company, industry, size, email, phone (or "Unknown"/null)
-- painPoints: array
-- interest: services interested in
-- leadScore: 1-10
-- summary: 2-3 sentences
-Return ONLY valid JSON.`,
-        messages: [
-          {
-            role: 'user',
-            content: messages.map(m => `${m.role === 'user' ? 'Visitor' : 'AI'}: ${m.content}`).join('\n')
-          }
-        ],
-      }),
-    });
+    // Summarize with whatever AI is available
+    let lead = { summary: 'Chat ended', leadScore: 5 };
+    
+    const summaryPrompt = {
+      role: 'user',
+      content: `Analyze this chat and return JSON with: name, company, industry, email, phone (or "Unknown"/null), painPoints (array), interest, leadScore (1-10), summary (2-3 sentences). ONLY valid JSON.\n\n${messages.map(m => `${m.role === 'user' ? 'Visitor' : 'AI'}: ${m.content}`).join('\n')}`
+    };
 
-    const summaryData = await summaryResponse.json();
-    let lead = {};
-    try {
-      lead = JSON.parse(summaryData.content[0].text);
-    } catch {
-      lead = { summary: summaryData.content?.[0]?.text || 'Parse failed' };
+    const anthropicKey = context.env.ANTHROPIC_API_KEY;
+    if (anthropicKey) {
+      try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'x-api-key': anthropicKey,
+            'anthropic-version': '2023-06-01',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 500,
+            messages: [summaryPrompt],
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          try { lead = JSON.parse(data.content[0].text); } catch {}
+        }
+      } catch {}
+    } else if (context.env.AI) {
+      try {
+        const result = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+          messages: [{ role: 'system', content: 'Return only valid JSON.' }, summaryPrompt],
+          max_tokens: 500,
+        });
+        try { lead = JSON.parse(result.response); } catch {}
+      } catch {}
     }
 
-    // Format and send email via MailChannels (free on CF Workers/Pages)
+    // Email via MailChannels (free on Cloudflare)
     const transcript = messages.map(m =>
-      `<p style="margin:4px 0;"><strong style="color:${m.role === 'user' ? '#2563eb' : '#059669'}">${m.role === 'user' ? 'Visitor' : 'XClear AI'}:</strong> ${m.content}</p>`
+      `<p><strong>${m.role === 'user' ? 'Visitor' : 'XClear AI'}:</strong> ${m.content}</p>`
     ).join('');
 
-    const emailHtml = `
-    <div style="font-family:Arial,sans-serif;max-width:600px;">
-      <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);color:white;padding:20px;border-radius:8px 8px 0 0;">
-        <h2 style="margin:0;">New Chat Lead from xclearai.com</h2>
-        <p style="margin:8px 0 0;opacity:0.8;">Lead Score: ${'★'.repeat(Math.min(lead.leadScore || 1, 10))} (${lead.leadScore || '?'}/10)</p>
+    const emailHtml = `<div style="font-family:Arial;max-width:600px;">
+      <div style="background:#1e1b4b;color:white;padding:20px;border-radius:8px 8px 0 0;">
+        <h2 style="margin:0;">New Chat Lead — Score ${lead.leadScore || '?'}/10</h2>
       </div>
       <div style="background:#f8fafc;padding:20px;border:1px solid #e2e8f0;">
-        <table style="width:100%;font-size:14px;">
-          <tr><td style="padding:4px 8px;font-weight:bold;width:100px;">Name:</td><td>${lead.name || 'Unknown'}</td></tr>
-          <tr><td style="padding:4px 8px;font-weight:bold;">Company:</td><td>${lead.company || 'Unknown'}</td></tr>
-          <tr><td style="padding:4px 8px;font-weight:bold;">Industry:</td><td>${lead.industry || 'Unknown'}</td></tr>
-          <tr><td style="padding:4px 8px;font-weight:bold;">Email:</td><td>${lead.email || 'Not provided'}</td></tr>
-          <tr><td style="padding:4px 8px;font-weight:bold;">Phone:</td><td>${lead.phone || 'Not provided'}</td></tr>
-          <tr><td style="padding:4px 8px;font-weight:bold;">Interest:</td><td>${lead.interest || 'General'}</td></tr>
-        </table>
-        ${lead.painPoints?.length ? `<p style="margin:12px 0 4px;font-weight:bold;">Pain Points:</p><ul>${lead.painPoints.map(p => `<li>${p}</li>`).join('')}</ul>` : ''}
-        <p style="font-style:italic;color:#475569;">${lead.summary || ''}</p>
+        <p><b>Name:</b> ${lead.name || 'Unknown'} | <b>Company:</b> ${lead.company || 'Unknown'}</p>
+        <p><b>Industry:</b> ${lead.industry || 'Unknown'} | <b>Interest:</b> ${lead.interest || 'General'}</p>
+        <p><b>Email:</b> ${lead.email || 'N/A'} | <b>Phone:</b> ${lead.phone || 'N/A'}</p>
+        <p><i>${lead.summary || ''}</i></p>
       </div>
       <div style="background:white;padding:20px;border:1px solid #e2e8f0;border-top:0;">
-        <h3 style="margin:0 0 12px;">Full Transcript</h3>
+        <h3>Transcript</h3>
         <div style="background:#f1f5f9;padding:16px;border-radius:8px;font-size:13px;">${transcript}</div>
       </div>
     </div>`;
 
-    await fetch('https://api.mailchannels.net/tx/v1/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        personalizations: [{ to: [{ email: 'ryan@xclearnetworks.com', name: 'Ryan Clarke' }] }],
-        from: { email: 'chat@xclearai.com', name: 'XClear AI Chat' },
-        subject: `Chat Lead: ${lead.name || 'Unknown'}${lead.company !== 'Unknown' ? ` (${lead.company})` : ''} — Score ${lead.leadScore || '?'}/10`,
-        content: [{ type: 'text/html', value: emailHtml }],
-      }),
-    });
+    try {
+      await fetch('https://api.mailchannels.net/tx/v1/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          personalizations: [{ to: [{ email: 'ryan@xclearnetworks.com' }] }],
+          from: { email: 'chat@xclearai.com', name: 'XClear AI Chat' },
+          subject: `Chat Lead: ${lead.name || 'Unknown'} — Score ${lead.leadScore || '?'}/10`,
+          content: [{ type: 'text/html', value: emailHtml }],
+        }),
+      });
+    } catch (e) {
+      console.error('Email error:', e.message);
+    }
 
-    return new Response(JSON.stringify({ ok: true, lead }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    return new Response(JSON.stringify({ ok: true, lead }), { headers: corsHeaders });
   } catch (err) {
     console.error('End chat error:', err);
-    return new Response(JSON.stringify({ ok: true }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    return new Response(JSON.stringify({ ok: true }), { headers: corsHeaders });
   }
 }
