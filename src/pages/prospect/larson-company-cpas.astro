@@ -1,181 +1,528 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "Larson & Company CPAs - Website Concept Redesign";
+const description = "A modern website concept redesign for Larson & Company CPAs by XClear AI.";
 ---
 
-<Layout title="Larson & Company CPAs — Reimagined by XClear AI" description="See what Larson & Company CPAs could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    📊 This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>Larson & Company CPAs</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --lc-primary: #1a2744;
+      --lc-secondary: #2c4a7c;
+      --lc-accent: #3d6db5;
+      --lc-gold: #b8943e;
+      --lc-light: #f5f7fa;
+      --lc-dark: #0e1726;
+      --lc-text: #2c3542;
+      --lc-muted: #6b7a8d;
+      --lc-white: #ffffff;
+      --lc-border: #dce3eb;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .lc-concept-banner {
+      background: var(--lc-dark); color: rgba(255,255,255,0.85);
+      text-align: center; padding: 10px 20px; font-size: 13px; font-family: var(--font-stack);
+    }
+    .lc-concept-banner a { color: var(--lc-accent); text-decoration: none; font-weight: 600; }
+    .lc-concept-banner a:hover { text-decoration: underline; }
+
+    .lc-nav {
+      background: var(--lc-white); padding: 16px 0;
+      border-bottom: 1px solid var(--lc-border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .lc-nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .lc-logo { font-family: var(--font-stack); font-size: 20px; font-weight: 700; color: var(--lc-primary); }
+    .lc-logo span { color: var(--lc-gold); font-weight: 400; font-size: 14px; margin-left: 6px; }
+    .lc-nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .lc-nav-links a {
+      text-decoration: none; color: var(--lc-text); font-size: 14px;
+      font-weight: 500; font-family: var(--font-stack); transition: color 0.2s;
+    }
+    .lc-nav-links a:hover { color: var(--lc-accent); }
+    .lc-nav-cta {
+      background: var(--lc-accent) !important; color: var(--lc-white) !important;
+      padding: 10px 22px; border-radius: 6px; font-weight: 600 !important;
+    }
+
+    .lc-hero {
+      background: linear-gradient(135deg, var(--lc-primary) 0%, var(--lc-dark) 100%);
+      color: var(--lc-white); padding: 100px 24px; text-align: center;
+      position: relative;
+    }
+    .lc-hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(61,109,181,0.1) 0%, transparent 60%);
+    }
+    .lc-hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .lc-hero-badge {
+      display: inline-block; background: rgba(184,148,62,0.15);
+      border: 1px solid rgba(184,148,62,0.3); color: var(--lc-gold);
+      padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      font-family: var(--font-stack); margin-bottom: 24px; letter-spacing: 0.5px;
+    }
+    .lc-hero h1 {
+      font-family: var(--font-stack); font-size: 48px; font-weight: 700;
+      line-height: 1.15; margin-bottom: 20px; letter-spacing: -1px;
+    }
+    .lc-hero p {
+      font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.8);
+      margin-bottom: 36px; max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .lc-hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .lc-btn-gold {
+      background: var(--lc-gold); color: var(--lc-white);
+      padding: 14px 32px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 15px; font-family: var(--font-stack);
+      transition: all 0.2s; display: inline-block;
+    }
+    .lc-btn-gold:hover { opacity: 0.9; transform: translateY(-1px); }
+    .lc-btn-outline {
+      background: transparent; color: var(--lc-white);
+      padding: 14px 32px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 15px; font-family: var(--font-stack);
+      border: 2px solid rgba(255,255,255,0.25); transition: all 0.2s; display: inline-block;
+    }
+    .lc-btn-outline:hover { border-color: var(--lc-white); }
+
+    .lc-section { padding: 80px 24px; font-family: var(--font-stack); }
+    .lc-section-inner { max-width: 1200px; margin: 0 auto; }
+    .lc-section-header { text-align: center; margin-bottom: 56px; }
+    .lc-section-header h2 {
+      font-size: 36px; font-weight: 700; color: var(--lc-primary);
+      margin-bottom: 12px; letter-spacing: -0.5px;
+    }
+    .lc-section-header p {
+      font-size: 17px; color: var(--lc-muted);
+      max-width: 600px; margin: 0 auto; line-height: 1.6;
+    }
+    .lc-alt-bg { background: var(--lc-light); }
+
+    .lc-industries-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .lc-industry-card {
+      background: var(--lc-white); border: 1px solid var(--lc-border);
+      border-radius: 12px; padding: 32px 24px; transition: all 0.2s;
+    }
+    .lc-industry-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .lc-industry-card h3 { font-size: 17px; font-weight: 600; color: var(--lc-primary); margin-bottom: 8px; }
+    .lc-industry-card p { font-size: 14px; color: var(--lc-muted); line-height: 1.6; }
+
+    .lc-services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .lc-service-card {
+      text-align: center; padding: 36px 20px;
+      background: var(--lc-white); border: 1px solid var(--lc-border);
+      border-radius: 12px; transition: all 0.2s;
+    }
+    .lc-service-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+    .lc-service-icon {
+      width: 56px; height: 56px; background: var(--lc-light);
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .lc-service-icon svg { width: 28px; height: 28px; color: var(--lc-accent); }
+    .lc-service-card h3 { font-size: 16px; font-weight: 600; color: var(--lc-primary); margin-bottom: 8px; }
+    .lc-service-card p { font-size: 13px; color: var(--lc-muted); line-height: 1.5; }
+
+    .lc-team-section { background: var(--lc-primary); color: var(--lc-white); padding: 80px 24px; }
+    .lc-team-header { text-align: center; margin-bottom: 48px; }
+    .lc-team-header h2 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .lc-team-header p { font-size: 17px; color: rgba(255,255,255,0.7); max-width: 500px; margin: 0 auto; }
+    .lc-team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+    .lc-team-card {
+      text-align: center; padding: 24px 12px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+    }
+    .lc-team-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--lc-accent), var(--lc-gold));
+      margin: 0 auto 12px; display: flex; align-items: center; justify-content: center;
+      color: var(--lc-white); font-size: 20px; font-weight: 600;
+    }
+    .lc-team-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .lc-team-card p { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+    .lc-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+      text-align: center; padding: 60px 0;
+    }
+    .lc-stat h3 { font-size: 42px; font-weight: 700; color: var(--lc-gold); margin-bottom: 8px; }
+    .lc-stat p { font-size: 14px; color: var(--lc-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+
+    .lc-locations {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .lc-location-card {
+      background: var(--lc-white); border: 1px solid var(--lc-border);
+      border-radius: 12px; padding: 28px 24px; text-align: center;
+    }
+    .lc-location-card h4 { font-size: 17px; font-weight: 600; color: var(--lc-primary); margin-bottom: 6px; }
+    .lc-location-card p { font-size: 14px; color: var(--lc-muted); }
+
+    .lc-cta-section {
+      background: linear-gradient(135deg, var(--lc-secondary) 0%, var(--lc-primary) 100%);
+      color: var(--lc-white); padding: 80px 24px; text-align: center;
+    }
+    .lc-cta-section h2 { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
+    .lc-cta-section p {
+      font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 32px;
+      max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6;
+    }
+    .lc-cta-btn {
+      background: var(--lc-gold); color: var(--lc-white);
+      padding: 16px 36px; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 15px; font-family: var(--font-stack);
+      transition: all 0.2s; display: inline-block;
+    }
+    .lc-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+    .lc-footer {
+      background: var(--lc-dark); color: rgba(255,255,255,0.6);
+      padding: 48px 24px; font-family: var(--font-stack);
+    }
+    .lc-footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .lc-footer-brand { font-size: 18px; font-weight: 700; color: var(--lc-white); }
+    .lc-footer p { font-size: 13px; }
+
+    .lc-xclear-cta {
+      background: var(--lc-white); border-top: 1px solid var(--lc-border);
+      padding: 48px 24px; text-align: center; font-family: var(--font-stack);
+    }
+    .lc-xclear-cta p { font-size: 16px; color: var(--lc-muted); margin-bottom: 12px; }
+    .lc-xclear-cta a { color: var(--lc-accent); font-weight: 600; text-decoration: none; }
+    .lc-xclear-cta a:hover { text-decoration: underline; }
+
+    .lc-chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 1000; }
+    .lc-chat-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--lc-accent); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(61,109,181,0.35); transition: all 0.2s;
+    }
+    .lc-chat-btn:hover { transform: scale(1.05); }
+    .lc-chat-btn svg { width: 24px; height: 24px; color: white; }
+    .lc-chat-window {
+      display: none; position: absolute; bottom: 72px; right: 0;
+      width: 360px; height: 480px; background: var(--lc-white);
+      border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+      overflow: hidden; flex-direction: column;
+    }
+    .lc-chat-window.active { display: flex; }
+    .lc-chat-header {
+      background: var(--lc-primary); color: var(--lc-white);
+      padding: 16px 20px; font-weight: 600; font-size: 15px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .lc-chat-close { background: none; border: none; color: var(--lc-white); cursor: pointer; font-size: 18px; opacity: 0.7; }
+    .lc-chat-close:hover { opacity: 1; }
+    .lc-chat-messages { flex: 1; padding: 20px; overflow-y: auto; }
+    .lc-chat-msg {
+      background: var(--lc-light); padding: 12px 16px; border-radius: 12px;
+      font-size: 14px; color: var(--lc-text); line-height: 1.5;
+    }
+    .lc-chat-input-area {
+      padding: 12px 16px; border-top: 1px solid var(--lc-border);
+      display: flex; gap: 8px;
+    }
+    .lc-chat-input {
+      flex: 1; border: 1px solid var(--lc-border); border-radius: 8px;
+      padding: 10px 14px; font-size: 14px; font-family: var(--font-stack); outline: none;
+    }
+    .lc-chat-input:focus { border-color: var(--lc-accent); }
+    .lc-chat-send {
+      background: var(--lc-accent); color: var(--lc-white); border: none;
+      border-radius: 8px; padding: 10px 16px; cursor: pointer; font-weight: 600; font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .lc-hero h1 { font-size: 32px; }
+      .lc-industries-grid, .lc-locations { grid-template-columns: 1fr; }
+      .lc-services-grid { grid-template-columns: repeat(2, 1fr); }
+      .lc-team-grid { grid-template-columns: repeat(2, 1fr); }
+      .lc-stats { grid-template-columns: repeat(2, 1fr); }
+      .lc-nav-links { display: none; }
+    }
+  </style>
+
+  <div class="lc-concept-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #1a4731, #2d8a5e); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Larson & Company CPAs</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Tax preparation, bookkeeping, and advisory services</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #2d8a5e; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <nav class="lc-nav">
+    <div class="lc-nav-inner">
+      <div class="lc-logo">Larson &amp; Company<span>CPAs &amp; Advisors</span></div>
+      <ul class="lc-nav-links">
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#contact" class="lc-nav-cta">Get Started</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="lc-hero">
+    <div class="lc-hero-inner">
+      <div class="lc-hero-badge">SERVING CLIENTS NATIONWIDE SINCE 1975</div>
+      <h1>High Quality Accounting with Friendly, Accessible Professionals</h1>
+      <p>Audit, tax, consulting, and accounting services for insurance carriers, technology companies, nonprofits, government entities, and small business entrepreneurs.</p>
+      <div class="lc-hero-btns">
+        <a href="#contact" class="lc-btn-gold">Schedule a Consultation</a>
+        <a href="#services" class="lc-btn-outline">Explore Services</a>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what Larson & Company CPAs could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #1a4731, #2d8a5e); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <section class="lc-section">
+    <div class="lc-section-inner">
+      <div class="lc-stats">
+        <div class="lc-stat">
+          <h3>50+</h3>
+          <p>Years of Experience</p>
+        </div>
+        <div class="lc-stat">
+          <h3>20+</h3>
+          <p>Partners</p>
+        </div>
+        <div class="lc-stat">
+          <h3>7</h3>
+          <p>Service Areas</p>
+        </div>
+        <div class="lc-stat">
+          <h3>4</h3>
+          <p>Office Locations</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Larson & Company CPAs</h2>
-    <p style="color: #666; font-size: 1.1rem;">Lehi, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 489-1300" style="color: #1a4731; text-decoration: none; font-weight: 600;">(801) 489-1300</a></p>
-    <p><a href="https://larsco.com/" style="color: #2563eb;" target="_blank">https://larsco.com/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for Larson & Company CPAs?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #1a4731, #2d8a5e); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #1a4731, #2d8a5e); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
+  <section class="lc-section lc-alt-bg" id="industries">
+    <div class="lc-section-inner">
+      <div class="lc-section-header">
+        <h2>Industries We Serve</h2>
+        <p>Deep expertise across specialized industries nationwide</p>
+      </div>
+      <div class="lc-industries-grid">
+        <div class="lc-industry-card">
+          <h3>Insurance Carriers</h3>
+          <p>Comprehensive audit and consulting services for insurance companies and captive insurance entities.</p>
         </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
-      </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hi! I can help you with tax questions, schedule a consultation, or learn about our services. How can I help?</div>
-      </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #1a4731; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
+        <div class="lc-industry-card">
+          <h3>Captive Insurance</h3>
+          <p>Specialized accounting and compliance services for captive insurance programs.</p>
+        </div>
+        <div class="lc-industry-card">
+          <h3>Technology &amp; Software</h3>
+          <p>Financial services tailored to technology companies navigating rapid growth and complex reporting.</p>
+        </div>
+        <div class="lc-industry-card">
+          <h3>Government Entities</h3>
+          <p>Government audit and compliance expertise meeting all regulatory requirements.</p>
+        </div>
+        <div class="lc-industry-card">
+          <h3>Nonprofit Organizations</h3>
+          <p>Audit, tax, and consulting services designed for the unique needs of nonprofit entities.</p>
+        </div>
+        <div class="lc-industry-card">
+          <h3>Small-Medium Business</h3>
+          <p>Personalized accounting, tax, and advisory services to help your business grow and thrive.</p>
+        </div>
       </div>
     </div>
+  </section>
+
+  <section class="lc-section" id="services">
+    <div class="lc-section-inner">
+      <div class="lc-section-header">
+        <h2>Our Services</h2>
+        <p>Comprehensive professional services delivered with excellence</p>
+      </div>
+      <div class="lc-services-grid">
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15a2.25 2.25 0 0 1 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25Z" /></svg>
+          </div>
+          <h3>Audit &amp; Attest</h3>
+          <p>Independent audits, reviews, and compilations</p>
+        </div>
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" /></svg>
+          </div>
+          <h3>Tax Services</h3>
+          <p>Tax planning, compliance, and strategic advisory</p>
+        </div>
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" /></svg>
+          </div>
+          <h3>Consulting</h3>
+          <p>Business advisory and strategic consulting</p>
+        </div>
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" /></svg>
+          </div>
+          <h3>Accounting</h3>
+          <p>Full-service accounting and bookkeeping</p>
+        </div>
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" /></svg>
+          </div>
+          <h3>Growth Advisory</h3>
+          <p>Strategic guidance for business growth</p>
+        </div>
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" /></svg>
+          </div>
+          <h3>Data Analytics</h3>
+          <p>Data-driven insights and reporting</p>
+        </div>
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" /></svg>
+          </div>
+          <h3>IT Audit &amp; SOC</h3>
+          <p>IT auditing and SOC examinations</p>
+        </div>
+        <div class="lc-service-card">
+          <div class="lc-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" /></svg>
+          </div>
+          <h3>Employee Benefits</h3>
+          <p>401(k) plan audits and compliance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lc-team-section" id="team">
+    <div class="lc-team-header">
+      <h2>Our Leadership</h2>
+      <p>Experienced partners dedicated to your success</p>
+    </div>
+    <div class="lc-team-grid">
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">GD</div>
+        <h4>Greg Denning, CPA</h4>
+        <p>Managing Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">AJ</div>
+        <h4>Allison Johnson, CPA</h4>
+        <p>Audit Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">AR</div>
+        <h4>Amber Robbins, CPA</h4>
+        <p>Tax Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">AW</div>
+        <h4>Andrew Wan, CPA, CFE</h4>
+        <p>Audit Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">CH</div>
+        <h4>Cameron Hodson, CPA</h4>
+        <p>CISA</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">CJ</div>
+        <h4>Carl Jensen, CPA</h4>
+        <p>Tax Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">CS</div>
+        <h4>Craig Swindlehurst, CPA</h4>
+        <p>Tax Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">DM</div>
+        <h4>Dakon Mortenson, CPA</h4>
+        <p>Tax Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">DB</div>
+        <h4>Daniel Bringhurst, CPA</h4>
+        <p>Audit Partner</p>
+      </div>
+      <div class="lc-team-card">
+        <div class="lc-team-avatar">DN</div>
+        <h4>Diane Nesbit, CPA</h4>
+        <p>Audit Partner</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="lc-section lc-alt-bg" id="locations">
+    <div class="lc-section-inner">
+      <div class="lc-section-header">
+        <h2>Our Offices</h2>
+        <p>Locations across Utah, serving clients nationwide</p>
+      </div>
+      <div class="lc-locations">
+        <div class="lc-location-card">
+          <h4>South Jordan</h4>
+          <p>Headquarters serving the Wasatch Front</p>
+        </div>
+        <div class="lc-location-card">
+          <h4>Spanish Fork</h4>
+          <p>Serving Utah County clients</p>
+        </div>
+        <div class="lc-location-card">
+          <h4>Moab</h4>
+          <p>Serving southeastern Utah</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lc-cta-section" id="contact">
+    <h2>Ready to Work with Experienced CPAs?</h2>
+    <p>From audit and tax to consulting and data analytics, our team is ready to deliver the quality service you deserve.</p>
+    <a href="#" class="lc-cta-btn">Schedule a Consultation</a>
+  </section>
+
+  <section class="lc-xclear-cta">
+    <p>Want this website for your firm? Get a free consultation.</p>
+    <a href="https://xclearai.com/ai-assessment">Visit xclearai.com/ai-assessment</a>
+  </section>
+
+  <footer class="lc-footer">
+    <div class="lc-footer-inner">
+      <div class="lc-footer-brand">Larson &amp; Company</div>
+      <p>South Jordan | Spanish Fork | Moab | Since 1975</p>
+    </div>
+  </footer>
+
+  <div class="lc-chat-widget">
+    <div class="lc-chat-window" id="chatWindow">
+      <div class="lc-chat-header">
+        <span>Larson &amp; Company Assistant</span>
+        <button class="lc-chat-close" onclick="document.getElementById('chatWindow').classList.remove('active')">&times;</button>
+      </div>
+      <div class="lc-chat-messages">
+        <div class="lc-chat-msg">Welcome to Larson &amp; Company. How can we assist you? I can help with questions about our services, connect you with a partner, or schedule a consultation.</div>
+      </div>
+      <div class="lc-chat-input-area">
+        <input type="text" class="lc-chat-input" placeholder="Type your message..." />
+        <button class="lc-chat-send">Send</button>
+      </div>
+    </div>
+    <button class="lc-chat-btn" onclick="document.getElementById('chatWindow').classList.toggle('active')">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>
+    </button>
   </div>
-
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
-
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
-
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
 </Layout>

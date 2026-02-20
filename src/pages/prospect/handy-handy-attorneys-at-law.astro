@@ -1,181 +1,339 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "Handy & Handy Attorneys At Law — Concept Redesign by XClear AI";
+const description = "A professional website concept for Handy & Handy — Utah's trusted personal injury law firm with 45+ years of experience.";
 ---
 
-<Layout title="Handy & Handy Attorneys At Law — Reimagined by XClear AI" description="See what Handy & Handy Attorneys At Law could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    ⚖️ This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>Handy & Handy Attorneys At Law</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --hh-primary: #1c2b3a;
+      --hh-accent: #8b2c2c;
+      --hh-deep: #6b1e1e;
+      --hh-warm: #faf2f2;
+      --hh-dark: #111c28;
+      --hh-light: #f8f8fa;
+      --hh-border: #e2ddd8;
+      --hh-text: #2c3040;
+      --hh-muted: #6b7080;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .hh-banner {
+      background: var(--hh-dark); color: #8a9ab0; text-align: center;
+      padding: 10px 20px; font-size: 13px; font-family: var(--font-stack);
+    }
+    .hh-banner a { color: #c49a9a; text-decoration: none; font-weight: 500; }
+    .hh-banner a:hover { text-decoration: underline; }
+
+    .hh-nav {
+      background: #fff; border-bottom: 1px solid var(--hh-border);
+      padding: 0 40px; display: flex; align-items: center;
+      justify-content: space-between; height: 72px; font-family: var(--font-stack);
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .hh-logo { font-size: 21px; font-weight: 700; color: var(--hh-primary); }
+    .hh-logo span { color: var(--hh-accent); }
+    .hh-nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .hh-nav-links a { color: var(--hh-text); text-decoration: none; font-size: 15px; font-weight: 500; }
+    .hh-nav-links a:hover { color: var(--hh-accent); }
+    .hh-nav-right { display: flex; align-items: center; gap: 16px; }
+    .hh-phone { color: var(--hh-primary); font-weight: 600; font-size: 15px; text-decoration: none; }
+    .hh-nav-cta {
+      background: var(--hh-accent); color: #fff; padding: 10px 22px;
+      border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600;
+    }
+    .hh-nav-cta:hover { background: var(--hh-deep); }
+
+    .hh-hero {
+      background: linear-gradient(135deg, var(--hh-primary) 0%, var(--hh-dark) 100%);
+      color: #fff; padding: 100px 40px 80px; text-align: center; font-family: var(--font-stack);
+    }
+    .hh-hero h1 { font-size: 46px; font-weight: 800; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.15; }
+    .hh-hero p { font-size: 19px; color: #a8b5c8; max-width: 620px; margin: 0 auto 20px; line-height: 1.6; }
+    .hh-hero .tagline { font-size: 15px; color: #7a8da0; font-style: italic; margin: 0 0 36px; }
+    .hh-hero-cta {
+      display: inline-block; background: var(--hh-accent); color: #fff;
+      padding: 16px 40px; border-radius: 8px; text-decoration: none;
+      font-size: 16px; font-weight: 700; transition: transform 0.2s;
+    }
+    .hh-hero-cta:hover { transform: translateY(-2px); background: var(--hh-deep); }
+
+    .hh-section {
+      padding: 80px 40px; font-family: var(--font-stack);
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hh-section-alt { background: var(--hh-light); }
+    .hh-section h2 { font-size: 36px; font-weight: 700; color: var(--hh-primary); text-align: center; margin: 0 0 12px; }
+    .hh-section .subtitle { text-align: center; color: var(--hh-muted); font-size: 17px; margin: 0 0 48px; }
+
+    .hh-results-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .hh-result-card {
+      background: #fff; border: 1px solid var(--hh-border); border-radius: 12px;
+      padding: 32px 24px; text-align: center;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .hh-result-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.07); transform: translateY(-3px); }
+    .hh-result-amount { font-size: 36px; font-weight: 800; color: var(--hh-accent); margin: 0 0 8px; }
+    .hh-result-card h3 { font-size: 15px; font-weight: 600; color: var(--hh-primary); margin: 0 0 8px; }
+    .hh-result-card p { font-size: 13px; color: var(--hh-muted); margin: 0; line-height: 1.5; }
+
+    .hh-areas-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .hh-area-card {
+      background: #fff; border: 1px solid var(--hh-border); border-radius: 12px;
+      padding: 28px 24px; transition: box-shadow 0.25s;
+    }
+    .hh-area-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+    .hh-area-icon {
+      width: 44px; height: 44px; background: var(--hh-warm); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+    }
+    .hh-area-icon svg { width: 22px; height: 22px; stroke: var(--hh-accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .hh-area-card h3 { font-size: 16px; font-weight: 600; color: var(--hh-primary); margin: 0 0 6px; }
+    .hh-area-card p { font-size: 14px; color: var(--hh-muted); line-height: 1.6; margin: 0; }
+
+    .hh-team-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+    }
+    .hh-team-card {
+      background: #fff; border: 1px solid var(--hh-border); border-radius: 12px;
+      padding: 36px 24px; text-align: center;
+    }
+    .hh-team-avatar {
+      width: 72px; height: 72px; background: var(--hh-warm); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+      font-size: 28px; font-weight: 700; color: var(--hh-accent);
+    }
+    .hh-team-card h3 { font-size: 17px; font-weight: 600; color: var(--hh-primary); margin: 0 0 4px; }
+    .hh-team-card .role { font-size: 13px; color: var(--hh-muted); margin: 0; }
+
+    .hh-testimonials {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .hh-testimonial {
+      background: #fff; border: 1px solid var(--hh-border); border-radius: 12px;
+      padding: 28px; position: relative;
+    }
+    .hh-testimonial blockquote {
+      font-size: 15px; color: var(--hh-text); line-height: 1.7;
+      margin: 0 0 12px; font-style: italic;
+    }
+    .hh-testimonial cite { font-size: 13px; color: var(--hh-muted); font-style: normal; font-weight: 600; }
+
+    .hh-contact {
+      background: var(--hh-primary); color: #fff; padding: 60px 40px;
+      font-family: var(--font-stack); text-align: center;
+    }
+    .hh-contact h2 { font-size: 32px; margin: 0 0 12px; color: #fff; }
+    .hh-contact p { color: #a0b0c4; font-size: 16px; margin: 0 0 8px; }
+    .hh-contact a.cta {
+      display: inline-block; background: var(--hh-accent); color: #fff;
+      padding: 14px 36px; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 16px; margin-top: 20px;
+    }
+    .hh-contact-info { margin-top: 24px; color: #8a9ab0; font-size: 14px; }
+    .hh-contact-info a { color: #c49a9a; text-decoration: none; }
+
+    .hh-cta-final {
+      background: var(--hh-dark); color: #fff; text-align: center;
+      padding: 60px 40px; font-family: var(--font-stack);
+    }
+    .hh-cta-final h2 { font-size: 28px; font-weight: 700; margin: 0 0 12px; }
+    .hh-cta-final p { color: #7a8da8; font-size: 16px; margin: 0 0 28px; }
+    .hh-cta-final a {
+      display: inline-block; background: var(--hh-accent); color: #fff;
+      padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 700;
+    }
+
+    .hh-chat-widget {
+      position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px;
+      background: var(--hh-accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: transform 0.2s; z-index: 999;
+    }
+    .hh-chat-widget:hover { transform: scale(1.08); }
+    .hh-chat-widget svg { width: 26px; height: 26px; fill: #fff; }
+
+    @media (max-width: 768px) {
+      .hh-results-grid, .hh-areas-grid, .hh-team-grid { grid-template-columns: 1fr; }
+      .hh-testimonials { grid-template-columns: 1fr; }
+      .hh-hero h1 { font-size: 30px; }
+      .hh-nav-links { display: none; }
+    }
+  </style>
+
+  <div class="hh-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Handy & Handy Attorneys At Law</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Protecting your rights with dedication and expertise</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #c8a951; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <nav class="hh-nav">
+    <div class="hh-logo">Handy <span>&amp;</span> Handy</div>
+    <ul class="hh-nav-links">
+      <li><a href="#results">Results</a></li>
+      <li><a href="#areas">Practice Areas</a></li>
+      <li><a href="#team">Attorneys</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hh-nav-right">
+      <a class="hh-phone" href="tel:+18012646677">(801) 264-6677</a>
+      <a class="hh-nav-cta" href="#contact">Free Consultation</a>
+    </div>
+  </nav>
+
+  <section class="hh-hero">
+    <h1>Serious Attorneys for<br/>Serious Injuries</h1>
+    <p>Big firm experience, small firm attention. Dedicated to representing the people of Utah with over 45 years of combined personal injury experience.</p>
+    <p class="tagline">Se Habla Espanol</p>
+    <a class="hh-hero-cta" href="#contact">Request Free Consultation</a>
+  </section>
+
+  <section class="hh-section" id="results">
+    <h2>Proven Case Results</h2>
+    <p class="subtitle">Results that speak for themselves</p>
+    <div class="hh-results-grid">
+      <div class="hh-result-card">
+        <div class="hh-result-amount">$3.9M</div>
+        <h3>Auto Accident</h3>
+        <p>Wrongful death auto accident settlement</p>
+      </div>
+      <div class="hh-result-card">
+        <div class="hh-result-amount">$2.85M</div>
+        <h3>Bicycle Accident</h3>
+        <p>Mild traumatic brain injury and spinal surgery</p>
+      </div>
+      <div class="hh-result-card">
+        <div class="hh-result-amount">$2.75M</div>
+        <h3>Product Liability</h3>
+        <p>Wrongful death claim involving product liability against vehicle manufacturer</p>
+      </div>
+      <div class="hh-result-card">
+        <div class="hh-result-amount">$1.825M</div>
+        <h3>UTV Accident</h3>
+        <p>UTV rollover with spinal injuries</p>
+      </div>
+      <div class="hh-result-card">
+        <div class="hh-result-amount">$1M</div>
+        <h3>Industrial Accident</h3>
+        <p>Industrial accident with spinal cord injuries</p>
+      </div>
+      <div class="hh-result-card">
+        <div class="hh-result-amount">$650K</div>
+        <h3>Ski Collision</h3>
+        <p>Ski collision with fractured femur</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what Handy & Handy Attorneys At Law could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <div class="hh-section-alt">
+    <section class="hh-section" id="areas">
+      <h2>Practice Areas</h2>
+      <p class="subtitle">Focused expertise in personal injury law</p>
+      <div class="hh-areas-grid">
+        <div class="hh-area-card">
+          <div class="hh-area-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h2a2 2 0 012 2v7a2 2 0 01-2 2H7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <h3>Car Accidents</h3>
+          <p>Comprehensive representation for all motor vehicle collision injuries.</p>
+        </div>
+        <div class="hh-area-card">
+          <div class="hh-area-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <h3>Personal Injury</h3>
+          <p>Full-spectrum personal injury claims including slip-and-fall and premises liability.</p>
+        </div>
+        <div class="hh-area-card">
+          <div class="hh-area-icon"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></div>
+          <h3>Truck Accidents</h3>
+          <p>Complex trucking accident cases requiring specialized investigation and expertise.</p>
+        </div>
+        <div class="hh-area-card">
+          <div class="hh-area-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <h3>Wrongful Death</h3>
+          <p>Compassionate representation for families who have lost a loved one due to negligence.</p>
+        </div>
+        <div class="hh-area-card">
+          <div class="hh-area-icon"><svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
+          <h3>Motorcycle Accidents</h3>
+          <p>Aggressive advocacy for motorcyclists injured by negligent drivers.</p>
+        </div>
+        <div class="hh-area-card">
+          <div class="hh-area-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <h3>Pedestrian &amp; Bicycle</h3>
+          <p>Protecting vulnerable road users injured by distracted or negligent drivers.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Handy & Handy Attorneys At Law</h2>
-    <p style="color: #666; font-size: 1.1rem;">Salt Lake City, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 264-6677" style="color: #1e3a5f; text-decoration: none; font-weight: 600;">(801) 264-6677</a></p>
-    <p><a href="https://www.handylaw.com/" style="color: #2563eb;" target="_blank">https://www.handylaw.com/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for Handy & Handy Attorneys At Law?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #1e3a5f, #2d5a8e); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
-        </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
-      </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hi! I'm the firm's AI assistant. I can help you understand our practice areas, check if we can help with your case, or schedule a free consultation. What brings you here today?</div>
-      </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #1e3a5f; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
-      </div>
-    </div>
+    </section>
   </div>
 
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
+  <section class="hh-section" id="team">
+    <h2>Our Attorneys</h2>
+    <p class="subtitle">Experienced trial lawyers dedicated to your case</p>
+    <div class="hh-team-grid">
+      <div class="hh-team-card">
+        <div class="hh-team-avatar">GH</div>
+        <h3>Garrett S. Handy</h3>
+        <p class="role">Partner</p>
+      </div>
+      <div class="hh-team-card">
+        <div class="hh-team-avatar">PH</div>
+        <h3>Preston L. Handy</h3>
+        <p class="role">Partner</p>
+      </div>
+      <div class="hh-team-card">
+        <div class="hh-team-avatar">AK</div>
+        <h3>Ashley R. Koford</h3>
+        <p class="role">Attorney</p>
+      </div>
+    </div>
+  </section>
 
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
+  <div class="hh-section-alt">
+    <section class="hh-section" id="testimonials">
+      <h2>Client Testimonials</h2>
+      <p class="subtitle">What our clients say about working with us</p>
+      <div class="hh-testimonials">
+        <div class="hh-testimonial">
+          <blockquote>"I am forever grateful for all of their hard work."</blockquote>
+          <cite>Jenna K.</cite>
+        </div>
+        <div class="hh-testimonial">
+          <blockquote>"Would highly recommend Handy and Handy to anyone."</blockquote>
+          <cite>Rob C.</cite>
+        </div>
+        <div class="hh-testimonial">
+          <blockquote>"Garrett and Erin were fabulous!"</blockquote>
+          <cite>Kellie N.</cite>
+        </div>
+        <div class="hh-testimonial">
+          <blockquote>"They put in the time and effort to secure a settlement."</blockquote>
+          <cite>Yvonne W.</cite>
+        </div>
+      </div>
+    </section>
+  </div>
 
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
+  <section class="hh-contact" id="contact">
+    <h2>Get Your Free Consultation</h2>
+    <p>No upfront fees. We only get paid when you win.</p>
+    <div class="hh-contact-info">
+      <p>2150 S. 1300 E., Salt Lake City, UT</p>
+      <p>Phone: <a href="tel:+18012646677">(801) 264-6677</a></p>
+      <p>Serving: Salt Lake City, Layton, Ogden, Sandy, South Jordan, Draper, and all of Utah</p>
+    </div>
+    <a class="cta" href="#schedule">Schedule Your Free Case Review</a>
+  </section>
+
+  <section class="hh-cta-final">
+    <h2>Want a website like this for your firm?</h2>
+    <p>This concept was designed by XClear AI to showcase what modern web design can do for law firms.</p>
+    <a href="https://xclearai.com/ai-assessment">Get Your Free AI Assessment</a>
+  </section>
+
+  <div class="hh-chat-widget" title="Chat with us">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  </div>
 </Layout>

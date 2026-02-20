@@ -1,181 +1,482 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "Salt Lake Construction - Website Concept Redesign";
+const description = "A modern website concept redesign for Salt Lake Construction by XClear AI.";
 ---
 
-<Layout title="Salt Lake Construction — Reimagined by XClear AI" description="See what Salt Lake Construction could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    🔧 This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>Salt Lake Construction</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --slc-primary: #2c2c2c;
+      --slc-secondary: #c47a2a;
+      --slc-accent: #d4922e;
+      --slc-light: #f7f5f2;
+      --slc-dark: #1a1a1a;
+      --slc-text: #333333;
+      --slc-muted: #777777;
+      --slc-white: #ffffff;
+      --slc-border: #e5e0d8;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .slc-concept-banner {
+      background: var(--slc-dark); color: rgba(255,255,255,0.85);
+      text-align: center; padding: 10px 20px; font-size: 13px; font-family: var(--font-stack);
+    }
+    .slc-concept-banner a { color: var(--slc-accent); text-decoration: none; font-weight: 600; }
+
+    .slc-nav {
+      background: var(--slc-white); padding: 16px 0;
+      border-bottom: 1px solid var(--slc-border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .slc-nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .slc-logo { font-family: var(--font-stack); font-size: 20px; font-weight: 700; color: var(--slc-primary); }
+    .slc-logo span { color: var(--slc-secondary); }
+    .slc-nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .slc-nav-links a {
+      text-decoration: none; color: var(--slc-text); font-size: 14px;
+      font-weight: 500; font-family: var(--font-stack); transition: color 0.2s;
+    }
+    .slc-nav-links a:hover { color: var(--slc-secondary); }
+    .slc-nav-cta {
+      background: var(--slc-secondary) !important; color: var(--slc-white) !important;
+      padding: 10px 22px; border-radius: 6px; font-weight: 600 !important;
+    }
+
+    .slc-hero {
+      background: linear-gradient(135deg, var(--slc-primary) 0%, var(--slc-dark) 100%);
+      color: var(--slc-white); padding: 100px 24px; text-align: center;
+      position: relative;
+    }
+    .slc-hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 80%, rgba(196,122,42,0.1) 0%, transparent 60%);
+    }
+    .slc-hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .slc-hero-badge {
+      display: inline-block; background: rgba(196,122,42,0.15);
+      border: 1px solid rgba(196,122,42,0.3); color: var(--slc-accent);
+      padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      font-family: var(--font-stack); margin-bottom: 24px; letter-spacing: 0.5px;
+    }
+    .slc-hero h1 {
+      font-family: var(--font-stack); font-size: 48px; font-weight: 700;
+      line-height: 1.15; margin-bottom: 20px; letter-spacing: -1px;
+    }
+    .slc-hero p {
+      font-size: 18px; line-height: 1.7; color: rgba(255,255,255,0.8);
+      margin-bottom: 36px; max-width: 640px; margin-left: auto; margin-right: auto;
+    }
+    .slc-hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .slc-btn-primary {
+      background: var(--slc-secondary); color: var(--slc-white);
+      padding: 14px 32px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 15px; font-family: var(--font-stack);
+      transition: all 0.2s; display: inline-block;
+    }
+    .slc-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .slc-btn-outline {
+      background: transparent; color: var(--slc-white);
+      padding: 14px 32px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 15px; font-family: var(--font-stack);
+      border: 2px solid rgba(255,255,255,0.25); transition: all 0.2s; display: inline-block;
+    }
+    .slc-btn-outline:hover { border-color: var(--slc-white); }
+
+    .slc-section { padding: 80px 24px; font-family: var(--font-stack); }
+    .slc-section-inner { max-width: 1200px; margin: 0 auto; }
+    .slc-section-header { text-align: center; margin-bottom: 56px; }
+    .slc-section-header h2 {
+      font-size: 36px; font-weight: 700; color: var(--slc-primary);
+      margin-bottom: 12px; letter-spacing: -0.5px;
+    }
+    .slc-section-header p {
+      font-size: 17px; color: var(--slc-muted);
+      max-width: 600px; margin: 0 auto; line-height: 1.6;
+    }
+    .slc-alt-bg { background: var(--slc-light); }
+
+    .slc-values-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .slc-value-card {
+      text-align: center; padding: 36px 20px;
+      background: var(--slc-white); border: 1px solid var(--slc-border);
+      border-radius: 12px;
+    }
+    .slc-value-num {
+      font-size: 14px; font-weight: 700; color: var(--slc-secondary);
+      margin-bottom: 12px; letter-spacing: 1px;
+    }
+    .slc-value-card h3 { font-size: 20px; font-weight: 700; color: var(--slc-primary); margin-bottom: 10px; }
+    .slc-value-card p { font-size: 14px; color: var(--slc-muted); line-height: 1.6; }
+
+    .slc-services-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .slc-service-card {
+      background: var(--slc-white); border: 1px solid var(--slc-border);
+      border-radius: 12px; padding: 36px 28px; transition: all 0.2s;
+    }
+    .slc-service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .slc-service-card h3 { font-size: 20px; font-weight: 700; color: var(--slc-primary); margin-bottom: 12px; }
+    .slc-service-card p { font-size: 14px; color: var(--slc-muted); line-height: 1.6; margin-bottom: 16px; }
+    .slc-service-list {
+      list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    }
+    .slc-service-list li {
+      font-size: 13px; color: var(--slc-text); padding-left: 16px;
+      position: relative;
+    }
+    .slc-service-list li::before {
+      content: ''; position: absolute; left: 0; top: 7px;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--slc-secondary);
+    }
+
+    .slc-testimonials { background: var(--slc-primary); color: var(--slc-white); padding: 80px 24px; }
+    .slc-testimonials-header { text-align: center; margin-bottom: 48px; }
+    .slc-testimonials-header h2 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .slc-testimonials-header p { font-size: 17px; color: rgba(255,255,255,0.7); }
+    .slc-testimonials-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .slc-testimonial-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px; padding: 28px 24px;
+    }
+    .slc-testimonial-card p {
+      font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.7;
+      font-style: italic; margin-bottom: 16px;
+    }
+    .slc-testimonial-author {
+      font-size: 13px; color: var(--slc-accent); font-weight: 600; font-style: normal;
+    }
+
+    .slc-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+      text-align: center; padding: 60px 0;
+    }
+    .slc-stat h3 { font-size: 42px; font-weight: 700; color: var(--slc-secondary); margin-bottom: 8px; }
+    .slc-stat p { font-size: 14px; color: var(--slc-muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
+
+    .slc-contact-bar {
+      background: var(--slc-secondary); color: var(--slc-white);
+      padding: 40px 24px; text-align: center;
+    }
+    .slc-contact-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap;
+    }
+    .slc-contact-item h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-bottom: 4px; }
+    .slc-contact-item p { font-size: 17px; font-weight: 600; }
+    .slc-contact-item a { color: var(--slc-white); text-decoration: none; }
+
+    .slc-cta-section {
+      background: linear-gradient(135deg, var(--slc-primary) 0%, var(--slc-dark) 100%);
+      color: var(--slc-white); padding: 80px 24px; text-align: center;
+    }
+    .slc-cta-section h2 { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
+    .slc-cta-section p {
+      font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 32px;
+      max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6;
+    }
+    .slc-cta-btn {
+      background: var(--slc-secondary); color: var(--slc-white);
+      padding: 16px 36px; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 15px; font-family: var(--font-stack);
+      transition: all 0.2s; display: inline-block;
+    }
+    .slc-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+    .slc-footer {
+      background: var(--slc-dark); color: rgba(255,255,255,0.6);
+      padding: 48px 24px; font-family: var(--font-stack);
+    }
+    .slc-footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .slc-footer-brand { font-size: 18px; font-weight: 700; color: var(--slc-white); }
+    .slc-footer p { font-size: 13px; }
+
+    .slc-xclear-cta {
+      background: var(--slc-white); border-top: 1px solid var(--slc-border);
+      padding: 48px 24px; text-align: center; font-family: var(--font-stack);
+    }
+    .slc-xclear-cta p { font-size: 16px; color: var(--slc-muted); margin-bottom: 12px; }
+    .slc-xclear-cta a { color: var(--slc-secondary); font-weight: 600; text-decoration: none; }
+
+    .slc-chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 1000; }
+    .slc-chat-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--slc-secondary); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(196,122,42,0.35); transition: all 0.2s;
+    }
+    .slc-chat-btn:hover { transform: scale(1.05); }
+    .slc-chat-btn svg { width: 24px; height: 24px; color: white; }
+    .slc-chat-window {
+      display: none; position: absolute; bottom: 72px; right: 0;
+      width: 360px; height: 480px; background: var(--slc-white);
+      border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+      overflow: hidden; flex-direction: column;
+    }
+    .slc-chat-window.active { display: flex; }
+    .slc-chat-header {
+      background: var(--slc-primary); color: var(--slc-white);
+      padding: 16px 20px; font-weight: 600; font-size: 15px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .slc-chat-close { background: none; border: none; color: var(--slc-white); cursor: pointer; font-size: 18px; opacity: 0.7; }
+    .slc-chat-messages { flex: 1; padding: 20px; overflow-y: auto; }
+    .slc-chat-msg {
+      background: var(--slc-light); padding: 12px 16px; border-radius: 12px;
+      font-size: 14px; color: var(--slc-text); line-height: 1.5;
+    }
+    .slc-chat-input-area {
+      padding: 12px 16px; border-top: 1px solid var(--slc-border);
+      display: flex; gap: 8px;
+    }
+    .slc-chat-input {
+      flex: 1; border: 1px solid var(--slc-border); border-radius: 8px;
+      padding: 10px 14px; font-size: 14px; font-family: var(--font-stack); outline: none;
+    }
+    .slc-chat-send {
+      background: var(--slc-secondary); color: var(--slc-white); border: none;
+      border-radius: 8px; padding: 10px 16px; cursor: pointer; font-weight: 600; font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .slc-hero h1 { font-size: 32px; }
+      .slc-values-grid, .slc-stats { grid-template-columns: repeat(2, 1fr); }
+      .slc-services-grid, .slc-testimonials-grid { grid-template-columns: 1fr; }
+      .slc-nav-links { display: none; }
+      .slc-contact-bar-inner { flex-direction: column; gap: 24px; }
+    }
+  </style>
+
+  <div class="slc-concept-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Salt Lake Construction</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Utah's trusted home service professionals</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #d97706; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <nav class="slc-nav">
+    <div class="slc-nav-inner">
+      <div class="slc-logo">Salt Lake <span>Construction</span></div>
+      <ul class="slc-nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="tel:8016980600">801-698-0600</a></li>
+        <li><a href="#estimate" class="slc-nav-cta">Free Estimate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="slc-hero">
+    <div class="slc-hero-inner">
+      <div class="slc-hero-badge">QUALITY WORKMANSHIP SINCE 1988</div>
+      <h1>Your Go-To Source for Everything Construction</h1>
+      <p>Full-service commercial and residential Utah contracting. Licensed, insured, and backed by over 30 years of experience. 100% satisfaction guaranteed.</p>
+      <div class="slc-hero-btns">
+        <a href="#estimate" class="slc-btn-primary">Get a Free Estimate</a>
+        <a href="#services" class="slc-btn-outline">Our Services</a>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what Salt Lake Construction could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <section class="slc-section">
+    <div class="slc-section-inner">
+      <div class="slc-stats">
+        <div class="slc-stat">
+          <h3>35+</h3>
+          <p>Years Experience</p>
+        </div>
+        <div class="slc-stat">
+          <h3>90+</h3>
+          <p>Satisfied Clients</p>
+        </div>
+        <div class="slc-stat">
+          <h3>100%</h3>
+          <p>Satisfaction Guarantee</p>
+        </div>
+        <div class="slc-stat">
+          <h3>Full</h3>
+          <p>Licensed &amp; Insured</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Salt Lake Construction</h2>
-    <p style="color: #666; font-size: 1.1rem;">Salt Lake City, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 363-6330" style="color: #92400e; text-decoration: none; font-weight: 600;">(801) 363-6330</a></p>
-    <p><a href="https://saltlakeconstruction.com/" style="color: #2563eb;" target="_blank">https://saltlakeconstruction.com/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for Salt Lake Construction?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #78350f, #b45309); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
+  <section class="slc-section slc-alt-bg">
+    <div class="slc-section-inner">
+      <div class="slc-section-header">
+        <h2>Our Core Values</h2>
+        <p>The principles that drive every project we undertake</p>
+      </div>
+      <div class="slc-values-grid">
+        <div class="slc-value-card">
+          <div class="slc-value-num">01</div>
+          <h3>Quality</h3>
+          <p>Our high standards of workmanship and service are unsurpassed</p>
         </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
+        <div class="slc-value-card">
+          <div class="slc-value-num">02</div>
+          <h3>Integrity</h3>
+          <p>Keen-eyed detail to contracting enables accountability throughout the process</p>
+        </div>
+        <div class="slc-value-card">
+          <div class="slc-value-num">03</div>
+          <h3>Innovation</h3>
+          <p>We transform your structural needs with the latest industry solutions</p>
+        </div>
+        <div class="slc-value-card">
+          <div class="slc-value-num">04</div>
+          <h3>Safety</h3>
+          <p>We uphold all OSHA regulations and take safety seriously on every job</p>
+        </div>
       </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hey there! Need a quote, want to schedule service, or have a question? I can help 24/7 — even if the crew is on a job right now.</div>
+    </div>
+  </section>
+
+  <section class="slc-section" id="services">
+    <div class="slc-section-inner">
+      <div class="slc-section-header">
+        <h2>Our Services</h2>
+        <p>Comprehensive construction solutions for residential and commercial projects</p>
       </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #92400e; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
+      <div class="slc-services-grid">
+        <div class="slc-service-card">
+          <h3>Residential Construction</h3>
+          <p>Our premier home services accommodate any homeowner's needs. Your house becomes a home.</p>
+          <ul class="slc-service-list">
+            <li>New Home Construction</li>
+            <li>Home Remodeling</li>
+            <li>Home Patios</li>
+            <li>Detached Garages</li>
+            <li>Multi-Family Housing</li>
+            <li>Disaster Restoration</li>
+          </ul>
+        </div>
+        <div class="slc-service-card">
+          <h3>Commercial Construction</h3>
+          <p>A commercial leader cultivating building innovations to foster improved business environments.</p>
+          <ul class="slc-service-list">
+            <li>Design Build / Steel</li>
+            <li>Building Add-ons</li>
+            <li>Gas Station Remodel</li>
+            <li>School Maintenance</li>
+            <li>Retail / Horticultural</li>
+            <li>Utility Services</li>
+          </ul>
+        </div>
+        <div class="slc-service-card">
+          <h3>Facility Services</h3>
+          <p>Comprehensive facility maintenance including space and infrastructure renovation.</p>
+          <ul class="slc-service-list">
+            <li>Maintenance Plans</li>
+            <li>Project Management</li>
+            <li>Construction Renovation</li>
+            <li>Demo / Restorative</li>
+            <li>Planning and Design</li>
+            <li>Operations &amp; Maintenance</li>
+          </ul>
+        </div>
+        <div class="slc-service-card">
+          <h3>Specialty Services</h3>
+          <p>Specialized construction services for unique project requirements.</p>
+          <ul class="slc-service-list">
+            <li>Metal Buildings</li>
+            <li>Concrete Placement</li>
+            <li>Concrete Removal</li>
+            <li>Prefabricated Steel</li>
+            <li>Energy Efficiency</li>
+            <li>Pre-Construction</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slc-testimonials" id="testimonials">
+    <div class="slc-testimonials-header">
+      <h2>What Our Clients Say</h2>
+      <p>Real feedback from real projects</p>
+    </div>
+    <div class="slc-testimonials-grid">
+      <div class="slc-testimonial-card">
+        <p>"Salt Lake Construction Company has completed several construction projects for our office, including electrical projects, building shelves, and finish work. Each project was completed with excellent quality."</p>
+        <span class="slc-testimonial-author">-- Commercial Client</span>
+      </div>
+      <div class="slc-testimonial-card">
+        <p>"I wanted to say that the contractor that did the remodel in this office did an absolutely outstanding job. I have not seen high quality work like this in a long time."</p>
+        <span class="slc-testimonial-author">-- Office Remodel Client</span>
+      </div>
+      <div class="slc-testimonial-card">
+        <p>"We are so thrilled with our new spaces. We are so impressed with all of your works and subs. Everyone has been very understanding and professional throughout the entire process."</p>
+        <span class="slc-testimonial-author">-- Residential Client</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="slc-contact-bar" id="contact">
+    <div class="slc-contact-bar-inner">
+      <div class="slc-contact-item">
+        <h4>Call Us</h4>
+        <p><a href="tel:8016980600">801-698-0600</a></p>
+      </div>
+      <div class="slc-contact-item">
+        <h4>Email</h4>
+        <p><a href="mailto:sales@cmcsite.us">sales@cmcsite.us</a></p>
+      </div>
+      <div class="slc-contact-item">
+        <h4>Service Area</h4>
+        <p>The Greater Ogden Area</p>
       </div>
     </div>
   </div>
 
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
+  <section class="slc-cta-section" id="estimate">
+    <h2>Ready to Start Your Project?</h2>
+    <p>Contact Salt Lake Construction today for a free estimate. We would love to hear from you and help bring your vision to life.</p>
+    <a href="tel:8016980600" class="slc-cta-btn">Call for Free Estimate</a>
+  </section>
 
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
+  <section class="slc-xclear-cta">
+    <p>Want this website for your company? Get a free consultation.</p>
+    <a href="https://xclearai.com/ai-assessment">Visit xclearai.com/ai-assessment</a>
+  </section>
 
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
+  <footer class="slc-footer">
+    <div class="slc-footer-inner">
+      <div class="slc-footer-brand">Salt Lake Construction</div>
+      <p>Corey Malan Construction, Inc. | Since 1988 | Greater Ogden Area</p>
+    </div>
+  </footer>
+
+  <div class="slc-chat-widget">
+    <div class="slc-chat-window" id="chatWindow">
+      <div class="slc-chat-header">
+        <span>Salt Lake Construction</span>
+        <button class="slc-chat-close" onclick="document.getElementById('chatWindow').classList.remove('active')">&times;</button>
+      </div>
+      <div class="slc-chat-messages">
+        <div class="slc-chat-msg">Welcome to Salt Lake Construction. How can we help? I can assist with project inquiries, scheduling estimates, or answering questions about our services.</div>
+      </div>
+      <div class="slc-chat-input-area">
+        <input type="text" class="slc-chat-input" placeholder="Type your message..." />
+        <button class="slc-chat-send">Send</button>
+      </div>
+    </div>
+    <button class="slc-chat-btn" onclick="document.getElementById('chatWindow').classList.toggle('active')">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>
+    </button>
+  </div>
 </Layout>

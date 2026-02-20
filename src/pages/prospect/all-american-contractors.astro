@@ -1,181 +1,288 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "All American Contractors — Concept Redesign by XClear AI";
+const description = "A professional website concept for All American Contractors — Commercial and residential construction experts in Salt Lake County, Utah.";
 ---
 
-<Layout title="All American Contractors — Reimagined by XClear AI" description="See what All American Contractors could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    🔧 This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>All American Contractors</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --aac-primary: #1a2d42;
+      --aac-accent: #c4362a;
+      --aac-deep: #a02d23;
+      --aac-warm: #fdf4f3;
+      --aac-dark: #0f1c2c;
+      --aac-light: #f7f8fa;
+      --aac-border: #dde2e8;
+      --aac-text: #2c3340;
+      --aac-muted: #6a7585;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .aac-banner {
+      background: var(--aac-dark); color: #7f90a5; text-align: center;
+      padding: 10px 20px; font-size: 13px; font-family: var(--font-stack);
+    }
+    .aac-banner a { color: #d4817b; text-decoration: none; font-weight: 500; }
+
+    .aac-nav {
+      background: #fff; border-bottom: 1px solid var(--aac-border);
+      padding: 0 40px; display: flex; align-items: center;
+      justify-content: space-between; height: 72px; font-family: var(--font-stack);
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .aac-logo { font-size: 20px; font-weight: 700; color: var(--aac-primary); }
+    .aac-logo span { color: var(--aac-accent); }
+    .aac-nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .aac-nav-links a { color: var(--aac-text); text-decoration: none; font-size: 15px; font-weight: 500; }
+    .aac-nav-links a:hover { color: var(--aac-accent); }
+    .aac-nav-cta {
+      background: var(--aac-accent); color: #fff; padding: 10px 22px;
+      border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600;
+    }
+    .aac-nav-cta:hover { background: var(--aac-deep); }
+
+    .aac-hero {
+      background: linear-gradient(135deg, var(--aac-primary) 0%, var(--aac-dark) 100%);
+      color: #fff; padding: 100px 40px 80px; text-align: center; font-family: var(--font-stack);
+    }
+    .aac-hero h1 { font-size: 46px; font-weight: 800; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.15; }
+    .aac-hero p { font-size: 19px; color: #a0b0c4; max-width: 640px; margin: 0 auto 12px; line-height: 1.6; }
+    .aac-hero .tagline { font-size: 16px; color: #7a8fa5; font-weight: 600; margin: 0 0 36px; letter-spacing: 1px; text-transform: uppercase; }
+    .aac-hero-cta {
+      display: inline-block; background: var(--aac-accent); color: #fff;
+      padding: 16px 40px; border-radius: 8px; text-decoration: none;
+      font-size: 16px; font-weight: 700; transition: transform 0.2s;
+    }
+    .aac-hero-cta:hover { transform: translateY(-2px); background: var(--aac-deep); }
+
+    .aac-section {
+      padding: 80px 40px; font-family: var(--font-stack);
+      max-width: 1200px; margin: 0 auto;
+    }
+    .aac-section-alt { background: var(--aac-light); }
+    .aac-section h2 { font-size: 36px; font-weight: 700; color: var(--aac-primary); text-align: center; margin: 0 0 12px; }
+    .aac-section .subtitle { text-align: center; color: var(--aac-muted); font-size: 17px; margin: 0 0 48px; }
+
+    .aac-services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .aac-service-card {
+      background: #fff; border: 1px solid var(--aac-border); border-radius: 12px;
+      padding: 32px 24px; transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .aac-service-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.07); transform: translateY(-3px); }
+    .aac-service-icon {
+      width: 48px; height: 48px; background: var(--aac-warm); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .aac-service-icon svg { width: 24px; height: 24px; stroke: var(--aac-accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .aac-service-card h3 { font-size: 17px; font-weight: 600; color: var(--aac-primary); margin: 0 0 8px; }
+    .aac-service-card p { font-size: 14px; color: var(--aac-muted); line-height: 1.6; margin: 0; }
+
+    .aac-process-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+    }
+    .aac-process-step {
+      text-align: center; padding: 20px;
+    }
+    .aac-process-num {
+      width: 48px; height: 48px; background: var(--aac-accent); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 700; margin: 0 auto 16px;
+    }
+    .aac-process-step h3 { font-size: 17px; color: var(--aac-primary); margin: 0 0 8px; }
+    .aac-process-step p { font-size: 14px; color: var(--aac-muted); line-height: 1.5; margin: 0; }
+
+    .aac-testimonials {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .aac-testimonial {
+      background: #fff; border: 1px solid var(--aac-border); border-radius: 12px; padding: 28px;
+    }
+    .aac-testimonial blockquote { font-size: 15px; color: var(--aac-text); line-height: 1.7; margin: 0 0 12px; font-style: italic; }
+    .aac-testimonial cite { font-size: 13px; color: var(--aac-muted); font-style: normal; font-weight: 600; }
+
+    .aac-contact {
+      background: var(--aac-primary); color: #fff; padding: 60px 40px;
+      font-family: var(--font-stack);
+    }
+    .aac-contact-inner {
+      max-width: 1200px; margin: 0 auto; display: grid;
+      grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .aac-contact h2 { font-size: 32px; margin: 0 0 16px; text-align: left; color: #fff; }
+    .aac-contact p { color: #8fa5c0; font-size: 15px; line-height: 1.7; margin: 0 0 8px; }
+    .aac-contact a { color: #d4817b; text-decoration: none; }
+    .aac-contact a.cta {
+      display: inline-block; background: var(--aac-accent); color: #fff;
+      padding: 14px 36px; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 16px; margin-top: 20px;
+    }
+
+    .aac-cta-final {
+      background: var(--aac-dark); color: #fff; text-align: center;
+      padding: 60px 40px; font-family: var(--font-stack);
+    }
+    .aac-cta-final h2 { font-size: 28px; font-weight: 700; margin: 0 0 12px; }
+    .aac-cta-final p { color: #6a7f9a; font-size: 16px; margin: 0 0 28px; }
+    .aac-cta-final a {
+      display: inline-block; background: var(--aac-accent); color: #fff;
+      padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 700;
+    }
+
+    .aac-chat-widget {
+      position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px;
+      background: var(--aac-accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: transform 0.2s; z-index: 999;
+    }
+    .aac-chat-widget:hover { transform: scale(1.08); }
+    .aac-chat-widget svg { width: 26px; height: 26px; fill: #fff; }
+
+    @media (max-width: 768px) {
+      .aac-services-grid, .aac-process-grid { grid-template-columns: 1fr; }
+      .aac-testimonials { grid-template-columns: 1fr; }
+      .aac-contact-inner { grid-template-columns: 1fr; }
+      .aac-hero h1 { font-size: 30px; }
+      .aac-nav-links { display: none; }
+    }
+  </style>
+
+  <div class="aac-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">All American Contractors</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Utah's trusted home service professionals</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #d97706; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <nav class="aac-nav">
+    <div class="aac-logo">All <span>American</span> Contractors</div>
+    <ul class="aac-nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Our Process</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="aac-nav-cta" href="#contact">Get a Quote</a>
+  </nav>
+
+  <section class="aac-hero">
+    <p class="tagline">Safe. Trusted. Accurate. Experts.</p>
+    <h1>10+ Years of Trusted<br/>Construction Expertise</h1>
+    <p>Commercial T.I., commercial construction, residential construction, and more. Delivering superior craftsmanship on time and on budget across Salt Lake County.</p>
+    <a class="aac-hero-cta" href="#contact">Start Your Project</a>
+  </section>
+
+  <section class="aac-section" id="services">
+    <h2>Our Construction Services</h2>
+    <p class="subtitle">Full-service approach from design through final finishing touches</p>
+    <div class="aac-services-grid">
+      <div class="aac-service-card">
+        <div class="aac-service-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg></div>
+        <h3>Commercial Construction</h3>
+        <p>Strong, modern buildings for businesses. From offices to warehouses, built to stand the test of time with quality and speed.</p>
+      </div>
+      <div class="aac-service-card">
+        <div class="aac-service-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Commercial Remodeling</h3>
+        <p>Refresh business spaces with modern designs. Update offices and stores to look fresh and work better for your team.</p>
+      </div>
+      <div class="aac-service-card">
+        <div class="aac-service-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Residential Construction</h3>
+        <p>Safe, comfortable homes for families. Quality materials and clear plans to turn your dream home into reality.</p>
+      </div>
+      <div class="aac-service-card">
+        <div class="aac-service-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+        <h3>Design &amp; Architecture</h3>
+        <p>Detailed architectural drawings, engineering consultations, interior design, and 3D renderings for every project.</p>
+      </div>
+      <div class="aac-service-card">
+        <div class="aac-service-icon"><svg viewBox="0 0 24 24"><path d="M12 2v6M12 18v4M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M18 12h4"/></svg></div>
+        <h3>New Additions</h3>
+        <p>Extra rooms or spaces that blend perfectly with your existing style, boosting both function and value.</p>
+      </div>
+      <div class="aac-service-card">
+        <div class="aac-service-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3>Tenant Improvements</h3>
+        <p>Innovative design and precise planning for commercial tenant build-outs that work for your business.</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what All American Contractors could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <div class="aac-section-alt">
+    <section class="aac-section" id="process">
+      <h2>Our Process</h2>
+      <p class="subtitle">Building your dreams with precision and quality</p>
+      <div class="aac-process-grid">
+        <div class="aac-process-step">
+          <div class="aac-process-num">1</div>
+          <h3>Design &amp; Plan</h3>
+          <p>Detailed architectural drawings, engineering consultations, interior design, and 3D renderings to capture every detail.</p>
+        </div>
+        <div class="aac-process-step">
+          <div class="aac-process-num">2</div>
+          <h3>Build &amp; Renovate</h3>
+          <p>Energy-efficient and eco-friendly practices with superior materials and modern construction techniques.</p>
+        </div>
+        <div class="aac-process-step">
+          <div class="aac-process-num">3</div>
+          <h3>Satisfaction Guarantee</h3>
+          <p>Every project backed by a minimum one-year workmanship warranty for long-term peace of mind.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">All American Contractors</h2>
-    <p style="color: #666; font-size: 1.1rem;">Salt Lake City, Utah</p>
-    
-    <p><a href="https://aacontractorsutah.com/" style="color: #2563eb;" target="_blank">https://aacontractorsutah.com/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for All American Contractors?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #78350f, #b45309); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
-        </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
-      </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hey there! Need a quote, want to schedule service, or have a question? I can help 24/7 — even if the crew is on a job right now.</div>
-      </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #92400e; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
-      </div>
-    </div>
+    </section>
   </div>
 
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
+  <section class="aac-section" id="testimonials">
+    <h2>What Our Clients Say</h2>
+    <p class="subtitle">Real reviews from real clients</p>
+    <div class="aac-testimonials">
+      <div class="aac-testimonial">
+        <blockquote>"The team at All American did an amazing job! I presented a very challenging build out and Adrian saw my vision. Not only did he deliver, it was better than I expected. Everyone who comes to our office is very impressed."</blockquote>
+        <cite>Dusty James</cite>
+      </div>
+      <div class="aac-testimonial">
+        <blockquote>"Adrian was awesome to work with. The whole process from beginning to end was amazing. He was very accessible and finished the work in a timely manner. We couldn't have been happier with the end result."</blockquote>
+        <cite>K.C.</cite>
+      </div>
+      <div class="aac-testimonial">
+        <blockquote>"It's pretty rare to find a contractor who is on time and trustworthy. All American Contractors live up to their name. I am beyond impressed with the professionalism and a job well done."</blockquote>
+        <cite>Desiree Sanchez Goitia</cite>
+      </div>
+      <div class="aac-testimonial">
+        <blockquote>"Since I was first introduced to Adrian years ago, he has been the BEST person to work with. They always have answers and can provide the service I need at the most fair prices."</blockquote>
+        <cite>Felicia Turner</cite>
+      </div>
+    </div>
+  </section>
 
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
+  <section class="aac-contact" id="contact">
+    <div class="aac-contact-inner">
+      <div>
+        <h2>Start Your Project Today</h2>
+        <p>Our team is here to answer your questions and help turn your vision into reality.</p>
+        <div style="margin-top:20px;">
+          <p>Adrian Brewer, Owner</p>
+          <p>License #12074233-0160</p>
+          <p style="margin-top:12px;">Monday - Friday: 9 AM - 5 PM</p>
+          <p>Emergencies: 24/7</p>
+          <p>Salt Lake County, Utah</p>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <a class="cta" href="#schedule">Get a Free Estimate</a>
+        <p style="margin-top:16px;font-size:13px;color:#8fa5c0;">Appointments available outside scheduled hours upon request</p>
+      </div>
+    </div>
+  </section>
 
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
+  <section class="aac-cta-final">
+    <h2>Want a website like this for your business?</h2>
+    <p>This concept was designed by XClear AI to showcase what modern web design can do for construction companies.</p>
+    <a href="https://xclearai.com/ai-assessment">Get Your Free AI Assessment</a>
+  </section>
+
+  <div class="aac-chat-widget" title="Chat with us">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  </div>
 </Layout>

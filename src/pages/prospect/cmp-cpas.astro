@@ -1,181 +1,542 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "CMP CPAs - Website Concept Redesign";
+const description = "A modern website concept redesign for CMP CPAs by XClear AI.";
 ---
 
-<Layout title="CMP CPAs — Reimagined by XClear AI" description="See what CMP CPAs could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    📊 This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>CMP CPAs</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --cmp-primary: #1a2d50;
+      --cmp-secondary: #2b5ea7;
+      --cmp-accent: #3b7dd8;
+      --cmp-teal: #1a8a7d;
+      --cmp-light: #f4f7fb;
+      --cmp-dark: #0e1a30;
+      --cmp-text: #2c3a4e;
+      --cmp-muted: #6b7d93;
+      --cmp-white: #ffffff;
+      --cmp-border: #d8e2ee;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .cmp-concept-banner {
+      background: var(--cmp-dark); color: rgba(255,255,255,0.85);
+      text-align: center; padding: 10px 20px; font-size: 13px; font-family: var(--font-stack);
+    }
+    .cmp-concept-banner a { color: var(--cmp-accent); text-decoration: none; font-weight: 600; }
+
+    .cmp-nav {
+      background: var(--cmp-white); padding: 16px 0;
+      border-bottom: 1px solid var(--cmp-border);
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .cmp-nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cmp-logo { font-family: var(--font-stack); font-size: 22px; font-weight: 800; color: var(--cmp-primary); letter-spacing: 1px; }
+    .cmp-logo span { color: var(--cmp-secondary); font-weight: 400; font-size: 14px; margin-left: 8px; letter-spacing: 0; }
+    .cmp-nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .cmp-nav-links a {
+      text-decoration: none; color: var(--cmp-text); font-size: 14px;
+      font-weight: 500; font-family: var(--font-stack); transition: color 0.2s;
+    }
+    .cmp-nav-links a:hover { color: var(--cmp-secondary); }
+    .cmp-nav-cta {
+      background: var(--cmp-secondary) !important; color: var(--cmp-white) !important;
+      padding: 10px 22px; border-radius: 6px; font-weight: 600 !important;
+    }
+
+    .cmp-hero {
+      background: linear-gradient(135deg, var(--cmp-primary) 0%, var(--cmp-dark) 100%);
+      color: var(--cmp-white); padding: 100px 24px;
+      position: relative;
+    }
+    .cmp-hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(59,125,216,0.1) 0%, transparent 60%);
+    }
+    .cmp-hero-inner {
+      max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .cmp-hero-badge {
+      display: inline-block; background: rgba(26,138,125,0.15);
+      border: 1px solid rgba(26,138,125,0.3); color: var(--cmp-teal);
+      padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+      font-family: var(--font-stack); margin-bottom: 20px; letter-spacing: 0.3px;
+    }
+    .cmp-hero h1 {
+      font-family: var(--font-stack); font-size: 44px; font-weight: 700;
+      line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.5px;
+    }
+    .cmp-hero p {
+      font-size: 17px; line-height: 1.7; color: rgba(255,255,255,0.8);
+      margin-bottom: 32px;
+    }
+    .cmp-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+    .cmp-btn-primary {
+      background: var(--cmp-secondary); color: var(--cmp-white);
+      padding: 14px 32px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 15px; font-family: var(--font-stack);
+      transition: all 0.2s; display: inline-block;
+    }
+    .cmp-btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+    .cmp-btn-outline {
+      background: transparent; color: var(--cmp-white);
+      padding: 14px 32px; border-radius: 8px; text-decoration: none;
+      font-weight: 600; font-size: 15px; font-family: var(--font-stack);
+      border: 2px solid rgba(255,255,255,0.25); transition: all 0.2s; display: inline-block;
+    }
+    .cmp-btn-outline:hover { border-color: var(--cmp-white); }
+
+    .cmp-hero-contact {
+      background: var(--cmp-white); border-radius: 16px; padding: 36px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .cmp-hero-contact h3 {
+      font-size: 20px; font-weight: 700; color: var(--cmp-primary); margin-bottom: 6px;
+    }
+    .cmp-hero-contact .cmp-form-sub {
+      font-size: 14px; color: var(--cmp-muted); margin-bottom: 20px;
+    }
+    .cmp-form-field {
+      width: 100%; padding: 12px 16px; border: 1px solid var(--cmp-border);
+      border-radius: 8px; font-size: 14px; font-family: var(--font-stack);
+      margin-bottom: 12px; outline: none;
+    }
+    .cmp-form-field:focus { border-color: var(--cmp-accent); }
+    .cmp-form-btn {
+      width: 100%; background: var(--cmp-secondary); color: var(--cmp-white);
+      padding: 14px; border: none; border-radius: 8px; font-size: 15px;
+      font-weight: 600; font-family: var(--font-stack); cursor: pointer; margin-top: 4px;
+    }
+    .cmp-form-btn:hover { opacity: 0.9; }
+    .cmp-phone-links {
+      margin-top: 20px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .cmp-phone-links a {
+      font-size: 14px; color: var(--cmp-secondary); text-decoration: none;
+      font-weight: 500; display: flex; align-items: center; gap: 6px;
+    }
+
+    .cmp-section { padding: 80px 24px; font-family: var(--font-stack); }
+    .cmp-section-inner { max-width: 1200px; margin: 0 auto; }
+    .cmp-section-header { text-align: center; margin-bottom: 56px; }
+    .cmp-section-header h2 {
+      font-size: 36px; font-weight: 700; color: var(--cmp-primary);
+      margin-bottom: 12px; letter-spacing: -0.5px;
+    }
+    .cmp-section-header p {
+      font-size: 17px; color: var(--cmp-muted);
+      max-width: 600px; margin: 0 auto; line-height: 1.6;
+    }
+    .cmp-alt-bg { background: var(--cmp-light); }
+
+    .cmp-services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .cmp-service-card {
+      background: var(--cmp-white); border: 1px solid var(--cmp-border);
+      border-radius: 12px; padding: 32px 24px; transition: all 0.2s;
+    }
+    .cmp-service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.06); transform: translateY(-2px); }
+    .cmp-service-icon {
+      width: 44px; height: 44px; background: var(--cmp-light);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .cmp-service-icon svg { width: 22px; height: 22px; color: var(--cmp-secondary); }
+    .cmp-service-card h3 { font-size: 17px; font-weight: 600; color: var(--cmp-primary); margin-bottom: 8px; }
+    .cmp-service-card p { font-size: 14px; color: var(--cmp-muted); line-height: 1.6; }
+
+    .cmp-industries-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    }
+    .cmp-industry-card {
+      text-align: center; padding: 32px 16px;
+      background: var(--cmp-white); border: 1px solid var(--cmp-border);
+      border-radius: 12px; transition: all 0.2s;
+    }
+    .cmp-industry-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+    .cmp-industry-card h4 { font-size: 15px; font-weight: 600; color: var(--cmp-primary); margin-bottom: 6px; }
+    .cmp-industry-card p { font-size: 13px; color: var(--cmp-muted); line-height: 1.5; }
+
+    .cmp-awards {
+      background: var(--cmp-primary); color: var(--cmp-white); padding: 60px 24px;
+      text-align: center;
+    }
+    .cmp-awards h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    .cmp-awards p {
+      font-size: 16px; color: rgba(255,255,255,0.75); max-width: 600px;
+      margin: 0 auto; line-height: 1.7;
+    }
+    .cmp-awards-badges {
+      display: flex; justify-content: center; gap: 40px; margin-top: 32px; flex-wrap: wrap;
+    }
+    .cmp-award-badge {
+      text-align: center;
+    }
+    .cmp-award-badge h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--cmp-accent); margin-bottom: 4px; }
+    .cmp-award-badge p { font-size: 14px; color: rgba(255,255,255,0.7); }
+
+    .cmp-locations-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .cmp-location-card {
+      background: var(--cmp-white); border: 1px solid var(--cmp-border);
+      border-radius: 12px; padding: 28px 24px; text-align: center;
+    }
+    .cmp-location-card h4 { font-size: 17px; font-weight: 600; color: var(--cmp-primary); margin-bottom: 8px; }
+    .cmp-location-card p { font-size: 14px; color: var(--cmp-muted); margin-bottom: 4px; }
+    .cmp-location-card a {
+      font-size: 14px; color: var(--cmp-secondary); text-decoration: none; font-weight: 600;
+    }
+
+    .cmp-cta-section {
+      background: linear-gradient(135deg, var(--cmp-secondary) 0%, var(--cmp-primary) 100%);
+      color: var(--cmp-white); padding: 80px 24px; text-align: center;
+    }
+    .cmp-cta-section h2 { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
+    .cmp-cta-section p {
+      font-size: 17px; color: rgba(255,255,255,0.85); margin-bottom: 32px;
+      max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.6;
+    }
+    .cmp-cta-btn {
+      background: var(--cmp-white); color: var(--cmp-primary);
+      padding: 16px 36px; border-radius: 8px; text-decoration: none;
+      font-weight: 700; font-size: 15px; font-family: var(--font-stack);
+      transition: all 0.2s; display: inline-block;
+    }
+    .cmp-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+    .cmp-footer {
+      background: var(--cmp-dark); color: rgba(255,255,255,0.6);
+      padding: 48px 24px; font-family: var(--font-stack);
+    }
+    .cmp-footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .cmp-footer-brand { font-size: 18px; font-weight: 800; color: var(--cmp-white); letter-spacing: 1px; }
+    .cmp-footer p { font-size: 13px; }
+
+    .cmp-xclear-cta {
+      background: var(--cmp-white); border-top: 1px solid var(--cmp-border);
+      padding: 48px 24px; text-align: center; font-family: var(--font-stack);
+    }
+    .cmp-xclear-cta p { font-size: 16px; color: var(--cmp-muted); margin-bottom: 12px; }
+    .cmp-xclear-cta a { color: var(--cmp-secondary); font-weight: 600; text-decoration: none; }
+
+    .cmp-chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 1000; }
+    .cmp-chat-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--cmp-secondary); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(43,94,167,0.35); transition: all 0.2s;
+    }
+    .cmp-chat-btn:hover { transform: scale(1.05); }
+    .cmp-chat-btn svg { width: 24px; height: 24px; color: white; }
+    .cmp-chat-window {
+      display: none; position: absolute; bottom: 72px; right: 0;
+      width: 360px; height: 480px; background: var(--cmp-white);
+      border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+      overflow: hidden; flex-direction: column;
+    }
+    .cmp-chat-window.active { display: flex; }
+    .cmp-chat-header {
+      background: var(--cmp-primary); color: var(--cmp-white);
+      padding: 16px 20px; font-weight: 600; font-size: 15px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .cmp-chat-close { background: none; border: none; color: var(--cmp-white); cursor: pointer; font-size: 18px; opacity: 0.7; }
+    .cmp-chat-messages { flex: 1; padding: 20px; overflow-y: auto; }
+    .cmp-chat-msg {
+      background: var(--cmp-light); padding: 12px 16px; border-radius: 12px;
+      font-size: 14px; color: var(--cmp-text); line-height: 1.5;
+    }
+    .cmp-chat-input-area {
+      padding: 12px 16px; border-top: 1px solid var(--cmp-border);
+      display: flex; gap: 8px;
+    }
+    .cmp-chat-input {
+      flex: 1; border: 1px solid var(--cmp-border); border-radius: 8px;
+      padding: 10px 14px; font-size: 14px; font-family: var(--font-stack); outline: none;
+    }
+    .cmp-chat-send {
+      background: var(--cmp-secondary); color: var(--cmp-white); border: none;
+      border-radius: 8px; padding: 10px 16px; cursor: pointer; font-weight: 600; font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .cmp-hero-inner { grid-template-columns: 1fr; }
+      .cmp-hero h1 { font-size: 32px; }
+      .cmp-services-grid, .cmp-locations-grid { grid-template-columns: 1fr; }
+      .cmp-industries-grid { grid-template-columns: repeat(2, 1fr); }
+      .cmp-nav-links { display: none; }
+    }
+  </style>
+
+  <div class="cmp-concept-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #1a4731, #2d8a5e); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">CMP CPAs</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Tax preparation, bookkeeping, and advisory services</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #2d8a5e; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
-      </div>
+  <nav class="cmp-nav">
+    <div class="cmp-nav-inner">
+      <div class="cmp-logo">CMP<span>Certified Public Accountants</span></div>
+      <ul class="cmp-nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#contact" class="cmp-nav-cta">Free Consultation</a></li>
+      </ul>
     </div>
-  </section>
+  </nav>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
+  <section class="cmp-hero">
+    <div class="cmp-hero-inner">
       <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
+        <div class="cmp-hero-badge">AWARD-WINNING UTAH CPA FIRM -- 40+ YEARS</div>
+        <h1>Nationwide Full-Service Accounting for Individuals and Businesses</h1>
+        <p>Trusted CPAs serving Utah from Layton, Logan, and St. George. Tax preparation, financial audits, business valuation, bookkeeping, and strategic advisory powered by 250+ years of combined expertise.</p>
+        <div class="cmp-hero-btns">
+          <a href="#contact" class="cmp-btn-primary">Request a Consultation</a>
+          <a href="#services" class="cmp-btn-outline">Our Services</a>
+        </div>
       </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what CMP CPAs could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #1a4731, #2d8a5e); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+      <div class="cmp-hero-contact" id="contact">
+        <h3>Free 30-Minute Consultation</h3>
+        <p class="cmp-form-sub">Let us help you with your tax and accounting needs</p>
+        <input type="text" class="cmp-form-field" placeholder="Full Name" />
+        <input type="email" class="cmp-form-field" placeholder="Email Address" />
+        <input type="tel" class="cmp-form-field" placeholder="Phone Number" />
+        <select class="cmp-form-field" style="appearance: none; background: white; cursor: pointer;">
+          <option value="">What do you need help with?</option>
+          <option>Tax Preparation</option>
+          <option>Financial Audit / Review</option>
+          <option>Business Valuation</option>
+          <option>Bookkeeping &amp; Payroll</option>
+          <option>Estate &amp; Succession Planning</option>
+          <option>R&amp;D Tax Credits</option>
+          <option>Outsourced CFO</option>
+          <option>Other</option>
+        </select>
+        <button class="cmp-form-btn">Schedule Consultation</button>
+        <div class="cmp-phone-links">
+          <a href="tel:8014674450">Wasatch Front: 801-467-4450</a>
+          <a href="tel:4357505566">Logan: 435-750-5566</a>
+          <a href="tel:4352694540">Southern Utah: 435-269-4540</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">CMP CPAs</h2>
-    <p style="color: #666; font-size: 1.1rem;">Layton, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 544-5243" style="color: #1a4731; text-decoration: none; font-weight: 600;">(801) 544-5243</a></p>
-    <p><a href="https://cmp.cpa/" style="color: #2563eb;" target="_blank">https://cmp.cpa/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for CMP CPAs?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #1a4731, #2d8a5e); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #1a4731, #2d8a5e); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
+  <section class="cmp-section cmp-alt-bg" id="services">
+    <div class="cmp-section-inner">
+      <div class="cmp-section-header">
+        <h2>Our Services</h2>
+        <p>Comprehensive accounting and advisory services for individuals and businesses</p>
+      </div>
+      <div class="cmp-services-grid">
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+          </div>
+          <h3>Tax Preparation</h3>
+          <p>Personal and business tax preparation with strategic planning to minimize your tax burden year-round.</p>
         </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
-      </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hi! I can help you with tax questions, schedule a consultation, or learn about our services. How can I help?</div>
-      </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #1a4731; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15a2.25 2.25 0 0 1 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25Z" /></svg>
+          </div>
+          <h3>Financial Audits &amp; Reviews</h3>
+          <p>Independent audits, reviews, and compilations performed with integrity and precision.</p>
+        </div>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" /></svg>
+          </div>
+          <h3>Business Valuation</h3>
+          <p>Accurate business valuations for transactions, litigation, estate planning, and strategic decision-making.</p>
+        </div>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z" /></svg>
+          </div>
+          <h3>Bookkeeping &amp; Payroll</h3>
+          <p>Reliable bookkeeping and payroll processing so you can focus on running your business.</p>
+        </div>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" /></svg>
+          </div>
+          <h3>Estate &amp; Succession Planning</h3>
+          <p>Comprehensive planning to protect your assets and ensure smooth business transitions.</p>
+        </div>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" /></svg>
+          </div>
+          <h3>R&amp;D Tax Credits</h3>
+          <p>Identify and claim research and development credits to maximize your tax savings.</p>
+        </div>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0 0 12 2.25Z" /></svg>
+          </div>
+          <h3>Accounting Software</h3>
+          <p>Solutions and consulting for QuickBooks, Xero, and other platforms to streamline your finances.</p>
+        </div>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z" /></svg>
+          </div>
+          <h3>Outsourced CFO</h3>
+          <p>Fractional CFO services providing high-level financial strategy without the full-time cost.</p>
+        </div>
+        <div class="cmp-service-card">
+          <div class="cmp-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg>
+          </div>
+          <h3>ERISA / 401K Audits</h3>
+          <p>Specialized retirement plan audits ensuring compliance with ERISA and DOL requirements.</p>
+        </div>
       </div>
     </div>
+  </section>
+
+  <section class="cmp-section" id="industries">
+    <div class="cmp-section-inner">
+      <div class="cmp-section-header">
+        <h2>Industries We Serve</h2>
+        <p>Specialized expertise across diverse business sectors</p>
+      </div>
+      <div class="cmp-industries-grid">
+        <div class="cmp-industry-card">
+          <h4>Farm &amp; Ranch</h4>
+          <p>Agricultural accounting and tax expertise</p>
+        </div>
+        <div class="cmp-industry-card">
+          <h4>Real Estate &amp; Construction</h4>
+          <p>Project-based financial management</p>
+        </div>
+        <div class="cmp-industry-card">
+          <h4>Retail &amp; Wholesale</h4>
+          <p>Inventory and sales tax optimization</p>
+        </div>
+        <div class="cmp-industry-card">
+          <h4>Nonprofit</h4>
+          <p>Compliance and grant reporting</p>
+        </div>
+        <div class="cmp-industry-card">
+          <h4>Manufacturing</h4>
+          <p>Cost accounting and efficiency</p>
+        </div>
+        <div class="cmp-industry-card">
+          <h4>Healthcare</h4>
+          <p>Regulatory compliance and billing</p>
+        </div>
+        <div class="cmp-industry-card">
+          <h4>Technology</h4>
+          <p>R&amp;D credits and growth advisory</p>
+        </div>
+        <div class="cmp-industry-card">
+          <h4>Internet Marketing</h4>
+          <p>YouTube and creator tax planning</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cmp-awards">
+    <h2>Award-Winning Service</h2>
+    <p>CMP is proud to be recognized for excellence in accounting services across Northern Utah.</p>
+    <div class="cmp-awards-badges">
+      <div class="cmp-award-badge">
+        <h4>Best of Northern Utah</h4>
+        <p>Recognized by community vote</p>
+      </div>
+      <div class="cmp-award-badge">
+        <h4>Best of BusinessRate 2025</h4>
+        <p>Logan, Utah - Accountant</p>
+      </div>
+      <div class="cmp-award-badge">
+        <h4>40+ Years</h4>
+        <p>Celebrating four decades of service</p>
+      </div>
+      <div class="cmp-award-badge">
+        <h4>250+ Years Combined</h4>
+        <p>Team expertise in tax and accounting</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cmp-section cmp-alt-bg" id="locations">
+    <div class="cmp-section-inner">
+      <div class="cmp-section-header">
+        <h2>Our Offices</h2>
+        <p>Three convenient locations across Utah</p>
+      </div>
+      <div class="cmp-locations-grid">
+        <div class="cmp-location-card">
+          <h4>Layton</h4>
+          <p>1916 Layton Hills Parkway, Suite 210</p>
+          <p>Layton, UT</p>
+          <a href="tel:8014674450">801-467-4450</a>
+        </div>
+        <div class="cmp-location-card">
+          <h4>Logan</h4>
+          <p>Serving Cache Valley</p>
+          <p>Logan, UT</p>
+          <a href="tel:4357505566">435-750-5566</a>
+        </div>
+        <div class="cmp-location-card">
+          <h4>St. George</h4>
+          <p>Serving Southern Utah</p>
+          <p>St. George, UT</p>
+          <a href="tel:4352694540">435-269-4540</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cmp-cta-section">
+    <h2>Ready to Work with Award-Winning CPAs?</h2>
+    <p>Schedule your free 30-minute consultation and discover how CMP can help you save on taxes and grow your business.</p>
+    <a href="#contact" class="cmp-cta-btn">Schedule Free Consultation</a>
+  </section>
+
+  <section class="cmp-xclear-cta">
+    <p>Want this website for your firm? Get a free consultation.</p>
+    <a href="https://xclearai.com/ai-assessment">Visit xclearai.com/ai-assessment</a>
+  </section>
+
+  <footer class="cmp-footer">
+    <div class="cmp-footer-inner">
+      <div class="cmp-footer-brand">CMP</div>
+      <p>Layton | Logan | St. George | Celebrating 40+ Years</p>
+    </div>
+  </footer>
+
+  <div class="cmp-chat-widget">
+    <div class="cmp-chat-window" id="chatWindow">
+      <div class="cmp-chat-header">
+        <span>CMP Assistant</span>
+        <button class="cmp-chat-close" onclick="document.getElementById('chatWindow').classList.remove('active')">&times;</button>
+      </div>
+      <div class="cmp-chat-messages">
+        <div class="cmp-chat-msg">Welcome to CMP CPAs. How can I help you today? I can assist with scheduling a consultation, answering questions about our services, or connecting you with the right team member.</div>
+      </div>
+      <div class="cmp-chat-input-area">
+        <input type="text" class="cmp-chat-input" placeholder="Type your message..." />
+        <button class="cmp-chat-send">Send</button>
+      </div>
+    </div>
+    <button class="cmp-chat-btn" onclick="document.getElementById('chatWindow').classList.toggle('active')">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>
+    </button>
   </div>
-
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
-
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
-
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
 </Layout>

@@ -1,181 +1,356 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "Fillmore Spencer LLC — Concept Redesign by XClear AI";
+const description = "A professional website concept for Fillmore Spencer LLC — Award-winning Utah law firm in Provo, St. George, and Murray.";
 ---
 
-<Layout title="Fillmore Spencer LLC — Reimagined by XClear AI" description="See what Fillmore Spencer LLC could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    ⚖️ This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>Fillmore Spencer LLC</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --fs-primary: #1b2a4a;
+      --fs-accent: #8b6914;
+      --fs-gold: #c49a1c;
+      --fs-warm: #faf6ec;
+      --fs-dark: #111d35;
+      --fs-light: #f8f9fb;
+      --fs-border: #e0ddd5;
+      --fs-text: #2c3345;
+      --fs-muted: #6b7080;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .fs-banner {
+      background: var(--fs-dark);
+      color: #8a9ab5;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-family: var(--font-stack);
+    }
+    .fs-banner a { color: #b8a460; text-decoration: none; font-weight: 500; }
+    .fs-banner a:hover { text-decoration: underline; }
+
+    .fs-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--fs-border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      font-family: var(--font-stack);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .fs-logo {
+      font-size: 21px;
+      font-weight: 700;
+      color: var(--fs-primary);
+      letter-spacing: -0.3px;
+    }
+    .fs-logo span { color: var(--fs-accent); }
+    .fs-nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .fs-nav-links a { color: var(--fs-text); text-decoration: none; font-size: 15px; font-weight: 500; }
+    .fs-nav-links a:hover { color: var(--fs-accent); }
+    .fs-nav-cta {
+      background: var(--fs-accent);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .fs-nav-cta:hover { background: #7a5c10; }
+
+    .fs-hero {
+      background: linear-gradient(135deg, var(--fs-primary) 0%, var(--fs-dark) 100%);
+      color: #fff;
+      padding: 100px 40px 80px;
+      text-align: center;
+      font-family: var(--font-stack);
+    }
+    .fs-hero h1 {
+      font-size: 46px;
+      font-weight: 800;
+      margin: 0 0 16px;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .fs-hero p {
+      font-size: 19px;
+      color: #a8b5cc;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .fs-hero-cta {
+      display: inline-block;
+      background: var(--fs-gold);
+      color: #1a1a1a;
+      padding: 16px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s;
+    }
+    .fs-hero-cta:hover { transform: translateY(-2px); }
+
+    .fs-section {
+      padding: 80px 40px;
+      font-family: var(--font-stack);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .fs-section-alt { background: var(--fs-light); }
+    .fs-section h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--fs-primary);
+      text-align: center;
+      margin: 0 0 12px;
+    }
+    .fs-section .subtitle {
+      text-align: center;
+      color: var(--fs-muted);
+      font-size: 17px;
+      margin: 0 0 48px;
+    }
+
+    .fs-areas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .fs-area-card {
+      background: #fff;
+      border: 1px solid var(--fs-border);
+      border-radius: 12px;
+      padding: 32px 24px;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .fs-area-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+      transform: translateY(-3px);
+    }
+    .fs-area-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--fs-warm);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .fs-area-icon svg { width: 24px; height: 24px; stroke: var(--fs-accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .fs-area-card h3 { font-size: 17px; font-weight: 600; color: var(--fs-primary); margin: 0 0 8px; }
+    .fs-area-card p { font-size: 14px; color: var(--fs-muted); line-height: 1.6; margin: 0; }
+
+    .fs-locations {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .fs-location {
+      background: #fff;
+      border: 1px solid var(--fs-border);
+      border-radius: 10px;
+      padding: 28px;
+      text-align: center;
+    }
+    .fs-location h3 { font-size: 18px; color: var(--fs-primary); margin: 0 0 8px; }
+    .fs-location p { font-size: 14px; color: var(--fs-muted); margin: 0; line-height: 1.6; }
+
+    .fs-values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .fs-value { text-align: center; padding: 20px; }
+    .fs-value-icon {
+      width: 52px; height: 52px; background: var(--fs-warm); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    }
+    .fs-value-icon svg { width: 24px; height: 24px; stroke: var(--fs-accent); fill: none; stroke-width: 2; }
+    .fs-value h3 { font-size: 16px; color: var(--fs-primary); margin: 0 0 8px; }
+    .fs-value p { font-size: 14px; color: var(--fs-muted); margin: 0; line-height: 1.5; }
+
+    .fs-contact {
+      background: var(--fs-primary);
+      color: #fff;
+      padding: 60px 40px;
+      font-family: var(--font-stack);
+      text-align: center;
+    }
+    .fs-contact h2 { font-size: 32px; margin: 0 0 12px; color: #fff; }
+    .fs-contact p { color: #a0b0c8; font-size: 16px; margin: 0 0 28px; }
+    .fs-contact a.cta {
+      display: inline-block;
+      background: var(--fs-gold);
+      color: #1a1a1a;
+      padding: 14px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .fs-cta-final {
+      background: var(--fs-dark);
+      color: #fff;
+      text-align: center;
+      padding: 60px 40px;
+      font-family: var(--font-stack);
+    }
+    .fs-cta-final h2 { font-size: 28px; font-weight: 700; margin: 0 0 12px; }
+    .fs-cta-final p { color: #7a8da8; font-size: 16px; margin: 0 0 28px; }
+    .fs-cta-final a {
+      display: inline-block;
+      background: var(--fs-gold);
+      color: #1a1a1a;
+      padding: 14px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .fs-chat-widget {
+      position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px;
+      background: var(--fs-accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: transform 0.2s; z-index: 999;
+    }
+    .fs-chat-widget:hover { transform: scale(1.08); }
+    .fs-chat-widget svg { width: 26px; height: 26px; fill: #fff; }
+
+    @media (max-width: 768px) {
+      .fs-areas-grid, .fs-locations, .fs-values-grid { grid-template-columns: 1fr; }
+      .fs-hero h1 { font-size: 30px; }
+      .fs-nav { padding: 0 20px; }
+      .fs-nav-links { display: none; }
+    }
+  </style>
+
+  <div class="fs-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Fillmore Spencer LLC</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Protecting your rights with dedication and expertise</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #c8a951; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <nav class="fs-nav">
+    <div class="fs-logo">Fillmore <span>Spencer</span> LLC</div>
+    <ul class="fs-nav-links">
+      <li><a href="#areas">Practice Areas</a></li>
+      <li><a href="#locations">Locations</a></li>
+      <li><a href="#values">Our Values</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="fs-nav-cta" href="#contact">Free Consultation</a>
+  </nav>
+
+  <section class="fs-hero">
+    <h1>Award-Winning Legal<br/>Representation in Utah</h1>
+    <p>Building long-term relationships with clients and community. Experienced Utah attorneys specializing in Family Law, Estate Planning, Criminal Defense, Personal Injury, and Immigration.</p>
+    <a class="fs-hero-cta" href="#contact">Schedule a Consultation</a>
+  </section>
+
+  <section class="fs-section" id="areas">
+    <h2>Practice Areas</h2>
+    <p class="subtitle">Comprehensive legal services tailored to your needs</p>
+    <div class="fs-areas-grid">
+      <div class="fs-area-card">
+        <div class="fs-area-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Family Law</h3>
+        <p>Divorce, custody, adoption, and family dispute resolution with compassion and expertise.</p>
+      </div>
+      <div class="fs-area-card">
+        <div class="fs-area-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h3>Estate Planning</h3>
+        <p>Wills, trusts, probate, and asset protection to secure your family's future.</p>
+      </div>
+      <div class="fs-area-card">
+        <div class="fs-area-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h3>Criminal Defense</h3>
+        <p>Aggressive defense for misdemeanor and felony charges throughout Utah courts.</p>
+      </div>
+      <div class="fs-area-card">
+        <div class="fs-area-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>Personal Injury</h3>
+        <p>Fighting for fair compensation in accident, negligence, and wrongful death cases.</p>
+      </div>
+      <div class="fs-area-card">
+        <div class="fs-area-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+        <h3>Immigration</h3>
+        <p>Visa applications, green cards, citizenship, and deportation defense with care.</p>
+      </div>
+      <div class="fs-area-card">
+        <div class="fs-area-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Real Estate &amp; Business</h3>
+        <p>Commercial transactions, contracts, disputes, bankruptcy, and business formation.</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what Fillmore Spencer LLC could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <div class="fs-section-alt">
+    <section class="fs-section" id="values">
+      <h2>Why Fillmore Spencer</h2>
+      <p class="subtitle">We explain the law as it applies to your case and make sure you understand the why behind our strategies</p>
+      <div class="fs-values-grid">
+        <div class="fs-value">
+          <div class="fs-value-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Trusted Counsel</h3>
+          <p>Long-term client relationships built on transparency, integrity, and results.</p>
+        </div>
+        <div class="fs-value">
+          <div class="fs-value-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h3>Award-Winning</h3>
+          <p>Recognized by peers and clients for legal excellence across multiple practice areas.</p>
+        </div>
+        <div class="fs-value">
+          <div class="fs-value-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <h3>Community Focused</h3>
+          <p>Legal counsel to America's Freedom Festival at Provo since 1996. Deeply rooted in Utah.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Fillmore Spencer LLC</h2>
-    <p style="color: #666; font-size: 1.1rem;">Provo, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 426-8200" style="color: #1e3a5f; text-decoration: none; font-weight: 600;">(801) 426-8200</a></p>
-    <p><a href="https://fslaw.com/" style="color: #2563eb;" target="_blank">https://fslaw.com/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for Fillmore Spencer LLC?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #1e3a5f, #2d5a8e); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
-        </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
-      </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hi! I'm the firm's AI assistant. I can help you understand our practice areas, check if we can help with your case, or schedule a free consultation. What brings you here today?</div>
-      </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #1e3a5f; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
-      </div>
-    </div>
+    </section>
   </div>
 
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
+  <section class="fs-section" id="locations">
+    <h2>Our Locations</h2>
+    <p class="subtitle">Three offices to serve you across Utah</p>
+    <div class="fs-locations">
+      <div class="fs-location">
+        <h3>Provo Office</h3>
+        <p>3301 N. University Ave.<br/>Provo, UT 84604</p>
+      </div>
+      <div class="fs-location">
+        <h3>St. George Office</h3>
+        <p>St. George, UT</p>
+      </div>
+      <div class="fs-location">
+        <h3>Murray Office</h3>
+        <p>Murray, UT</p>
+      </div>
+    </div>
+  </section>
 
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
+  <section class="fs-contact" id="contact">
+    <h2>Schedule Your Free Consultation</h2>
+    <p>Our attorneys are ready to listen, evaluate your case, and explain your options clearly.</p>
+    <a class="cta" href="#schedule">Book a Consultation</a>
+  </section>
 
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
+  <section class="fs-cta-final">
+    <h2>Want a website like this for your firm?</h2>
+    <p>This concept was designed by XClear AI to showcase what modern web presence can do for law firms.</p>
+    <a href="https://xclearai.com/ai-assessment">Get Your Free AI Assessment</a>
+  </section>
+
+  <div class="fs-chat-widget" title="Chat with us">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  </div>
 </Layout>

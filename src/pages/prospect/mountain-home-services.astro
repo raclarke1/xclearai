@@ -1,181 +1,454 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "Mountain Home Services — Concept Redesign by XClear AI";
+const description = "A professional website concept for Mountain Home Services — HVAC, Plumbing, Electrical & Generator services across the Wasatch Front.";
 ---
 
-<Layout title="Mountain Home Services — Reimagined by XClear AI" description="See what Mountain Home Services could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    🔧 This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>Mountain Home Services</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --mhs-primary: #1a3a5c;
+      --mhs-accent: #2e7d32;
+      --mhs-warm: #e8f0e8;
+      --mhs-dark: #0f2137;
+      --mhs-light: #f7f9fc;
+      --mhs-border: #dde4ec;
+      --mhs-text: #2c3e50;
+      --mhs-muted: #6b7c93;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .mhs-banner {
+      background: var(--mhs-dark);
+      color: #a8bdd4;
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-family: var(--font-stack);
+      letter-spacing: 0.3px;
+    }
+    .mhs-banner a {
+      color: #7eb8f7;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .mhs-banner a:hover { text-decoration: underline; }
+
+    .mhs-nav {
+      background: #fff;
+      border-bottom: 1px solid var(--mhs-border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+      font-family: var(--font-stack);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .mhs-logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--mhs-primary);
+      letter-spacing: -0.5px;
+    }
+    .mhs-logo span { color: var(--mhs-accent); }
+    .mhs-nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .mhs-nav-links a {
+      color: var(--mhs-text);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .mhs-nav-links a:hover { color: var(--mhs-accent); }
+    .mhs-nav-cta {
+      background: var(--mhs-accent);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .mhs-nav-cta:hover { background: #256b28; }
+    .mhs-phone {
+      color: var(--mhs-primary);
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+    }
+
+    .mhs-hero {
+      background: linear-gradient(135deg, var(--mhs-primary) 0%, var(--mhs-dark) 100%);
+      color: #fff;
+      padding: 100px 40px 80px;
+      text-align: center;
+      font-family: var(--font-stack);
+    }
+    .mhs-hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin: 0 0 16px;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .mhs-hero p {
+      font-size: 20px;
+      color: #b8cde0;
+      max-width: 640px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .mhs-hero-cta {
+      display: inline-block;
+      background: var(--mhs-accent);
+      color: #fff;
+      padding: 16px 40px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 600;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .mhs-hero-cta:hover { background: #256b28; transform: translateY(-2px); }
+
+    .mhs-section {
+      padding: 80px 40px;
+      font-family: var(--font-stack);
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .mhs-section-alt { background: var(--mhs-light); }
+    .mhs-section h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--mhs-primary);
+      text-align: center;
+      margin: 0 0 12px;
+      letter-spacing: -0.5px;
+    }
+    .mhs-section .subtitle {
+      text-align: center;
+      color: var(--mhs-muted);
+      font-size: 17px;
+      margin: 0 0 48px;
+    }
+
+    .mhs-services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .mhs-service-card {
+      background: #fff;
+      border: 1px solid var(--mhs-border);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .mhs-service-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+    }
+    .mhs-service-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 20px;
+      background: var(--mhs-warm);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mhs-service-icon svg {
+      width: 28px;
+      height: 28px;
+      stroke: var(--mhs-accent);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .mhs-service-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--mhs-primary);
+      margin: 0 0 10px;
+    }
+    .mhs-service-card p {
+      font-size: 14px;
+      color: var(--mhs-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .mhs-why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .mhs-why-item {
+      text-align: center;
+      padding: 24px;
+    }
+    .mhs-why-number {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--mhs-accent);
+      margin-bottom: 8px;
+    }
+    .mhs-why-item h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--mhs-primary);
+      margin: 0 0 8px;
+    }
+    .mhs-why-item p {
+      font-size: 14px;
+      color: var(--mhs-muted);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .mhs-contact {
+      background: var(--mhs-primary);
+      color: #fff;
+      padding: 60px 40px;
+      font-family: var(--font-stack);
+    }
+    .mhs-contact-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .mhs-contact h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 16px;
+    }
+    .mhs-contact p {
+      color: #a8bdd4;
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 0 0 8px;
+    }
+    .mhs-contact a { color: #7eb8f7; text-decoration: none; }
+    .mhs-contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mhs-cta-final {
+      background: var(--mhs-dark);
+      color: #fff;
+      text-align: center;
+      padding: 60px 40px;
+      font-family: var(--font-stack);
+    }
+    .mhs-cta-final h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+    .mhs-cta-final p {
+      color: #8aa4c0;
+      font-size: 16px;
+      margin: 0 0 28px;
+    }
+    .mhs-cta-final a {
+      display: inline-block;
+      background: var(--mhs-accent);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .mhs-chat-widget {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 56px;
+      height: 56px;
+      background: var(--mhs-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      z-index: 999;
+    }
+    .mhs-chat-widget:hover { transform: scale(1.08); }
+    .mhs-chat-widget svg {
+      width: 26px;
+      height: 26px;
+      fill: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .mhs-services-grid { grid-template-columns: 1fr 1fr; }
+      .mhs-why-grid { grid-template-columns: 1fr; }
+      .mhs-contact-inner { grid-template-columns: 1fr; }
+      .mhs-hero h1 { font-size: 32px; }
+      .mhs-nav { padding: 0 20px; }
+      .mhs-nav-links { display: none; }
+    }
+  </style>
+
+  <div class="mhs-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Mountain Home Services</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Utah's trusted home service professionals</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #d97706; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <nav class="mhs-nav">
+    <div class="mhs-logo">Mountain <span>Home</span> Services</div>
+    <ul class="mhs-nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a class="mhs-phone" href="tel:+18015432222">(801) 543-2222</a>
+      <a class="mhs-nav-cta" href="#schedule">Schedule Now</a>
+    </div>
+  </nav>
+
+  <section class="mhs-hero">
+    <h1>Your Trusted Home Service Experts<br/>Across the Wasatch Front</h1>
+    <p>Since 1954, delivering reliable HVAC, plumbing, electrical, and generator services to Utah families. Now united as Mountain Home Services.</p>
+    <a class="mhs-hero-cta" href="#schedule">Schedule Your Service</a>
+  </section>
+
+  <section class="mhs-section" id="services">
+    <h2>Our Services</h2>
+    <p class="subtitle">Comprehensive home solutions from one trusted team</p>
+    <div class="mhs-services-grid">
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="currentColor" fill="none"/><path d="M8 14s1.5 2 4 2 4-2 4-2" /><path d="M9 9h.01M15 9h.01"/></svg>
+        </div>
+        <h3>Air Conditioning</h3>
+        <p>AC repair, installation, maintenance, heat pumps, ductless systems, and indoor air quality solutions.</p>
+      </div>
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <h3>Heating</h3>
+        <p>Furnace repairs, tune-ups, installation, boilers, fireplaces, and carbon monoxide detector services.</p>
+      </div>
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Plumbing</h3>
+        <p>Drain cleaning, water heaters, emergency plumbing, sewer repair, hydro jetting, and water softeners.</p>
+      </div>
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Electrical</h3>
+        <p>Panel upgrades, wiring, EV charger installation, lighting, surge protection, and safety inspections.</p>
+      </div>
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M14 12h4"/></svg>
+        </div>
+        <h3>Generators</h3>
+        <p>Whole home generator installation, repairs, and automatic transfer switch services.</p>
+      </div>
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Water Quality</h3>
+        <p>Water filtration systems, softeners, and whole-home purification for clean, safe water.</p>
+      </div>
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h3>Maintenance Plans</h3>
+        <p>Annual maintenance agreements to keep your systems running efficiently year-round.</p>
+      </div>
+      <div class="mhs-service-card">
+        <div class="mhs-service-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h3>Air Duct Services</h3>
+        <p>Professional air duct cleaning and installation for improved air quality and efficiency.</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what Mountain Home Services could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <div class="mhs-section-alt">
+    <section class="mhs-section" id="why-us">
+      <h2>Why Mountain Home Services</h2>
+      <p class="subtitle">Backed by decades of expertise and a commitment to quality</p>
+      <div class="mhs-why-grid">
+        <div class="mhs-why-item">
+          <div class="mhs-why-number">70+</div>
+          <h3>Years of Experience</h3>
+          <p>Formerly Master Electrical Service, serving Utah since 1954 with trusted craftsmanship.</p>
+        </div>
+        <div class="mhs-why-item">
+          <div class="mhs-why-number">4-in-1</div>
+          <h3>One Team, All Trades</h3>
+          <p>HVAC, plumbing, electrical, and generators under one roof for seamless home service.</p>
+        </div>
+        <div class="mhs-why-item">
+          <div class="mhs-why-number">5</div>
+          <h3>Service Regions</h3>
+          <p>Serving Ogden, Layton, Provo, Salt Lake City, and the greater Wasatch Front.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Mountain Home Services</h2>
-    <p style="color: #666; font-size: 1.1rem;">Salt Lake City, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 264-4253" style="color: #92400e; text-decoration: none; font-weight: 600;">(801) 264-4253</a></p>
-    <p><a href="https://www.mountainhomeutah.com/" style="color: #2563eb;" target="_blank">https://www.mountainhomeutah.com/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for Mountain Home Services?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #78350f, #b45309); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #78350f, #b45309); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
-        </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
-      </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hey there! Need a quote, want to schedule service, or have a question? I can help 24/7 — even if the crew is on a job right now.</div>
-      </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #92400e; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
-      </div>
-    </div>
+    </section>
   </div>
 
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
+  <section class="mhs-contact" id="contact">
+    <div class="mhs-contact-inner">
+      <div>
+        <h2>Get in Touch</h2>
+        <p>Ready to schedule a service or have a question? Our team is here to help.</p>
+        <div class="mhs-contact-details" style="margin-top:24px;">
+          <p>1255 W. Gordon Ave. Unit B, Layton, UT 84041</p>
+          <p>Phone: <a href="tel:+18015432222">(801) 543-2222</a></p>
+          <p>Serving: Ogden, Layton, Provo, Salt Lake City, and surrounding areas</p>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <a class="mhs-hero-cta" href="#schedule" id="schedule" style="font-size:18px;padding:18px 48px;">Schedule Online</a>
+        <p style="margin-top:16px;font-size:13px;">Or call us anytime at (801) 543-2222</p>
+      </div>
+    </div>
+  </section>
 
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
+  <section class="mhs-cta-final">
+    <h2>Want a website like this for your business?</h2>
+    <p>This concept was designed by XClear AI to showcase what modern web design can do for home service companies.</p>
+    <a href="https://xclearai.com/ai-assessment">Get Your Free AI Assessment</a>
+  </section>
 
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
+  <div class="mhs-chat-widget" title="Chat with us">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  </div>
 </Layout>

@@ -1,181 +1,378 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "Helgesen, Houtz & Jones — Concept Redesign by XClear AI";
+const description = "A professional website concept for Helgesen, Houtz & Jones — Northern Utah's trusted law firm since 1982 with 10 experienced attorneys.";
 ---
 
-<Layout title="Helgesen, Houtz & Jones — Reimagined by XClear AI" description="See what Helgesen, Houtz & Jones could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    ⚖️ This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>Helgesen, Houtz & Jones</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --hhj-primary: #1a2744;
+      --hhj-accent: #2c5f8a;
+      --hhj-highlight: #3a7bb8;
+      --hhj-warm: #eef4fa;
+      --hhj-dark: #0f1a2e;
+      --hhj-light: #f6f8fb;
+      --hhj-border: #d8e0ea;
+      --hhj-text: #2c3345;
+      --hhj-muted: #6a7588;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .hhj-banner {
+      background: var(--hhj-dark); color: #7f90a8; text-align: center;
+      padding: 10px 20px; font-size: 13px; font-family: var(--font-stack);
+    }
+    .hhj-banner a { color: #7aaed4; text-decoration: none; font-weight: 500; }
+
+    .hhj-nav {
+      background: #fff; border-bottom: 1px solid var(--hhj-border);
+      padding: 0 40px; display: flex; align-items: center;
+      justify-content: space-between; height: 72px; font-family: var(--font-stack);
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .hhj-logo { font-size: 20px; font-weight: 700; color: var(--hhj-primary); }
+    .hhj-logo span { color: var(--hhj-accent); }
+    .hhj-nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; }
+    .hhj-nav-links a { color: var(--hhj-text); text-decoration: none; font-size: 15px; font-weight: 500; }
+    .hhj-nav-links a:hover { color: var(--hhj-accent); }
+    .hhj-nav-cta {
+      background: var(--hhj-accent); color: #fff; padding: 10px 22px;
+      border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600;
+    }
+    .hhj-nav-cta:hover { background: #24507a; }
+
+    .hhj-hero {
+      background: linear-gradient(135deg, var(--hhj-primary) 0%, var(--hhj-dark) 100%);
+      color: #fff; padding: 100px 40px 80px; text-align: center; font-family: var(--font-stack);
+    }
+    .hhj-hero h1 { font-size: 44px; font-weight: 800; margin: 0 0 16px; letter-spacing: -1px; line-height: 1.15; }
+    .hhj-hero p { font-size: 19px; color: #a0b5cc; max-width: 640px; margin: 0 auto 12px; line-height: 1.6; }
+    .hhj-hero .tagline { font-size: 15px; color: #7a90a8; margin: 0 0 36px; }
+    .hhj-hero-cta {
+      display: inline-block; background: var(--hhj-highlight); color: #fff;
+      padding: 16px 40px; border-radius: 8px; text-decoration: none;
+      font-size: 16px; font-weight: 700; transition: transform 0.2s;
+    }
+    .hhj-hero-cta:hover { transform: translateY(-2px); }
+
+    .hhj-section {
+      padding: 80px 40px; font-family: var(--font-stack);
+      max-width: 1200px; margin: 0 auto;
+    }
+    .hhj-section-alt { background: var(--hhj-light); }
+    .hhj-section h2 { font-size: 36px; font-weight: 700; color: var(--hhj-primary); text-align: center; margin: 0 0 12px; }
+    .hhj-section .subtitle { text-align: center; color: var(--hhj-muted); font-size: 17px; margin: 0 0 48px; }
+
+    .hhj-stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 60px;
+    }
+    .hhj-stat {
+      text-align: center; background: #fff; border: 1px solid var(--hhj-border);
+      border-radius: 12px; padding: 28px 16px;
+    }
+    .hhj-stat-num { font-size: 38px; font-weight: 800; color: var(--hhj-accent); margin: 0; }
+    .hhj-stat p { font-size: 14px; color: var(--hhj-muted); margin: 8px 0 0; }
+
+    .hhj-team-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    }
+    .hhj-team-card {
+      background: #fff; border: 1px solid var(--hhj-border); border-radius: 10px;
+      padding: 28px 16px; text-align: center; transition: box-shadow 0.2s;
+    }
+    .hhj-team-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+    .hhj-team-avatar {
+      width: 60px; height: 60px; background: var(--hhj-warm); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;
+      font-size: 22px; font-weight: 700; color: var(--hhj-accent);
+    }
+    .hhj-team-card h3 { font-size: 15px; font-weight: 600; color: var(--hhj-primary); margin: 0 0 4px; }
+    .hhj-team-card .role { font-size: 12px; color: var(--hhj-accent); font-weight: 600; margin: 0 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hhj-team-card p { font-size: 12px; color: var(--hhj-muted); line-height: 1.5; margin: 0; }
+
+    .hhj-areas-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .hhj-area {
+      background: #fff; border: 1px solid var(--hhj-border); border-radius: 10px;
+      padding: 24px; transition: box-shadow 0.2s;
+    }
+    .hhj-area:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.05); }
+    .hhj-area-icon {
+      width: 40px; height: 40px; background: var(--hhj-warm); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+    }
+    .hhj-area-icon svg { width: 20px; height: 20px; stroke: var(--hhj-accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .hhj-area h3 { font-size: 15px; font-weight: 600; color: var(--hhj-primary); margin: 0 0 6px; }
+    .hhj-area p { font-size: 13px; color: var(--hhj-muted); line-height: 1.5; margin: 0; }
+
+    .hhj-testimonials {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+    }
+    .hhj-testimonial {
+      background: #fff; border: 1px solid var(--hhj-border); border-radius: 12px; padding: 28px;
+    }
+    .hhj-testimonial blockquote { font-size: 15px; color: var(--hhj-text); line-height: 1.7; margin: 0 0 12px; font-style: italic; }
+    .hhj-testimonial cite { font-size: 13px; color: var(--hhj-muted); font-style: normal; font-weight: 600; }
+
+    .hhj-locations {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 40px;
+    }
+    .hhj-location {
+      background: #fff; border: 1px solid var(--hhj-border); border-radius: 10px;
+      padding: 28px; text-align: center;
+    }
+    .hhj-location h3 { font-size: 18px; color: var(--hhj-primary); margin: 0 0 8px; }
+    .hhj-location p { font-size: 14px; color: var(--hhj-muted); margin: 0; line-height: 1.6; }
+
+    .hhj-contact {
+      background: var(--hhj-primary); color: #fff; padding: 60px 40px;
+      font-family: var(--font-stack); text-align: center;
+    }
+    .hhj-contact h2 { font-size: 32px; margin: 0 0 12px; color: #fff; }
+    .hhj-contact p { color: #8fa5c0; font-size: 16px; margin: 0 0 24px; }
+    .hhj-contact a.cta {
+      display: inline-block; background: var(--hhj-highlight); color: #fff;
+      padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px;
+    }
+
+    .hhj-cta-final {
+      background: var(--hhj-dark); color: #fff; text-align: center;
+      padding: 60px 40px; font-family: var(--font-stack);
+    }
+    .hhj-cta-final h2 { font-size: 28px; font-weight: 700; margin: 0 0 12px; }
+    .hhj-cta-final p { color: #6a7f9a; font-size: 16px; margin: 0 0 28px; }
+    .hhj-cta-final a {
+      display: inline-block; background: var(--hhj-highlight); color: #fff;
+      padding: 14px 36px; border-radius: 8px; text-decoration: none; font-weight: 700;
+    }
+
+    .hhj-chat-widget {
+      position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px;
+      background: var(--hhj-accent); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      transition: transform 0.2s; z-index: 999;
+    }
+    .hhj-chat-widget:hover { transform: scale(1.08); }
+    .hhj-chat-widget svg { width: 26px; height: 26px; fill: #fff; }
+
+    @media (max-width: 768px) {
+      .hhj-stats-row { grid-template-columns: repeat(2, 1fr); }
+      .hhj-team-grid, .hhj-areas-grid { grid-template-columns: 1fr; }
+      .hhj-testimonials, .hhj-locations { grid-template-columns: 1fr; }
+      .hhj-hero h1 { font-size: 30px; }
+      .hhj-nav-links { display: none; }
+    }
+  </style>
+
+  <div class="hhj-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
 
-  <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Helgesen, Houtz & Jones</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Protecting your rights with dedication and expertise</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #c8a951; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <nav class="hhj-nav">
+    <div class="hhj-logo">Helgesen, Houtz <span>&amp;</span> Jones</div>
+    <ul class="hhj-nav-links">
+      <li><a href="#team">Attorneys</a></li>
+      <li><a href="#areas">Practice Areas</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#locations">Locations</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="hhj-nav-cta" href="#contact">Free Consultation</a>
+  </nav>
+
+  <section class="hhj-hero">
+    <h1>All the Legal Help You Need</h1>
+    <p>For over 36 years, helping Utah families with a variety of legal matters. One of the oldest, largest, and most dynamic law firms in Northern Utah.</p>
+    <p class="tagline">Small enough to care, large enough to specialize.</p>
+    <a class="hhj-hero-cta" href="#contact">Ask a Question</a>
+  </section>
+
+  <section class="hhj-section">
+    <div class="hhj-stats-row">
+      <div class="hhj-stat">
+        <div class="hhj-stat-num">40,000+</div>
+        <p>Utahns Served</p>
+      </div>
+      <div class="hhj-stat">
+        <div class="hhj-stat-num">10</div>
+        <p>Experienced Attorneys</p>
+      </div>
+      <div class="hhj-stat">
+        <div class="hhj-stat-num">1982</div>
+        <p>Established</p>
+      </div>
+      <div class="hhj-stat">
+        <div class="hhj-stat-num">AV</div>
+        <p>Peer Review Rating</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what Helgesen, Houtz & Jones could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <div class="hhj-section-alt">
+    <section class="hhj-section" id="team">
+      <h2>Our Attorneys</h2>
+      <p class="subtitle">10 experienced Utah lawyers ready to help</p>
+      <div class="hhj-team-grid">
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">JH</div>
+          <h3>Jack C. Helgesen</h3>
+          <p class="role">Senior Partner</p>
+          <p>Personal injury, wrongful death, elder law, estate planning, medical malpractice. BYU Law 1979.</p>
+        </div>
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">RJ</div>
+          <h3>Richard W. Jones</h3>
+          <p class="role">Senior Partner</p>
+          <p>HOA law, real estate, evictions, foreclosures. BYU Law 1982. With the firm since 1983.</p>
+        </div>
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">MH</div>
+          <h3>Michael V. Houtz</h3>
+          <p class="role">Senior Partner</p>
+          <p>Social security disability, personal injury, criminal law, estate planning. NYU &amp; BYU Law.</p>
+        </div>
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">KB</div>
+          <h3>Keith M. Backman</h3>
+          <p class="role">Attorney</p>
+          <p>Family law, divorce, custody, estate planning, real estate, contracts. BYU Law 1993.</p>
+        </div>
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">SN</div>
+          <h3>Scott P. Nickle</h3>
+          <p class="role">Attorney</p>
+          <p>Family law, divorce, custody, adoptions, surrogacy, estate planning. Gonzaga Law 2006.</p>
+        </div>
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">JY</div>
+          <h3>Jason M. Yancey</h3>
+          <p class="role">Attorney</p>
+          <p>Business law, general counsel services, litigation for small and midsize businesses. BYU Law.</p>
+        </div>
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">KH</div>
+          <h3>Kurt M. Helgesen</h3>
+          <p class="role">Attorney</p>
+          <p>Family law, divorce, custody, criminal defense, contracts. Top young trial attorney.</p>
+        </div>
+        <div class="hhj-team-card">
+          <div class="hhj-team-avatar">EH</div>
+          <h3>Erik S. Helgesen</h3>
+          <p class="role">Attorney</p>
+          <p>Estate planning, asset protection, probate, guardianship, elder law. Michigan State Law 2011.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Helgesen, Houtz & Jones</h2>
-    <p style="color: #666; font-size: 1.1rem;">Ogden, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 621-6600" style="color: #1e3a5f; text-decoration: none; font-weight: 600;">(801) 621-6600</a></p>
-    <p><a href="https://www.utahattorneys.com/" style="color: #2563eb;" target="_blank">https://www.utahattorneys.com/</a></p>
-  </section>
-
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for Helgesen, Houtz & Jones?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
-  </section>
-
-  <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #1e3a5f, #2d5a8e); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a8e); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
-        </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
-      </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Hi! I'm the firm's AI assistant. I can help you understand our practice areas, check if we can help with your case, or schedule a free consultation. What brings you here today?</div>
-      </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #1e3a5f; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
-      </div>
-    </div>
+    </section>
   </div>
 
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
+  <section class="hhj-section" id="areas">
+    <h2>Practice Areas</h2>
+    <p class="subtitle">A broad range of legal services for diverse needs</p>
+    <div class="hhj-areas-grid">
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+        <h3>Family Law</h3>
+        <p>Divorce, custody, adoption, and family disputes handled with care and expertise.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>Personal Injury</h3>
+        <p>Wrongful death, medical malpractice, and accident claims throughout Utah.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <h3>Estate Planning</h3>
+        <p>Wills, trusts, probate, guardianship, and asset protection strategies.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h3>Criminal Defense</h3>
+        <p>Experienced prosecution and defense representation in criminal matters.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3>Real Estate</h3>
+        <p>HOA law, condominiums, evictions, foreclosures, and property transactions.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <h3>Business Law</h3>
+        <p>Contracts, litigation, and general counsel for small and midsize businesses.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Social Security Disability</h3>
+        <p>Helping clients navigate the disability claims and appeals process.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <h3>Elder Law</h3>
+        <p>Guardianship, conservatorship, and protecting the rights of older Utahns.</p>
+      </div>
+      <div class="hhj-area">
+        <div class="hhj-area-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3>Class Action</h3>
+        <p>Representing groups of individuals in large-scale civil claims.</p>
+      </div>
+    </div>
+  </section>
 
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
+  <div class="hhj-section-alt">
+    <section class="hhj-section" id="testimonials">
+      <h2>What Our Clients Say</h2>
+      <p class="subtitle">Trusted by thousands of Utah families</p>
+      <div class="hhj-testimonials">
+        <div class="hhj-testimonial">
+          <blockquote>"Attorney Erik Helgesen and staff are excellent; Erik Helgesen answered all questions and was very patient and considerate. I highly recommend Erik Helgesen for any legal consultation."</blockquote>
+          <cite>Chuck</cite>
+        </div>
+        <div class="hhj-testimonial">
+          <blockquote>"They were amazing, understanding, and helpful. They were always there when we had a question or concern. They made us feel we were their number 1 priority."</blockquote>
+          <cite>Karen D.</cite>
+        </div>
+        <div class="hhj-testimonial">
+          <blockquote>"These guys are very good. Very compassionate and listen well. They made me feel very comfortable in a very uncomfortable situation."</blockquote>
+          <cite>B.W.</cite>
+        </div>
+        <div class="hhj-testimonial">
+          <blockquote>"They are a great company to provide services for. They are very honest."</blockquote>
+          <cite>Utah Process Service</cite>
+        </div>
+      </div>
+    </section>
+  </div>
 
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
+  <section class="hhj-section" id="locations">
+    <h2>Our Locations</h2>
+    <p class="subtitle">Two convenient Northern Utah offices</p>
+    <div class="hhj-locations">
+      <div class="hhj-location">
+        <h3>Kaysville Office</h3>
+        <p>Davis County, UT<br/>Serving Kaysville and surrounding communities</p>
+      </div>
+      <div class="hhj-location">
+        <h3>South Ogden Office</h3>
+        <p>Weber County, UT<br/>Serving Ogden and the greater Weber County area</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hhj-contact" id="contact">
+    <h2>Free Consultation &amp; Case Evaluation</h2>
+    <p>Learn your rights and options before you hire a lawyer. Text or call to schedule.</p>
+    <a class="cta" href="#schedule">Schedule Your Consultation</a>
+  </section>
+
+  <section class="hhj-cta-final">
+    <h2>Want a website like this for your firm?</h2>
+    <p>This concept was designed by XClear AI to showcase what modern web design can do for law firms.</p>
+    <a href="https://xclearai.com/ai-assessment">Get Your Free AI Assessment</a>
+  </section>
+
+  <div class="hhj-chat-widget" title="Chat with us">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+  </div>
 </Layout>

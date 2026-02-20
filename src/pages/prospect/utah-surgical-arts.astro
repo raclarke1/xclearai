@@ -1,181 +1,738 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const title = "Utah Surgical Arts - Website Concept Redesign";
+const description = "A modern website concept redesign for Utah Surgical Arts by XClear AI.";
 ---
 
-<Layout title="Utah Surgical Arts — Reimagined by XClear AI" description="See what Utah Surgical Arts could look like with AI automation built in.">
-  <!-- XClear AI Banner -->
-  <div style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; text-align: center; padding: 10px 20px; font-size: 13px; position: sticky; top: 0; z-index: 1000;">
-    🏥 This is a demo by <strong>XClear AI</strong> showing what we can build for <strong>Utah Surgical Arts</strong>
-    <a href="/ai-assessment" style="color: #fbbf24; margin-left: 10px; text-decoration: underline; font-weight: 600;">Get Your Free AI Assessment →</a>
+<Layout title={title} description={description}>
+  <style>
+    :root {
+      --usa-primary: #1a3a5c;
+      --usa-secondary: #2a7ab5;
+      --usa-accent: #4a9ed6;
+      --usa-light: #f0f6fb;
+      --usa-dark: #0d1f33;
+      --usa-text: #2c3e50;
+      --usa-muted: #6b7c8d;
+      --usa-white: #ffffff;
+      --usa-border: #d8e3ed;
+      --usa-success: #2a8f6b;
+      --font-stack: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    .usa-concept-banner {
+      background: var(--usa-dark);
+      color: rgba(255,255,255,0.85);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-family: var(--font-stack);
+      letter-spacing: 0.3px;
+    }
+    .usa-concept-banner a {
+      color: var(--usa-accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .usa-concept-banner a:hover { text-decoration: underline; }
+
+    .usa-nav {
+      background: var(--usa-white);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--usa-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .usa-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .usa-logo {
+      font-family: var(--font-stack);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--usa-primary);
+      letter-spacing: -0.5px;
+    }
+    .usa-logo span { color: var(--usa-secondary); }
+    .usa-nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .usa-nav-links a {
+      text-decoration: none;
+      color: var(--usa-text);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-stack);
+      transition: color 0.2s;
+    }
+    .usa-nav-links a:hover { color: var(--usa-secondary); }
+    .usa-nav-cta {
+      background: var(--usa-secondary);
+      color: var(--usa-white) !important;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s;
+    }
+    .usa-nav-cta:hover { background: var(--usa-primary); }
+
+    .usa-hero {
+      background: linear-gradient(135deg, var(--usa-primary) 0%, var(--usa-dark) 100%);
+      color: var(--usa-white);
+      padding: 100px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .usa-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(42,122,181,0.15) 0%, transparent 70%);
+    }
+    .usa-hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .usa-hero h1 {
+      font-family: var(--font-stack);
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .usa-hero p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 36px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .usa-hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .usa-btn-primary {
+      background: var(--usa-accent);
+      color: var(--usa-white);
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      font-family: var(--font-stack);
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .usa-btn-primary:hover { background: var(--usa-secondary); transform: translateY(-1px); }
+    .usa-btn-outline {
+      background: transparent;
+      color: var(--usa-white);
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      font-family: var(--font-stack);
+      border: 2px solid rgba(255,255,255,0.3);
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .usa-btn-outline:hover { border-color: var(--usa-white); background: rgba(255,255,255,0.05); }
+
+    .usa-section {
+      padding: 80px 24px;
+      font-family: var(--font-stack);
+    }
+    .usa-section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .usa-section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .usa-section-header h2 {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--usa-primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .usa-section-header p {
+      font-size: 17px;
+      color: var(--usa-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .usa-alt-bg { background: var(--usa-light); }
+
+    .usa-services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .usa-service-card {
+      background: var(--usa-white);
+      border: 1px solid var(--usa-border);
+      border-radius: 12px;
+      padding: 36px 28px;
+      transition: all 0.2s;
+    }
+    .usa-service-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      transform: translateY(-2px);
+    }
+    .usa-service-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--usa-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .usa-service-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--usa-secondary);
+    }
+    .usa-service-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--usa-primary);
+      margin-bottom: 10px;
+    }
+    .usa-service-card p {
+      font-size: 14px;
+      color: var(--usa-muted);
+      line-height: 1.6;
+    }
+
+    .usa-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+      padding: 60px 0;
+    }
+    .usa-stat h3 {
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--usa-secondary);
+      margin-bottom: 8px;
+    }
+    .usa-stat p {
+      font-size: 14px;
+      color: var(--usa-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .usa-team-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+    .usa-team-card {
+      text-align: center;
+      padding: 28px 16px;
+      background: var(--usa-white);
+      border-radius: 12px;
+      border: 1px solid var(--usa-border);
+      transition: all 0.2s;
+    }
+    .usa-team-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .usa-team-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--usa-secondary), var(--usa-primary));
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--usa-white);
+      font-size: 28px;
+      font-weight: 600;
+    }
+    .usa-team-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--usa-primary);
+      margin-bottom: 4px;
+    }
+    .usa-team-card p {
+      font-size: 13px;
+      color: var(--usa-muted);
+    }
+
+    .usa-accreditation {
+      background: var(--usa-primary);
+      color: var(--usa-white);
+      padding: 60px 24px;
+      text-align: center;
+    }
+    .usa-accreditation h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .usa-accreditation p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .usa-locations-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .usa-location-card {
+      background: var(--usa-white);
+      border: 1px solid var(--usa-border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .usa-location-card h4 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--usa-primary);
+      margin-bottom: 8px;
+    }
+    .usa-location-card p {
+      font-size: 14px;
+      color: var(--usa-muted);
+      line-height: 1.5;
+    }
+
+    .usa-cta-section {
+      background: linear-gradient(135deg, var(--usa-secondary) 0%, var(--usa-primary) 100%);
+      color: var(--usa-white);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .usa-cta-section h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .usa-cta-section p {
+      font-size: 17px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 32px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+    .usa-cta-btn {
+      background: var(--usa-white);
+      color: var(--usa-primary);
+      padding: 16px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      font-family: var(--font-stack);
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .usa-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+    .usa-footer {
+      background: var(--usa-dark);
+      color: rgba(255,255,255,0.6);
+      padding: 48px 24px;
+      font-family: var(--font-stack);
+    }
+    .usa-footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .usa-footer-brand {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--usa-white);
+    }
+    .usa-footer p { font-size: 13px; }
+
+    .usa-chat-widget {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1000;
+    }
+    .usa-chat-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--usa-secondary);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(42,122,181,0.35);
+      transition: all 0.2s;
+    }
+    .usa-chat-btn:hover { transform: scale(1.05); box-shadow: 0 6px 24px rgba(42,122,181,0.45); }
+    .usa-chat-btn svg { width: 24px; height: 24px; color: white; }
+    .usa-chat-window {
+      display: none;
+      position: absolute;
+      bottom: 72px;
+      right: 0;
+      width: 360px;
+      height: 480px;
+      background: var(--usa-white);
+      border-radius: 16px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.15);
+      overflow: hidden;
+      flex-direction: column;
+    }
+    .usa-chat-window.active { display: flex; }
+    .usa-chat-header {
+      background: var(--usa-primary);
+      color: var(--usa-white);
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .usa-chat-close {
+      background: none;
+      border: none;
+      color: var(--usa-white);
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0.7;
+    }
+    .usa-chat-close:hover { opacity: 1; }
+    .usa-chat-messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .usa-chat-msg {
+      background: var(--usa-light);
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: var(--usa-text);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      max-width: 85%;
+    }
+    .usa-chat-input-area {
+      padding: 12px 16px;
+      border-top: 1px solid var(--usa-border);
+      display: flex;
+      gap: 8px;
+    }
+    .usa-chat-input {
+      flex: 1;
+      border: 1px solid var(--usa-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-family: var(--font-stack);
+      outline: none;
+    }
+    .usa-chat-input:focus { border-color: var(--usa-secondary); }
+    .usa-chat-send {
+      background: var(--usa-secondary);
+      color: var(--usa-white);
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .usa-xclear-cta {
+      background: var(--usa-white);
+      border-top: 1px solid var(--usa-border);
+      padding: 48px 24px;
+      text-align: center;
+      font-family: var(--font-stack);
+    }
+    .usa-xclear-cta p {
+      font-size: 16px;
+      color: var(--usa-muted);
+      margin-bottom: 12px;
+    }
+    .usa-xclear-cta a {
+      color: var(--usa-secondary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .usa-xclear-cta a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .usa-hero h1 { font-size: 32px; }
+      .usa-services-grid, .usa-locations-grid { grid-template-columns: 1fr; }
+      .usa-team-grid { grid-template-columns: repeat(2, 1fr); }
+      .usa-stats { grid-template-columns: repeat(2, 1fr); }
+      .usa-nav-links { display: none; }
+    }
+  </style>
+
+  <!-- Concept Banner -->
+  <div class="usa-concept-banner">
+    This is a concept redesign by XClear AI &mdash; <a href="https://xclearai.com">Learn More</a>
   </div>
+
+  <!-- Navigation -->
+  <nav class="usa-nav">
+    <div class="usa-nav-inner">
+      <div class="usa-logo">Utah <span>Surgical Arts</span></div>
+      <ul class="usa-nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Surgeons</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#book" class="usa-nav-cta">Book a Consultation</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <!-- Hero -->
-  <section style="background: linear-gradient(135deg, #1a365d, #2b6cb0); color: white; padding: 80px 20px; text-align: center;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Utah Surgical Arts</h1>
-      <p style="font-size: 1.3rem; opacity: 0.9; margin-bottom: 2rem;">Comprehensive care with a personal touch</p>
-      <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="#schedule" style="background: #38a169; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1rem;">Book Free Consultation</a>
-        <a href="#contact" style="border: 2px solid white; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600;">Contact Us</a>
+  <section class="usa-hero">
+    <div class="usa-hero-inner">
+      <h1>Delivering Exceptional Oral Surgery Experiences</h1>
+      <p>Board-certified oral surgeons providing dental implants, wisdom teeth removal, and advanced surgical care across four Utah locations. AAAHC accredited for your safety and comfort.</p>
+      <div class="usa-hero-btns">
+        <a href="#book" class="usa-btn-primary">Schedule Your Consultation</a>
+        <a href="#services" class="usa-btn-outline">Explore Our Services</a>
       </div>
     </div>
   </section>
 
-  <!-- Features Banner -->
-  <section style="background: #f8fafc; padding: 30px 20px; border-bottom: 1px solid #e2e8f0;">
-    <div style="max-width: 900px; margin: 0 auto; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px; text-align: center;">
-      <div>
-        <div style="font-size: 1.5rem;">🤖</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">AI-Powered Support</div>
-        <div style="font-size: 0.75rem; color: #666;">24/7 Instant Answers</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">📅</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Online Scheduling</div>
-        <div style="font-size: 0.75rem; color: #666;">Book Anytime</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">🔒</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Client Portal</div>
-        <div style="font-size: 0.75rem; color: #666;">Secure Access</div>
-      </div>
-      <div>
-        <div style="font-size: 1.5rem;">⚡</div>
-        <div style="font-weight: 600; font-size: 0.85rem;">Automated Workflows</div>
-        <div style="font-size: 0.75rem; color: #666;">Less Manual Work</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- AI Chat Demo + What's Different Section -->
-  <section style="padding: 60px 20px; max-width: 1000px; margin: 0 auto;">
-    <h2 style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem;">What AI Automation Looks Like</h2>
-    <p style="text-align: center; color: #666; margin-bottom: 2rem;">Here's what Utah Surgical Arts could have with XClear AI</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #fee2e2; background: #fef2f2;">
-        <h3 style="color: #dc2626; font-size: 1rem; margin-bottom: 12px;">❌ Without AI Automation</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• No after-hours lead capture</li>
-          <li>• Phone-only scheduling</li>
-          <li>• No client self-service portal</li>
-          <li>• Manual email triage every morning</li>
-          <li>• Staff answering same questions daily</li>
-          <li>• Leads falling through the cracks</li>
-        </ul>
-      </div>
-      <div style="padding: 24px; border-radius: 12px; border: 2px solid #d1fae5; background: #ecfdf5;">
-        <h3 style="color: #059669; font-size: 1rem; margin-bottom: 12px;">✅ With XClear AI</h3>
-        <ul style="list-style: none; padding: 0; font-size: 0.9rem; color: #666; line-height: 2;">
-          <li>• AI captures leads 24/7 — even at 2am</li>
-          <li>• Online booking fills your calendar</li>
-          <li>• Client portal for self-service</li>
-          <li>• AI triages email, drafts responses</li>
-          <li>• Instant answers to common questions</li>
-          <li>• Automated follow-up on every lead</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Online Scheduling Section -->
-  <section id="schedule" style="background: #f8fafc; padding: 60px 20px;">
-    <div style="max-width: 600px; margin: 0 auto;">
-      <h2 style="text-align: center; font-size: 1.8rem; margin-bottom: 0.5rem;">📅 Book a Free Consultation</h2>
-      <p style="text-align: center; color: #666; margin-bottom: 2rem;">No phone calls needed — pick a time that works for you</p>
-      <div style="background: white; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-        <div style="display: grid; gap: 15px;">
-          <input type="text" placeholder="Your name" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="email" placeholder="Email address" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <input type="tel" placeholder="Phone number" style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem;" />
-          <select style="padding: 12px 16px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; color: #6b7280;">
-            <option>Select a service</option>
-            <option>General consultation</option>
-            <option>AI automation assessment</option>
-            <option>Website redesign</option>
-          </select>
-          <button style="background: linear-gradient(135deg, #1a365d, #2b6cb0); color: white; padding: 14px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer;">Book Consultation →</button>
+  <!-- Stats -->
+  <section class="usa-section">
+    <div class="usa-section-inner">
+      <div class="usa-stats">
+        <div class="usa-stat">
+          <h3>5</h3>
+          <p>Board-Certified Surgeons</p>
+        </div>
+        <div class="usa-stat">
+          <h3>4</h3>
+          <p>Utah Locations</p>
+        </div>
+        <div class="usa-stat">
+          <h3>AAAHC</h3>
+          <p>Accredited Facilities</p>
+        </div>
+        <div class="usa-stat">
+          <h3>25+</h3>
+          <p>Years of Experience</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" style="padding: 60px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Utah Surgical Arts</h2>
-    <p style="color: #666; font-size: 1.1rem;">Salt Lake City, Utah</p>
-    <p style="font-size: 1.2rem; margin-top: 10px;"><a href="tel:(801) 743-0505" style="color: #1a365d; text-decoration: none; font-weight: 600;">(801) 743-0505</a></p>
-    <p><a href="https://www.utahsurgicalarts.com/" style="color: #2563eb;" target="_blank">https://www.utahsurgicalarts.com/</a></p>
+  <!-- Services -->
+  <section class="usa-section usa-alt-bg" id="services">
+    <div class="usa-section-inner">
+      <div class="usa-section-header">
+        <h2>Oral Surgery Procedures</h2>
+        <p>Comprehensive surgical care with state-of-the-art technology and compassionate treatment</p>
+      </div>
+      <div class="usa-services-grid">
+        <div class="usa-service-card">
+          <div class="usa-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>
+          </div>
+          <h3>Dental Implants</h3>
+          <p>Permanent tooth replacement solutions using advanced implant technology for a natural-looking, lasting smile.</p>
+        </div>
+        <div class="usa-service-card">
+          <div class="usa-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" /></svg>
+          </div>
+          <h3>Wisdom Teeth Removal</h3>
+          <p>Safe, comfortable extraction of wisdom teeth with sedation options and rapid recovery protocols.</p>
+        </div>
+        <div class="usa-service-card">
+          <div class="usa-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.049.58.025 1.194-.14 1.743" /></svg>
+          </div>
+          <h3>All-on-4 Treatment</h3>
+          <p>Full-arch restoration on just four implants. A complete smile transformation in a single procedure.</p>
+        </div>
+        <div class="usa-service-card">
+          <div class="usa-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>
+          </div>
+          <h3>Bone Grafting</h3>
+          <p>Rebuilding jawbone density to support dental implants and restore oral health foundations.</p>
+        </div>
+        <div class="usa-service-card">
+          <div class="usa-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+          </div>
+          <h3>Jaw Surgery</h3>
+          <p>Corrective orthognathic surgery to improve jaw alignment, function, and facial aesthetics.</p>
+        </div>
+        <div class="usa-service-card">
+          <div class="usa-service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>
+          </div>
+          <h3>Facial Trauma</h3>
+          <p>Emergency and reconstructive care for facial injuries, fractures, and soft tissue damage.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section style="background: linear-gradient(135deg, #2563eb, #7c3aed); color: white; padding: 50px 20px; text-align: center;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Want this for Utah Surgical Arts?</h2>
-    <p style="opacity: 0.9; margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">XClear AI builds AI-powered websites and automation for Utah businesses. This demo took us less than a day — imagine what we could do in a week.</p>
-    <a href="/ai-assessment" style="display: inline-block; background: white; color: #2563eb; padding: 16px 36px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 1.1rem;">Get Your Free AI Assessment →</a>
+  <!-- Team -->
+  <section class="usa-section" id="team">
+    <div class="usa-section-inner">
+      <div class="usa-section-header">
+        <h2>Our Surgeons</h2>
+        <p>Board-certified oral and maxillofacial surgeons with decades of combined expertise</p>
+      </div>
+      <div class="usa-team-grid">
+        <div class="usa-team-card">
+          <div class="usa-team-avatar">MH</div>
+          <h4>Dr. Michael Harris</h4>
+          <p>DDS, MD</p>
+        </div>
+        <div class="usa-team-card">
+          <div class="usa-team-avatar">DP</div>
+          <h4>Dr. David Park</h4>
+          <p>DDS, MD</p>
+        </div>
+        <div class="usa-team-card">
+          <div class="usa-team-avatar">JB</div>
+          <h4>Dr. Jared Brown</h4>
+          <p>DDS, MD</p>
+        </div>
+        <div class="usa-team-card">
+          <div class="usa-team-avatar">EW</div>
+          <h4>Dr. Eric Wood</h4>
+          <p>DDS</p>
+        </div>
+        <div class="usa-team-card">
+          <div class="usa-team-avatar">CH</div>
+          <h4>Dr. Christopher Holladay</h4>
+          <p>DMD</p>
+        </div>
+      </div>
+    </div>
   </section>
+
+  <!-- AAAHC Accreditation -->
+  <section class="usa-accreditation">
+    <h2>AAAHC Accredited Facilities</h2>
+    <p>Utah Surgical Arts is the only oral surgery practice in the state of Utah to receive accreditation from the Accreditation Association of Ambulatory Health Care. Our facilities meet the highest standards of safety, cleanliness, and clinical excellence.</p>
+  </section>
+
+  <!-- Locations -->
+  <section class="usa-section usa-alt-bg" id="locations">
+    <div class="usa-section-inner">
+      <div class="usa-section-header">
+        <h2>Our Locations</h2>
+        <p>Convenient offices across the Wasatch Front</p>
+      </div>
+      <div class="usa-locations-grid">
+        <div class="usa-location-card">
+          <h4>South Jordan</h4>
+          <p>Serving the South Valley community with comprehensive oral surgery services</p>
+        </div>
+        <div class="usa-location-card">
+          <h4>Provo</h4>
+          <p>Convenient Utah County location for patients across the valley</p>
+        </div>
+        <div class="usa-location-card">
+          <h4>Lehi</h4>
+          <p>Accessible care in the heart of the Silicon Slopes corridor</p>
+        </div>
+        <div class="usa-location-card">
+          <h4>Payson</h4>
+          <p>Serving southern Utah County with expert surgical care</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="usa-cta-section" id="book">
+    <h2>Ready to Transform Your Smile?</h2>
+    <p>Schedule a consultation with one of our board-certified oral surgeons. We will create a personalized treatment plan tailored to your needs.</p>
+    <a href="#" class="usa-cta-btn">Schedule Your Consultation</a>
+  </section>
+
+  <!-- XClear CTA -->
+  <section class="usa-xclear-cta" id="contact">
+    <p>Want this website for your practice? Get a free consultation.</p>
+    <a href="https://xclearai.com/ai-assessment">Visit xclearai.com/ai-assessment</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="usa-footer">
+    <div class="usa-footer-inner">
+      <div class="usa-footer-brand">Utah Surgical Arts</div>
+      <p>Provo | South Jordan | Lehi | Payson</p>
+    </div>
+  </footer>
 
   <!-- Chat Widget -->
-  <div id="chat-widget" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
-    <div id="chat-bubble" onclick="toggleChat()" style="width: 60px; height: 60px; background: linear-gradient(135deg, #1a365d, #2b6cb0); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s;">
-      <span style="color: white; font-size: 24px;">💬</span>
-    </div>
-    <div id="chat-window" style="display: none; position: absolute; bottom: 70px; right: 0; width: 350px; height: 450px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); overflow: hidden; flex-direction: column;">
-      <div style="background: linear-gradient(135deg, #1a365d, #2b6cb0); color: white; padding: 16px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 35px; height: 35px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🤖</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.95rem;">AI Assistant</div>
-          <div style="font-size: 0.75rem; opacity: 0.8;">Online — typically replies instantly</div>
-        </div>
-        <span onclick="toggleChat()" style="margin-left: auto; cursor: pointer; font-size: 1.2rem;">✕</span>
+  <div class="usa-chat-widget">
+    <div class="usa-chat-window" id="chatWindow">
+      <div class="usa-chat-header">
+        <span>Utah Surgical Arts Assistant</span>
+        <button class="usa-chat-close" onclick="document.getElementById('chatWindow').classList.remove('active')">&times;</button>
       </div>
-      <div id="chat-messages" style="flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; height: 320px;">
-        <div class="bot-msg" style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">Welcome! I can help you schedule an appointment, answer questions about our services, or assist with new patient intake. How can I help?</div>
+      <div class="usa-chat-messages">
+        <div class="usa-chat-msg">Welcome to Utah Surgical Arts. How can I help you today? I can assist with scheduling consultations, answering questions about procedures, or providing location information.</div>
       </div>
-      <div style="padding: 12px; border-top: 1px solid #e2e8f0; display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px 14px; border: 1px solid #d1d5db; border-radius: 20px; font-size: 0.9rem; outline: none;" onkeypress="if(event.key==='Enter')sendMsg()" />
-        <button onclick="sendMsg()" style="background: #1a365d; color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem;">→</button>
+      <div class="usa-chat-input-area">
+        <input type="text" class="usa-chat-input" placeholder="Type your message..." />
+        <button class="usa-chat-send">Send</button>
       </div>
     </div>
+    <button class="usa-chat-btn" onclick="document.getElementById('chatWindow').classList.toggle('active')">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>
+    </button>
   </div>
-
-  <script is:inline>
-    function toggleChat() {
-      const w = document.getElementById('chat-window');
-      w.style.display = w.style.display === 'none' ? 'flex' : 'none';
-    }
-    
-    const responses = {
-      'schedule': 'I\'d love to help you schedule a consultation! You can use the booking form above, or tell me your preferred date and time and I\'ll check availability.',
-      'hours': 'Our office hours are Monday-Friday 8am-5pm, but I\'m available 24/7 to help you get started!',
-      'cost': 'Pricing depends on the specific services you need. I\'d recommend booking a free consultation so we can understand your situation and provide an accurate quote.',
-      'help': 'I can help with:\n• Scheduling appointments\n• Answering questions about our services\n• Collecting information for your case/project\n• Connecting you with our team',
-      'default': 'Thanks for reaching out! I\'ve noted your question. Would you like to schedule a free consultation to discuss in detail? Our team typically responds within the hour during business hours.'
-    };
-
-    function getResponse(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes('schedule') || lower.includes('appointment') || lower.includes('book')) return responses.schedule;
-      if (lower.includes('hour') || lower.includes('open') || lower.includes('time')) return responses.hours;
-      if (lower.includes('cost') || lower.includes('price') || lower.includes('much')) return responses.cost;
-      if (lower.includes('help') || lower.includes('what can')) return responses.help;
-      return responses.default;
-    }
-
-    function sendMsg() {
-      const input = document.getElementById('chat-input');
-      const msg = input.value.trim();
-      if (!msg) return;
-      
-      const container = document.getElementById('chat-messages');
-      container.innerHTML += '<div style="background: #2563eb; color: white; padding: 12px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; font-size: 0.9rem; align-self: flex-end;">' + msg + '</div>';
-      input.value = '';
-      
-      setTimeout(() => {
-        container.innerHTML += '<div style="background: #f1f5f9; padding: 12px 16px; border-radius: 16px 16px 16px 4px; max-width: 85%; font-size: 0.9rem; line-height: 1.5;">' + getResponse(msg) + '</div>';
-        container.scrollTop = container.scrollHeight;
-      }, 800);
-      container.scrollTop = container.scrollHeight;
-    }
-  </script>
 </Layout>
