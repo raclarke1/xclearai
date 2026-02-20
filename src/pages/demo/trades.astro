@@ -1,0 +1,363 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Wasatch Home Services - Plumbing, HVAC, Electrical" description="Demo home services website built by XClear AI">
+  <style is:global>
+    .nav, .footer { display: none !important; }
+  </style>
+
+  <!-- Demo Banner -->
+  <div id="demo-banner" style="position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#b45309,#d97706);color:#fff;text-align:center;padding:10px 20px;font-size:14px;font-family:'Inter',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.2);">
+    🔍 This is a demo by <strong>XClear AI</strong> — See what we can build for YOUR company →
+    <a href="https://xclearai.com/ai-assessment" style="color:#fff;font-weight:700;text-decoration:underline;margin-left:4px;">xclearai.com/ai-assessment</a>
+    <button onclick="document.getElementById('demo-banner').style.display='none'" style="background:none;border:none;color:#fff;margin-left:16px;cursor:pointer;font-size:18px;vertical-align:middle;">✕</button>
+  </div>
+
+  <div style="padding-top:42px;">
+
+  <!-- Nav -->
+  <nav style="position:fixed;top:42px;left:0;right:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #e5e7eb;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:42px;height:42px;background:#1e3a5f;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:22px;">🔧</div>
+        <div>
+          <div style="font-size:20px;font-weight:700;color:#1e3a5f;line-height:1.1;">Wasatch Home Services</div>
+          <div style="font-size:11px;color:#6b7280;letter-spacing:.5px;">PLUMBING · HVAC · ELECTRICAL</div>
+        </div>
+      </div>
+      <div class="trade-nav" style="display:flex;align-items:center;gap:28px;">
+        <a href="#services" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Services</a>
+        <a href="#why-us" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Why Us</a>
+        <a href="#reviews" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Reviews</a>
+        <a href="#contact" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Contact</a>
+        <a href="tel:+13855554321" style="background:#dc2626;color:#fff;padding:10px 20px;border-radius:6px;font-weight:700;font-size:14px;text-decoration:none;display:flex;align-items:center;gap:6px;">🚨 Emergency: (385) 555-4321</a>
+        <a href="#booking" style="background:#d97706;color:#fff;padding:10px 20px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;">Get a Quote</a>
+      </div>
+      <button id="trade-hamburger" onclick="document.getElementById('trade-mobile').style.display=document.getElementById('trade-mobile').style.display==='flex'?'none':'flex'" style="display:none;background:none;border:none;cursor:pointer;padding:8px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <div id="trade-mobile" style="display:none;flex-direction:column;padding:16px 24px;gap:12px;background:#fff;border-top:1px solid #eee;">
+      <a href="#services" style="color:#1e3a5f;font-weight:500;padding:8px 0;text-decoration:none;">Services</a>
+      <a href="#reviews" style="color:#1e3a5f;font-weight:500;padding:8px 0;text-decoration:none;">Reviews</a>
+      <a href="#contact" style="color:#1e3a5f;font-weight:500;padding:8px 0;text-decoration:none;">Contact</a>
+      <a href="tel:+13855554321" style="background:#dc2626;color:#fff;padding:12px;border-radius:6px;font-weight:700;text-align:center;text-decoration:none;">🚨 Emergency Call</a>
+      <a href="#booking" style="background:#d97706;color:#fff;padding:12px;border-radius:6px;font-weight:600;text-align:center;text-decoration:none;">Get a Quote</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section style="padding:160px 24px 100px;background:linear-gradient(135deg,#1e3a5f 0%,#0f172a 100%);position:relative;overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+      <div style="max-width:700px;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3);border-radius:20px;padding:6px 16px;margin-bottom:24px;">
+          <span style="display:inline-block;width:8px;height:8px;background:#dc2626;border-radius:50%;animation:pulse 2s infinite;"></span>
+          <span style="color:#fca5a5;font-size:14px;font-weight:600;">24/7 Emergency Service Available</span>
+        </div>
+        <h1 style="font-size:clamp(36px,5vw,56px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:20px;">Utah's Most Trusted<br><span style="color:#d97706;">Home Service Experts.</span></h1>
+        <p style="font-size:18px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:36px;max-width:560px;">Plumbing, HVAC, and electrical services for homes and businesses across the Wasatch Front. Licensed, bonded, insured. Same-day service available.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="#booking" style="background:#d97706;color:#fff;padding:16px 32px;border-radius:8px;font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 4px 20px rgba(217,119,6,.4);">Get Free Estimate →</a>
+          <a href="tel:+13855554321" style="background:#dc2626;color:#fff;padding:16px 32px;border-radius:8px;font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 4px 20px rgba(220,38,38,.4);display:flex;align-items:center;gap:8px;">🚨 Emergency Call</a>
+        </div>
+        <div style="display:flex;gap:32px;margin-top:48px;flex-wrap:wrap;">
+          <div><div style="color:#d97706;font-size:32px;font-weight:800;">15K+</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Jobs Completed</div></div>
+          <div><div style="color:#d97706;font-size:32px;font-weight:800;">4.9★</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Google Rating</div></div>
+          <div><div style="color:#d97706;font-size:32px;font-weight:800;">Same Day</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Service Available</div></div>
+          <div><div style="color:#d97706;font-size:32px;font-weight:800;">100%</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Satisfaction Guarantee</div></div>
+        </div>
+      </div>
+    </div>
+    <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}</style>
+  </section>
+
+  <!-- Services -->
+  <section id="services" style="padding:100px 24px;background:#fff;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:60px;">
+        <div style="color:#d97706;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Our Services</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#1e3a5f;">What We Do</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+        <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:16px;padding:36px;text-align:center;transition:all .3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(30,58,95,.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="font-size:48px;margin-bottom:16px;">🔧</div>
+          <h3 style="color:#1e3a5f;font-size:22px;font-weight:700;margin-bottom:12px;">Plumbing</h3>
+          <ul style="list-style:none;text-align:left;color:#4b5563;font-size:14px;line-height:2;">
+            <li>✓ Drain Cleaning & Repair</li>
+            <li>✓ Water Heater Install/Repair</li>
+            <li>✓ Leak Detection & Repair</li>
+            <li>✓ Sewer Line Services</li>
+            <li>✓ Fixture Installation</li>
+            <li>✓ Emergency Plumbing 24/7</li>
+          </ul>
+          <a href="#booking" style="display:inline-block;margin-top:16px;background:#1e3a5f;color:#fff;padding:10px 20px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;">Request Service →</a>
+        </div>
+        <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border:1px solid #fbbf24;border-radius:16px;padding:36px;text-align:center;transition:all .3s;position:relative;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(217,119,6,.2)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;top:-12px;right:20px;background:#dc2626;color:#fff;padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700;">MOST POPULAR</div>
+          <div style="font-size:48px;margin-bottom:16px;">❄️</div>
+          <h3 style="color:#1e3a5f;font-size:22px;font-weight:700;margin-bottom:12px;">HVAC</h3>
+          <ul style="list-style:none;text-align:left;color:#4b5563;font-size:14px;line-height:2;">
+            <li>✓ AC Install & Repair</li>
+            <li>✓ Furnace Install & Repair</li>
+            <li>✓ Ductwork & Ventilation</li>
+            <li>✓ Heat Pump Systems</li>
+            <li>✓ Seasonal Tune-ups</li>
+            <li>✓ Indoor Air Quality</li>
+          </ul>
+          <a href="#booking" style="display:inline-block;margin-top:16px;background:#d97706;color:#fff;padding:10px 20px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;">Request Service →</a>
+        </div>
+        <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #86efac;border-radius:16px;padding:36px;text-align:center;transition:all .3s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(22,163,74,.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="font-size:48px;margin-bottom:16px;">⚡</div>
+          <h3 style="color:#1e3a5f;font-size:22px;font-weight:700;margin-bottom:12px;">Electrical</h3>
+          <ul style="list-style:none;text-align:left;color:#4b5563;font-size:14px;line-height:2;">
+            <li>✓ Panel Upgrades</li>
+            <li>✓ Outlet & Switch Install</li>
+            <li>✓ Lighting Design & Install</li>
+            <li>✓ EV Charger Installation</li>
+            <li>✓ Generator Installation</li>
+            <li>✓ Electrical Safety Inspections</li>
+          </ul>
+          <a href="#booking" style="display:inline-block;margin-top:16px;background:#1e3a5f;color:#fff;padding:10px 20px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;">Request Service →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why-us" style="padding:100px 24px;background:#f8fafc;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:60px;">
+        <div style="color:#d97706;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">The Wasatch Difference</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#1e3a5f;">Why Homeowners Choose Us</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">⏰</div>
+          <h3 style="color:#1e3a5f;font-size:18px;font-weight:700;margin-bottom:8px;">On-Time, Every Time</h3>
+          <p style="color:#6b7280;font-size:14px;line-height:1.6;">We respect your time. Arrive in the scheduled window or the service call is free.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">💲</div>
+          <h3 style="color:#1e3a5f;font-size:18px;font-weight:700;margin-bottom:8px;">Upfront Pricing</h3>
+          <p style="color:#6b7280;font-size:14px;line-height:1.6;">No surprises. You approve the price before any work begins. No hidden fees, ever.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">🛡️</div>
+          <h3 style="color:#1e3a5f;font-size:18px;font-weight:700;margin-bottom:8px;">Licensed & Insured</h3>
+          <p style="color:#6b7280;font-size:14px;line-height:1.6;">Fully licensed, bonded, and insured. Background-checked technicians you can trust.</p>
+        </div>
+        <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">✅</div>
+          <h3 style="color:#1e3a5f;font-size:18px;font-weight:700;margin-bottom:8px;">Satisfaction Guaranteed</h3>
+          <p style="color:#6b7280;font-size:14px;line-height:1.6;">Not happy? We'll make it right or your money back. Period.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" style="padding:100px 24px;background:#1e3a5f;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:60px;">
+        <div style="color:#d97706;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Reviews</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;">What Homeowners Say</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;">
+          <div style="color:#d97706;font-size:20px;margin-bottom:12px;">★★★★★</div>
+          <p style="color:rgba(255,255,255,.85);font-size:15px;line-height:1.7;margin-bottom:16px;">"Our furnace died on the coldest night of the year. Wasatch had a tech at our door in 45 minutes and had it running by midnight. Absolute lifesavers!"</p>
+          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">— Amanda R., Sandy</div>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;">
+          <div style="color:#d97706;font-size:20px;margin-bottom:12px;">★★★★★</div>
+          <p style="color:rgba(255,255,255,.85);font-size:15px;line-height:1.7;margin-bottom:16px;">"They rewired our entire 1960s home. Clean work, on budget, and they even patched all the drywall. Best electrical contractor in Utah, hands down."</p>
+          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">— Kevin T., Draper</div>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;">
+          <div style="color:#d97706;font-size:20px;margin-bottom:12px;">★★★★★</div>
+          <p style="color:rgba(255,255,255,.85);font-size:15px;line-height:1.7;margin-bottom:16px;">"The online booking was so easy — picked a time, described the issue, tech showed up on time with all the parts. Fixed our leak in under an hour. Modern and professional."</p>
+          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">— Sarah M., Salt Lake City</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking / Service Request -->
+  <section id="booking" style="padding:100px 24px;background:#fff;">
+    <div style="max-width:800px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <div style="color:#d97706;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Request Service</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#1e3a5f;">Get a Free Estimate</h2>
+        <p style="color:#6b7280;font-size:16px;margin-top:12px;">Describe your issue and we'll get back to you ASAP — usually within 1 hour.</p>
+      </div>
+      <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:40px;\'><div style=\'font-size:48px;margin-bottom:16px;\'>✅</div><h3 style=\'color:#1e3a5f;font-size:24px;margin-bottom:8px;\'>Request Received!</h3><p style=\'color:#6b7280;\'>A dispatcher will contact you within 1 hour to confirm your appointment.</p></div>'" style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:40px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div><label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Full Name *</label><input required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#d97706'" onblur="this.style.borderColor='#d1d5db'"></div>
+          <div><label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Phone *</label><input type="tel" required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#d97706'" onblur="this.style.borderColor='#d1d5db'"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div><label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Email</label><input type="email" style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#d97706'" onblur="this.style.borderColor='#d1d5db'"></div>
+          <div><label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Address *</label><input required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#d97706'" onblur="this.style.borderColor='#d1d5db'" placeholder="Street address, city"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div><label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Service Type *</label>
+            <select required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;background:#fff;box-sizing:border-box;" onfocus="this.style.borderColor='#d97706'" onblur="this.style.borderColor='#d1d5db'">
+              <option value="">Select...</option><option>Plumbing</option><option>HVAC</option><option>Electrical</option><option>Multiple / Not Sure</option>
+            </select>
+          </div>
+          <div><label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Urgency *</label>
+            <select required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;background:#fff;box-sizing:border-box;" onfocus="this.style.borderColor='#d97706'" onblur="this.style.borderColor='#d1d5db'">
+              <option value="">Select...</option>
+              <option>🚨 Emergency (ASAP)</option>
+              <option>⏰ Today/Tomorrow</option>
+              <option>📅 This Week</option>
+              <option>📋 Just Need a Quote</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:24px;"><label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Describe the Issue *</label><textarea rows="4" required placeholder="What's happening? Any details help us prepare..." style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;resize:vertical;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#d97706'" onblur="this.style.borderColor='#d1d5db'"></textarea></div>
+        <div style="margin-bottom:24px;">
+          <label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Upload Photos (optional)</label>
+          <div style="border:2px dashed #d1d5db;border-radius:8px;padding:24px;text-align:center;color:#6b7280;font-size:14px;cursor:pointer;" onclick="this.querySelector('input').click()">
+            📷 Click or drag photos of the issue
+            <input type="file" multiple accept="image/*" style="display:none;">
+          </div>
+        </div>
+        <button type="submit" style="width:100%;padding:16px;background:#d97706;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;">Submit Service Request →</button>
+        <p style="text-align:center;color:#9ca3af;font-size:12px;margin-top:12px;">⚡ Average response time: under 1 hour</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Service Area -->
+  <section style="padding:80px 24px;background:#f8fafc;">
+    <div style="max-width:1200px;margin:0 auto;text-align:center;">
+      <h2 style="font-size:28px;font-weight:800;color:#1e3a5f;margin-bottom:12px;">Serving the Entire Wasatch Front</h2>
+      <p style="color:#6b7280;margin-bottom:32px;">Salt Lake City · Sandy · Draper · Provo · Orem · Lehi · Park City · Ogden · and more</p>
+      <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:12px;">
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Salt Lake City</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Sandy</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Draper</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">South Jordan</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Lehi</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Provo</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Orem</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Park City</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Ogden</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Murray</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">West Jordan</span>
+        <span style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:8px 16px;font-size:14px;color:#4b5563;">Riverton</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="padding:100px 24px;background:#fff;">
+    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;">
+      <div>
+        <div style="color:#d97706;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Contact</div>
+        <h2 style="font-size:clamp(28px,4vw,36px);font-weight:800;color:#1e3a5f;margin-bottom:24px;">Get In Touch</h2>
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <div style="display:flex;gap:16px;"><div style="width:44px;height:44px;background:#1e3a5f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📞</div><div><div style="color:#1e3a5f;font-weight:600;">Main Line</div><div style="color:#6b7280;font-size:15px;">(385) 555-4321</div></div></div>
+          <div style="display:flex;gap:16px;"><div style="width:44px;height:44px;background:#dc2626;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🚨</div><div><div style="color:#dc2626;font-weight:600;">24/7 Emergency</div><div style="color:#6b7280;font-size:15px;">(385) 555-9111</div></div></div>
+          <div style="display:flex;gap:16px;"><div style="width:44px;height:44px;background:#1e3a5f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">✉️</div><div><div style="color:#1e3a5f;font-weight:600;">Email</div><div style="color:#6b7280;font-size:15px;">info@wasatchhomeservices.com</div></div></div>
+          <div style="display:flex;gap:16px;"><div style="width:44px;height:44px;background:#1e3a5f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🕐</div><div><div style="color:#1e3a5f;font-weight:600;">Hours</div><div style="color:#6b7280;font-size:15px;">Mon-Sat: 7 AM - 8 PM<br>Sun: Emergency only<br>24/7 Emergency dispatch</div></div></div>
+        </div>
+      </div>
+      <div style="background:#1e3a5f;border-radius:16px;height:360px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:15px;">
+        <div style="text-align:center;"><div style="font-size:48px;margin-bottom:8px;">🗺️</div><div>Service Area Map</div><div style="font-size:13px;margin-top:4px;">Wasatch Front, Utah</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#0f172a;padding:60px 24px 24px;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="font-size:24px;">🔧</div>
+            <div style="color:#fff;font-size:18px;font-weight:700;">Wasatch Home Services</div>
+          </div>
+          <p style="color:rgba(255,255,255,.5);font-size:14px;line-height:1.7;max-width:300px;">Utah's trusted home service experts. Licensed, bonded, insured. Available 24/7 for emergencies.</p>
+          <div style="margin-top:16px;display:flex;gap:12px;">
+            <span style="background:rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;font-size:12px;color:rgba(255,255,255,.6);">Licensed</span>
+            <span style="background:rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;font-size:12px;color:rgba(255,255,255,.6);">Bonded</span>
+            <span style="background:rgba(255,255,255,.1);border-radius:8px;padding:6px 12px;font-size:12px;color:rgba(255,255,255,.6);">Insured</span>
+          </div>
+        </div>
+        <div><h4 style="color:#d97706;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Services</h4><div style="display:flex;flex-direction:column;gap:8px;"><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Plumbing</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">HVAC</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Electrical</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Emergency</a></div></div>
+        <div><h4 style="color:#d97706;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Company</h4><div style="display:flex;flex-direction:column;gap:8px;"><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">About Us</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Careers</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Reviews</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Blog</a></div></div>
+        <div><h4 style="color:#d97706;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Connect</h4><div style="display:flex;flex-direction:column;gap:8px;"><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Facebook</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Instagram</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Google Reviews</a><a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Nextdoor</a></div></div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <p style="color:rgba(255,255,255,.4);font-size:13px;">© 2026 Wasatch Home Services. All rights reserved. | Demo website. | UT License #12345678</p>
+        <div style="display:flex;gap:16px;"><a href="#" style="color:rgba(255,255,255,.4);font-size:13px;text-decoration:none;">Privacy</a><a href="#" style="color:rgba(255,255,255,.4);font-size:13px;text-decoration:none;">Terms</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chat Widget -->
+  <div id="chat-btn" onclick="toggleChat()" style="position:fixed;bottom:24px;right:24px;z-index:9998;width:64px;height:64px;background:#d97706;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(217,119,6,.4);transition:transform .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform=''">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="#fff"/></svg>
+    <div style="position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:#dc2626;border-radius:50%;border:2px solid #fff;"></div>
+  </div>
+
+  <div id="chat-box" style="display:none;position:fixed;bottom:100px;right:24px;z-index:9998;width:380px;max-height:520px;background:#fff;border-radius:16px;box-shadow:0 10px 50px rgba(0,0,0,.2);overflow:hidden;flex-direction:column;">
+    <div style="background:#1e3a5f;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;background:rgba(217,119,6,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;">🔧</div>
+        <div><div style="color:#fff;font-weight:600;font-size:15px;">Wasatch AI Dispatcher</div><div style="color:rgba(255,255,255,.6);font-size:12px;">● Online — avg reply: 30s</div></div>
+      </div>
+      <button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">✕</button>
+    </div>
+    <div id="chat-msgs" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:300px;max-height:340px;"></div>
+    <div id="chat-quick" style="padding:0 16px 8px;display:flex;flex-wrap:wrap;gap:6px;"></div>
+    <div style="padding:12px 16px;border-top:1px solid #e5e7eb;display:flex;gap:8px;">
+      <input id="chat-input" type="text" placeholder="Describe your issue..." style="flex:1;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()" style="background:#d97706;color:#fff;border:none;border-radius:8px;padding:10px 16px;cursor:pointer;font-weight:600;font-size:14px;">Send</button>
+    </div>
+  </div>
+
+  </div>
+
+  <style>
+    @media (max-width:768px) {
+      .trade-nav { display:none !important; }
+      #trade-hamburger { display:block !important; }
+      #services > div > div:last-child { grid-template-columns:1fr !important; }
+      #contact > div { grid-template-columns:1fr !important; }
+      #chat-box { right:8px;left:8px;width:auto !important;bottom:88px; }
+      footer > div > div:first-child { grid-template-columns:1fr 1fr !important; }
+    }
+  </style>
+
+  <script is:inline>
+    function toggleChat(){const b=document.getElementById('chat-box');if(b.style.display==='none'||!b.style.display){b.style.display='flex';if(!window._ci){initChat();window._ci=true;}}else b.style.display='none';}
+    function initChat(){addBot("Hi! I'm Wasatch Home Services' AI dispatcher. Need help with plumbing, HVAC, or electrical? I can get a tech to you fast!");showQuick(["🚨 Emergency","Plumbing Help","HVAC Help","Electrical Help","Get a Quote"]);}
+    function addBot(t){const d=document.getElementById('chat-msgs');const m=document.createElement('div');m.style.cssText='max-width:85%;padding:10px 14px;background:#f8fafc;border-radius:12px 12px 12px 4px;font-size:14px;color:#1e3a5f;line-height:1.5;white-space:pre-wrap;';m.textContent=t;d.appendChild(m);d.scrollTop=d.scrollHeight;}
+    function addUser(t){const d=document.getElementById('chat-msgs');const m=document.createElement('div');m.style.cssText='max-width:85%;padding:10px 14px;background:#1e3a5f;color:#fff;border-radius:12px 12px 4px 12px;font-size:14px;line-height:1.5;align-self:flex-end;';m.textContent=t;d.appendChild(m);d.scrollTop=d.scrollHeight;}
+    function showQuick(opts){const q=document.getElementById('chat-quick');q.innerHTML='';opts.forEach(o=>{const b=document.createElement('button');b.textContent=o;b.style.cssText='background:#fff7ed;border:1px solid #fed7aa;border-radius:16px;padding:6px 14px;font-size:13px;cursor:pointer;color:#92400e;font-weight:500;';b.onclick=()=>{addUser(o);handleInput(o);};q.appendChild(b);});}
+    let bs=0,bd={};
+    function handleInput(t){const l=t.toLowerCase();document.getElementById('chat-quick').innerHTML='';setTimeout(()=>{
+      if(bs>0)return handleBooking(t);
+      if(l.includes('emergency')||l.includes('urgent')||l.includes('flood')||l.includes('no heat')||l.includes('gas'))addBot("🚨 For emergencies, please call us directly:\n\n📞 (385) 555-9111\n\nOur dispatcher will send the nearest available tech immediately. Average response: 30-45 minutes.\n\nOr I can start a service request right now — what's your name?"),bs=1;
+      else if(l.includes('plumbing')||l.includes('leak')||l.includes('drain')||l.includes('water'))addBot("Our plumbing services include:\n\n🔧 Drain Cleaning & Repair\n🔧 Water Heater Install/Repair\n🔧 Leak Detection\n🔧 Sewer Line Services\n🔧 Fixture Installation\n\nWant to schedule a plumber?"),showQuick(["Get a Quote","Emergency","HVAC Help"]);
+      else if(l.includes('hvac')||l.includes('heat')||l.includes('ac')||l.includes('furnace')||l.includes('air'))addBot("Our HVAC services include:\n\n❄️ AC Install & Repair\n🔥 Furnace Install & Repair\n💨 Ductwork & Ventilation\n🌡️ Heat Pump Systems\n🔧 Seasonal Tune-ups\n\nWant to schedule a tech?"),showQuick(["Get a Quote","Emergency","Plumbing Help"]);
+      else if(l.includes('electric')||l.includes('outlet')||l.includes('panel')||l.includes('wiring'))addBot("Our electrical services include:\n\n⚡ Panel Upgrades\n💡 Lighting Design & Install\n🔌 Outlet & Switch Install\n🔋 EV Charger Installation\n🔧 Generator Installation\n\nWant to schedule an electrician?"),showQuick(["Get a Quote","Emergency","Plumbing Help"]);
+      else if(l.includes('quote')||l.includes('price')||l.includes('cost')||l.includes('estimate')||l.includes('schedule')||l.includes('book')){addBot("I'll help you get a free estimate! What's your name?");bs=1;}
+      else if(l.includes('hour')||l.includes('open'))addBot("Our hours:\n\n📅 Mon-Sat: 7 AM - 8 PM\n📅 Sun: Emergency only\n🚨 24/7 Emergency dispatch\n\nNeed to schedule a visit?"),showQuick(["Get a Quote","Emergency"]);
+      else if(l.includes('area')||l.includes('where')||l.includes('location'))addBot("We serve the entire Wasatch Front:\n\nSalt Lake City, Sandy, Draper, South Jordan, Lehi, Provo, Orem, Park City, Ogden, Murray, West Jordan, Riverton, and more!"),showQuick(["Get a Quote","Services"]);
+      else addBot("I can help with plumbing, HVAC, electrical issues, or scheduling service. What do you need help with?"),showQuick(["Plumbing Help","HVAC Help","Electrical Help","Get a Quote"]);
+    },500);}
+    function handleBooking(t){setTimeout(()=>{
+      if(bs===1){bd.name=t;addBot(`Got it, ${t}! What's your phone number so our dispatcher can reach you?`);bs=2;}
+      else if(bs===2){bd.phone=t;addBot("What's your address?");bs=3;}
+      else if(bs===3){bd.addr=t;addBot("What type of service do you need?");showQuick(["Plumbing","HVAC","Electrical","Not Sure"]);bs=4;}
+      else if(bs===4){bd.svc=t;addBot("How urgent is this?");showQuick(["🚨 Emergency","Today/Tomorrow","This Week","Just a Quote"]);bs=5;}
+      else if(bs===5){bd.urg=t;addBot(`✅ Service request submitted!\n\n👤 ${bd.name}\n📞 ${bd.phone}\n📍 ${bd.addr}\n🔧 ${bd.svc}\n⏰ ${t}\n\nA dispatcher will contact you shortly. For emergencies, call (385) 555-9111 directly.`);bs=0;bd={};showQuick(["Plumbing Help","HVAC Help","Electrical Help"]);}
+    },500);}
+    function sendMsg(){const i=document.getElementById('chat-input');if(!i.value.trim())return;addUser(i.value);handleInput(i.value);i.value='';}
+  </script>
+</Layout>
