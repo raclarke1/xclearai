@@ -46,21 +46,22 @@ export async function onRequestPost(context) {
 
     let reply = null;
 
-    // Option 1: Anthropic API
+    // Option 1: Anthropic API (if key is set)
     const anthropicKey = context.env.ANTHROPIC_API_KEY;
-    if (anthropicKey) {
+    if (anthropicKey && !reply) {
       try {
         const systemMsg = allMessages.find(m => m.role === 'system')?.content || '';
         const chatMsgs = allMessages.filter(m => m.role !== 'system');
+        
         const res = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
           headers: {
             'x-api-key': anthropicKey,
-            'anthropic-version': '2024-10-22',
+            'anthropic-version': '2023-06-01',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            model: 'claude-3-haiku-20240307',
+            model: 'claude-sonnet-4-20250514',
             max_tokens: 300,
             system: systemMsg,
             messages: chatMsgs,
@@ -69,13 +70,15 @@ export async function onRequestPost(context) {
         if (res.ok) {
           const data = await res.json();
           reply = data.content?.[0]?.text || null;
+        } else {
+          console.error('Anthropic:', res.status, await res.text());
         }
       } catch (e) {
         console.error('Anthropic error:', e.message);
       }
     }
 
-    // Option 2: Workers AI via binding
+    // Option 2: Workers AI (free, built into Cloudflare)
     if (!reply && context.env.AI) {
       try {
         const result = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
@@ -84,40 +87,21 @@ export async function onRequestPost(context) {
         });
         reply = result.response;
       } catch (e) {
-        console.error('Workers AI binding error:', e.message);
-      }
-    }
-
-    // Option 3: Workers AI via REST API (no binding needed)
-    if (!reply && context.env.CF_ACCOUNT_ID && context.env.CF_API_TOKEN) {
-      try {
-        const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${context.env.CF_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${context.env.CF_API_TOKEN}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ messages: allMessages, max_tokens: 300 }),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          reply = data.result?.response;
-        }
-      } catch (e) {
-        console.error('Workers AI REST error:', e.message);
+        console.error('Workers AI error:', e.message);
       }
     }
 
     if (!reply) {
-      return new Response(JSON.stringify({ error: 'AI temporarily unavailable' }), {
-        status: 500, headers: corsHeaders,
-      });
+      return new Response(JSON.stringify({ 
+        error: 'AI temporarily unavailable',
+        debug: `anthropic_key=${!!anthropicKey}, workers_ai=${!!context.env.AI}`
+      }), { status: 500, headers: corsHeaders });
     }
 
     return new Response(JSON.stringify({ reply }), { headers: corsHeaders });
   } catch (err) {
     console.error('Chat error:', err);
-    return new Response(JSON.stringify({ error: 'Something went wrong' }), {
+    return new Response(JSON.stringify({ error: 'Something went wrong', debug: err.message }), {
       status: 500, headers: corsHeaders,
     });
   }
@@ -139,14 +123,36 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
   }
 
   try {
-    // Summarize the lead
+    // Summarize with whatever AI is available
     let lead = { summary: 'Chat ended', leadScore: 5 };
+    
     const summaryPrompt = {
       role: 'user',
       content: `Analyze this chat and return JSON with: name, company, industry, email, phone (or "Unknown"/null), painPoints (array), interest, leadScore (1-10), summary (2-3 sentences). ONLY valid JSON.\n\n${messages.map(m => `${m.role === 'user' ? 'Visitor' : 'AI'}: ${m.content}`).join('\n')}`
     };
 
-    if (context.env.AI) {
+    const anthropicKey = context.env.ANTHROPIC_API_KEY;
+    if (anthropicKey) {
+      try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'x-api-key': anthropicKey,
+            'anthropic-version': '2023-06-01',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-20250514',
+            max_tokens: 500,
+            messages: [summaryPrompt],
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          try { lead = JSON.parse(data.content[0].text); } catch {}
+        }
+      } catch {}
+    } else if (context.env.AI) {
       try {
         const result = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
           messages: [{ role: 'system', content: 'Return only valid JSON.' }, summaryPrompt],
@@ -156,17 +162,15 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
       } catch {}
     }
 
-    // Build email
+    // Email via Resend
     const transcript = messages.map(m =>
       `<p style="margin:4px 0;"><strong style="color:${m.role === 'user' ? '#2563eb' : '#059669'}">${m.role === 'user' ? 'Visitor' : 'XClear AI'}:</strong> ${m.content}</p>`
     ).join('');
 
-    const stars = '★'.repeat(Math.min(lead.leadScore || 0, 10)) + '☆'.repeat(10 - Math.min(lead.leadScore || 0, 10));
-
     const emailHtml = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
       <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);color:white;padding:20px;border-radius:8px 8px 0 0;">
         <h2 style="margin:0;">New Chat Lead from xclearai.com</h2>
-        <p style="margin:8px 0 0;opacity:0.8;">Lead Score: ${stars} (${lead.leadScore || '?'}/10)</p>
+        <p style="margin:8px 0 0;opacity:0.8;">Lead Score: ${lead.leadScore || '?'}/10</p>
       </div>
       <div style="background:#f8fafc;padding:20px;border:1px solid #e2e8f0;">
         <table style="width:100%;font-size:14px;">
@@ -184,22 +188,17 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
         <h3 style="margin:0 0 12px;">Full Transcript (${messages.length} messages)</h3>
         <div style="background:#f1f5f9;padding:16px;border-radius:8px;font-size:13px;">${transcript}</div>
       </div>
-      <div style="padding:12px;text-align:center;font-size:12px;color:#94a3b8;">
-        ${visitorInfo?.page || 'xclearai.com'} | ${visitorInfo?.referrer ? `Ref: ${visitorInfo.referrer}` : 'Direct'} | ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })} MST
-      </div>
     </div>`;
 
-    const subject = `Chat Lead: ${lead.name || 'Unknown'}${lead.company && lead.company !== 'Unknown' ? ` (${lead.company})` : ''} — Score ${lead.leadScore || '?'}/10`;
+    const subject = 'Chat Lead: ' + (lead.name || 'Unknown') + (lead.company && lead.company !== 'Unknown' ? ' (' + lead.company + ')' : '') + ' — Score ' + (lead.leadScore || '?') + '/10';
 
-    // Send via Resend (free 100/day)
     const resendKey = context.env.RESEND_API_KEY;
-    let emailStatus = 'no_key';
     if (resendKey) {
       try {
-        const emailRes = await fetch('https://api.resend.com/emails', {
+        await fetch('https://api.resend.com/emails', {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${resendKey}`,
+            'Authorization': 'Bearer ' + resendKey,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -209,16 +208,12 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
             html: emailHtml,
           }),
         });
-        const emailResult = await emailRes.json();
-        emailStatus = emailRes.ok ? 'sent' : JSON.stringify(emailResult);
-        console.log('Resend result:', emailStatus);
       } catch (e) {
-        emailStatus = e.message;
         console.error('Resend error:', e.message);
       }
     }
 
-    return new Response(JSON.stringify({ ok: true, lead, emailStatus }), { headers: corsHeaders });
+    return new Response(JSON.stringify({ ok: true, lead }), { headers: corsHeaders });
   } catch (err) {
     console.error('End chat error:', err);
     return new Response(JSON.stringify({ ok: true }), { headers: corsHeaders });
