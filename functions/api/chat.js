@@ -136,67 +136,60 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
       } catch {}
     }
 
-    // Build transcript
+    // Build email
     const transcript = messages.map(m =>
-      `${m.role === 'user' ? ':bust_in_silhouette: *Visitor*' : ':robot_face: *XClear AI*'}: ${m.content}`
-    ).join('\n');
+      `<p style="margin:4px 0;"><strong style="color:${m.role === 'user' ? '#2563eb' : '#059669'}">${m.role === 'user' ? 'Visitor' : 'XClear AI'}:</strong> ${m.content}</p>`
+    ).join('');
 
     const stars = '★'.repeat(Math.min(lead.leadScore || 0, 10)) + '☆'.repeat(10 - Math.min(lead.leadScore || 0, 10));
 
-    // Post to Slack via webhook
-    const webhookUrl = context.env.SLACK_WEBHOOK_URL;
-    if (webhookUrl) {
-      const slackPayload = {
-        blocks: [
-          {
-            type: 'header',
-            text: { type: 'plain_text', text: `🔔 New Chat Lead — Score ${lead.leadScore || '?'}/10`, emoji: true }
-          },
-          {
-            type: 'section',
-            fields: [
-              { type: 'mrkdwn', text: `*Name:*\n${lead.name || 'Unknown'}` },
-              { type: 'mrkdwn', text: `*Company:*\n${lead.company || 'Unknown'}` },
-              { type: 'mrkdwn', text: `*Industry:*\n${lead.industry || 'Unknown'}` },
-              { type: 'mrkdwn', text: `*Score:*\n${stars}` },
-              { type: 'mrkdwn', text: `*Email:*\n${lead.email || 'Not provided'}` },
-              { type: 'mrkdwn', text: `*Phone:*\n${lead.phone || 'Not provided'}` },
-            ]
-          },
-          {
-            type: 'section',
-            text: { type: 'mrkdwn', text: `*Interest:* ${lead.interest || 'General'}` }
-          },
-          lead.painPoints?.length ? {
-            type: 'section',
-            text: { type: 'mrkdwn', text: `*Pain Points:*\n${lead.painPoints.map(p => `• ${p}`).join('\n')}` }
-          } : null,
-          lead.summary && lead.summary !== 'Chat ended' ? {
-            type: 'section',
-            text: { type: 'mrkdwn', text: `*Summary:* _${lead.summary}_` }
-          } : null,
-          { type: 'divider' },
-          {
-            type: 'section',
-            text: { type: 'mrkdwn', text: `*Full Transcript (${messages.length} messages):*\n${transcript}` }
-          },
-          {
-            type: 'context',
-            elements: [
-              { type: 'mrkdwn', text: `📍 ${visitorInfo?.page || 'xclearai.com'} | ${visitorInfo?.referrer ? `Ref: ${visitorInfo.referrer}` : 'Direct'} | ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })} MST` }
-            ]
-          }
-        ].filter(Boolean)
-      };
+    const emailHtml = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+      <div style="background:linear-gradient(135deg,#1e1b4b,#312e81);color:white;padding:20px;border-radius:8px 8px 0 0;">
+        <h2 style="margin:0;">New Chat Lead from xclearai.com</h2>
+        <p style="margin:8px 0 0;opacity:0.8;">Lead Score: ${stars} (${lead.leadScore || '?'}/10)</p>
+      </div>
+      <div style="background:#f8fafc;padding:20px;border:1px solid #e2e8f0;">
+        <table style="width:100%;font-size:14px;">
+          <tr><td style="padding:4px 8px;font-weight:bold;width:100px;">Name:</td><td>${lead.name || 'Unknown'}</td></tr>
+          <tr><td style="padding:4px 8px;font-weight:bold;">Company:</td><td>${lead.company || 'Unknown'}</td></tr>
+          <tr><td style="padding:4px 8px;font-weight:bold;">Industry:</td><td>${lead.industry || 'Unknown'}</td></tr>
+          <tr><td style="padding:4px 8px;font-weight:bold;">Email:</td><td>${lead.email || 'Not provided'}</td></tr>
+          <tr><td style="padding:4px 8px;font-weight:bold;">Phone:</td><td>${lead.phone || 'Not provided'}</td></tr>
+          <tr><td style="padding:4px 8px;font-weight:bold;">Interest:</td><td>${lead.interest || 'General'}</td></tr>
+        </table>
+        ${lead.painPoints?.length ? `<p style="margin:12px 0 4px;font-weight:bold;">Pain Points:</p><ul>${lead.painPoints.map(p => `<li>${p}</li>`).join('')}</ul>` : ''}
+        ${lead.summary && lead.summary !== 'Chat ended' ? `<p style="font-style:italic;color:#475569;margin-top:12px;">${lead.summary}</p>` : ''}
+      </div>
+      <div style="background:white;padding:20px;border:1px solid #e2e8f0;border-top:0;">
+        <h3 style="margin:0 0 12px;">Full Transcript (${messages.length} messages)</h3>
+        <div style="background:#f1f5f9;padding:16px;border-radius:8px;font-size:13px;">${transcript}</div>
+      </div>
+      <div style="padding:12px;text-align:center;font-size:12px;color:#94a3b8;">
+        ${visitorInfo?.page || 'xclearai.com'} | ${visitorInfo?.referrer ? `Ref: ${visitorInfo.referrer}` : 'Direct'} | ${new Date().toLocaleString('en-US', { timeZone: 'America/Denver' })} MST
+      </div>
+    </div>`;
 
+    const subject = `Chat Lead: ${lead.name || 'Unknown'}${lead.company && lead.company !== 'Unknown' ? ` (${lead.company})` : ''} — Score ${lead.leadScore || '?'}/10`;
+
+    // Send via Resend (free 100/day)
+    const resendKey = context.env.RESEND_API_KEY;
+    if (resendKey) {
       try {
-        await fetch(webhookUrl, {
+        await fetch('https://api.resend.com/emails', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(slackPayload),
+          headers: {
+            'Authorization': `Bearer ${resendKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'XClear AI Chat <onboarding@resend.dev>',
+            to: ['ryan@xclearnetworks.com'],
+            subject,
+            html: emailHtml,
+          }),
         });
       } catch (e) {
-        console.error('Slack webhook error:', e.message);
+        console.error('Resend error:', e.message);
       }
     }
 
