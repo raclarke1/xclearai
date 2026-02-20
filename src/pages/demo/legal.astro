@@ -1,0 +1,432 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Summit Legal Group - Salt Lake City Attorneys" description="Demo law firm website built by XClear AI">
+  <style is:global>
+    /* Override layout styles for demo */
+    .nav, .footer { display: none !important; }
+  </style>
+
+  <!-- Demo Banner -->
+  <div id="demo-banner" style="position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1e3a5f,#2a5298);color:#fff;text-align:center;padding:10px 20px;font-size:14px;font-family:'Inter',sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.2);">
+    🔍 This is a demo by <strong>XClear AI</strong> — See what we can build for YOUR firm →
+    <a href="https://xclearai.com/ai-assessment" style="color:#c8a951;font-weight:700;text-decoration:underline;margin-left:4px;">xclearai.com/ai-assessment</a>
+    <button onclick="document.getElementById('demo-banner').style.display='none';document.body.style.paddingTop='0'" style="background:none;border:none;color:#fff;margin-left:16px;cursor:pointer;font-size:18px;vertical-align:middle;">✕</button>
+  </div>
+
+  <div id="law-site" style="padding-top:42px;">
+
+  <!-- Navbar -->
+  <nav id="ln" style="position:fixed;top:42px;left:0;right:0;z-index:999;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid #e5e7eb;transition:box-shadow .3s;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:72px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:42px;height:42px;background:#1e3a5f;border-radius:8px;display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7v2h20V7L12 2zM4 11v8h3v-8H4zm5 0v8h3v-8H9zm5 0v8h3v-8h-3zm5 0v8h3v-8h-3zM2 21h20v2H2v-2z" fill="#c8a951"/></svg>
+        </div>
+        <div>
+          <div style="font-size:20px;font-weight:700;color:#1e3a5f;line-height:1.1;">Summit Legal Group</div>
+          <div style="font-size:11px;color:#6b7280;letter-spacing:.5px;">ATTORNEYS AT LAW</div>
+        </div>
+      </div>
+      <div class="lnav-links" style="display:flex;align-items:center;gap:28px;">
+        <a href="#practice" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Practice Areas</a>
+        <a href="#team" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Our Team</a>
+        <a href="#testimonials" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Reviews</a>
+        <a href="#contact" style="color:#4b5563;font-weight:500;font-size:15px;text-decoration:none;">Contact</a>
+        <button onclick="document.getElementById('portal-modal').style.display='flex'" style="background:none;border:1px solid #1e3a5f;color:#1e3a5f;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">Client Portal</button>
+        <a href="#booking" style="background:#c8a951;color:#fff;padding:10px 20px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;">Free Consultation</a>
+      </div>
+      <button id="law-hamburger" onclick="document.getElementById('law-mobile-menu').style.display=document.getElementById('law-mobile-menu').style.display==='flex'?'none':'flex'" style="display:none;background:none;border:none;cursor:pointer;padding:8px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1e3a5f" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+    <div id="law-mobile-menu" style="display:none;flex-direction:column;padding:16px 24px;gap:12px;background:#fff;border-top:1px solid #eee;">
+      <a href="#practice" style="color:#1e3a5f;font-weight:500;padding:8px 0;text-decoration:none;">Practice Areas</a>
+      <a href="#team" style="color:#1e3a5f;font-weight:500;padding:8px 0;text-decoration:none;">Our Team</a>
+      <a href="#testimonials" style="color:#1e3a5f;font-weight:500;padding:8px 0;text-decoration:none;">Reviews</a>
+      <a href="#contact" style="color:#1e3a5f;font-weight:500;padding:8px 0;text-decoration:none;">Contact</a>
+      <a href="#booking" style="background:#c8a951;color:#fff;padding:12px;border-radius:6px;font-weight:600;text-align:center;text-decoration:none;">Free Consultation</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section style="padding:160px 24px 100px;background:linear-gradient(135deg,#1e3a5f 0%,#2a5298 50%,#1e3a5f 100%);position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22none%22 width=%22100%22 height=%22100%22/><circle cx=%2250%22 cy=%2250%22 r=%221%22 fill=%22rgba(200,169,81,0.08)%22/></svg>');"></div>
+    <div style="max-width:1200px;margin:0 auto;position:relative;z-index:1;">
+      <div style="max-width:700px;">
+        <div style="display:inline-block;background:rgba(200,169,81,.15);border:1px solid rgba(200,169,81,.3);border-radius:20px;padding:6px 16px;margin-bottom:24px;">
+          <span style="color:#c8a951;font-size:14px;font-weight:600;">⭐ Top Rated Law Firm in Salt Lake City</span>
+        </div>
+        <h1 style="font-size:clamp(36px,5vw,56px);font-weight:800;color:#fff;line-height:1.1;margin-bottom:20px;">Fighting for Your Rights.<br><span style="color:#c8a951;">Protecting Your Future.</span></h1>
+        <p style="font-size:18px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:36px;max-width:560px;">Salt Lake City's trusted legal team. Over 25 years of experience in personal injury, family law, criminal defense, and business litigation.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="#booking" style="background:#c8a951;color:#fff;padding:16px 32px;border-radius:8px;font-weight:700;font-size:16px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 20px rgba(200,169,81,.4);">Book Free Consultation →</a>
+          <a href="tel:+13855551234" style="background:rgba(255,255,255,.1);color:#fff;padding:16px 32px;border-radius:8px;font-weight:600;font-size:16px;text-decoration:none;border:1px solid rgba(255,255,255,.2);display:inline-flex;align-items:center;gap:8px;">📞 (385) 555-1234</a>
+        </div>
+        <div style="display:flex;gap:32px;margin-top:48px;flex-wrap:wrap;">
+          <div><div style="color:#c8a951;font-size:32px;font-weight:800;">500+</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Cases Won</div></div>
+          <div><div style="color:#c8a951;font-size:32px;font-weight:800;">$50M+</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Recovered</div></div>
+          <div><div style="color:#c8a951;font-size:32px;font-weight:800;">25+</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Years Experience</div></div>
+          <div><div style="color:#c8a951;font-size:32px;font-weight:800;">4.9★</div><div style="color:rgba(255,255,255,.6);font-size:13px;">Google Rating</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice Areas -->
+  <section id="practice" style="padding:100px 24px;background:#fff;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:60px;">
+        <div style="color:#c8a951;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">What We Do</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#1e3a5f;">Our Practice Areas</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:36px;transition:all .3s;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(30,58,95,.12)';this.style.borderColor='#c8a951'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='#e5e7eb'">
+          <div style="width:56px;height:56px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:28px;">⚖️</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;margin-bottom:8px;">Personal Injury</h3>
+          <p style="color:#6b7280;font-size:15px;line-height:1.6;">Car accidents, slip & fall, medical malpractice, wrongful death. We fight for maximum compensation.</p>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:36px;transition:all .3s;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(30,58,95,.12)';this.style.borderColor='#c8a951'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='#e5e7eb'">
+          <div style="width:56px;height:56px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:28px;">👨‍👩‍👧</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;margin-bottom:8px;">Family Law</h3>
+          <p style="color:#6b7280;font-size:15px;line-height:1.6;">Divorce, child custody, adoption, prenuptial agreements. Compassionate guidance through difficult times.</p>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:36px;transition:all .3s;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(30,58,95,.12)';this.style.borderColor='#c8a951'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='#e5e7eb'">
+          <div style="width:56px;height:56px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:28px;">🛡️</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;margin-bottom:8px;">Criminal Defense</h3>
+          <p style="color:#6b7280;font-size:15px;line-height:1.6;">DUI, drug charges, assault, white collar crimes. Aggressive defense to protect your freedom.</p>
+        </div>
+        <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:36px;transition:all .3s;cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(30,58,95,.12)';this.style.borderColor='#c8a951'" onmouseout="this.style.transform='';this.style.boxShadow='';this.style.borderColor='#e5e7eb'">
+          <div style="width:56px;height:56px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:28px;">💼</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;margin-bottom:8px;">Business Law</h3>
+          <p style="color:#6b7280;font-size:15px;line-height:1.6;">Contracts, LLC formation, disputes, intellectual property. Your business deserves expert legal counsel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section id="team" style="padding:100px 24px;background:#f8fafc;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:60px;">
+        <div style="color:#c8a951;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Our Attorneys</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#1e3a5f;">Meet the Team</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;">
+        <div style="text-align:center;">
+          <div style="width:180px;height:180px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:64px;border:4px solid #c8a951;">👨‍💼</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;">Michael J. Harrison</h3>
+          <p style="color:#c8a951;font-weight:600;font-size:14px;margin-bottom:6px;">Managing Partner</p>
+          <p style="color:#6b7280;font-size:14px;">Personal Injury · 20+ years</p>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:180px;height:180px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:64px;border:4px solid #c8a951;">👩‍💼</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;">Sarah K. Whitfield</h3>
+          <p style="color:#c8a951;font-weight:600;font-size:14px;margin-bottom:6px;">Senior Partner</p>
+          <p style="color:#6b7280;font-size:14px;">Family Law · 15+ years</p>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:180px;height:180px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:64px;border:4px solid #c8a951;">👨‍💼</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;">David R. Chen</h3>
+          <p style="color:#c8a951;font-weight:600;font-size:14px;margin-bottom:6px;">Partner</p>
+          <p style="color:#6b7280;font-size:14px;">Criminal Defense · 12+ years</p>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:180px;height:180px;background:linear-gradient(135deg,#1e3a5f,#2a5298);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;font-size:64px;border:4px solid #c8a951;">👩‍💼</div>
+          <h3 style="color:#1e3a5f;font-size:20px;font-weight:700;">Emily A. Torres</h3>
+          <p style="color:#c8a951;font-weight:600;font-size:14px;margin-bottom:6px;">Associate</p>
+          <p style="color:#6b7280;font-size:14px;">Business Law · 8+ years</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" style="padding:100px 24px;background:#1e3a5f;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:60px;">
+        <div style="color:#c8a951;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Testimonials</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;">What Our Clients Say</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;">
+          <div style="color:#c8a951;font-size:20px;margin-bottom:12px;">★★★★★</div>
+          <p style="color:rgba(255,255,255,.85);font-size:15px;line-height:1.7;margin-bottom:16px;">"After my car accident, Summit Legal Group fought tirelessly for me. They secured a $1.2M settlement when the insurance company offered $50K. I can't thank them enough."</p>
+          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">— James P., Personal Injury Client</div>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;">
+          <div style="color:#c8a951;font-size:20px;margin-bottom:12px;">★★★★★</div>
+          <p style="color:rgba(255,255,255,.85);font-size:15px;line-height:1.7;margin-bottom:16px;">"Sarah handled my divorce with such compassion and professionalism. She made sure my kids were protected. The best decision I ever made was hiring Summit Legal."</p>
+          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">— Maria L., Family Law Client</div>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;">
+          <div style="color:#c8a951;font-size:20px;margin-bottom:12px;">★★★★★</div>
+          <p style="color:rgba(255,255,255,.85);font-size:15px;line-height:1.7;margin-bottom:16px;">"David got my DUI charges completely dismissed. His knowledge of Utah law is incredible. He's direct, honest, and brilliant in the courtroom."</p>
+          <div style="color:rgba(255,255,255,.6);font-size:14px;font-weight:600;">— Robert K., Criminal Defense Client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Section -->
+  <section id="booking" style="padding:100px 24px;background:#fff;">
+    <div style="max-width:800px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <div style="color:#c8a951;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Schedule Online</div>
+        <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#1e3a5f;">Book a Free Consultation</h2>
+        <p style="color:#6b7280;font-size:16px;margin-top:12px;">Fill out the form below and we'll get back to you within 24 hours.</p>
+      </div>
+      <form onsubmit="event.preventDefault();this.innerHTML='<div style=\'text-align:center;padding:40px;\'><div style=\'font-size:48px;margin-bottom:16px;\'>✅</div><h3 style=\'color:#1e3a5f;font-size:24px;margin-bottom:8px;\'>Thank You!</h3><p style=\'color:#6b7280;\'>We\'ll contact you within 24 hours to schedule your free consultation.</p></div>'" style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:40px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">First Name *</label>
+            <input type="text" required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#c8a951'" onblur="this.style.borderColor='#d1d5db'">
+          </div>
+          <div>
+            <label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Last Name *</label>
+            <input type="text" required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#c8a951'" onblur="this.style.borderColor='#d1d5db'">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Email *</label>
+            <input type="email" required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#c8a951'" onblur="this.style.borderColor='#d1d5db'">
+          </div>
+          <div>
+            <label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Phone *</label>
+            <input type="tel" required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#c8a951'" onblur="this.style.borderColor='#d1d5db'">
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Case Type *</label>
+          <select required style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;background:#fff;box-sizing:border-box;" onfocus="this.style.borderColor='#c8a951'" onblur="this.style.borderColor='#d1d5db'">
+            <option value="">Select a practice area...</option>
+            <option>Personal Injury</option>
+            <option>Family Law</option>
+            <option>Criminal Defense</option>
+            <option>Business Law</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div style="margin-bottom:24px;">
+          <label style="display:block;color:#1e3a5f;font-weight:600;font-size:14px;margin-bottom:6px;">Tell us about your case</label>
+          <textarea rows="4" style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;outline:none;resize:vertical;font-family:inherit;box-sizing:border-box;" onfocus="this.style.borderColor='#c8a951'" onblur="this.style.borderColor='#d1d5db'"></textarea>
+        </div>
+        <button type="submit" style="width:100%;padding:16px;background:#c8a951;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;">Request Free Consultation →</button>
+        <p style="text-align:center;color:#9ca3af;font-size:12px;margin-top:12px;">🔒 Your information is confidential and protected by attorney-client privilege.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="padding:100px 24px;background:#f8fafc;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+        <div>
+          <div style="color:#c8a951;font-weight:600;font-size:14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Get In Touch</div>
+          <h2 style="font-size:clamp(28px,4vw,36px);font-weight:800;color:#1e3a5f;margin-bottom:24px;">Contact Us</h2>
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div style="display:flex;gap:16px;align-items:start;">
+              <div style="width:44px;height:44px;background:#1e3a5f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📍</div>
+              <div><div style="color:#1e3a5f;font-weight:600;">Office Address</div><div style="color:#6b7280;font-size:15px;">123 Main Street, Suite 400<br>Salt Lake City, UT 84101</div></div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:start;">
+              <div style="width:44px;height:44px;background:#1e3a5f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📞</div>
+              <div><div style="color:#1e3a5f;font-weight:600;">Phone</div><div style="color:#6b7280;font-size:15px;">(385) 555-1234</div></div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:start;">
+              <div style="width:44px;height:44px;background:#1e3a5f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">✉️</div>
+              <div><div style="color:#1e3a5f;font-weight:600;">Email</div><div style="color:#6b7280;font-size:15px;">info@summitlegalgroup.com</div></div>
+            </div>
+            <div style="display:flex;gap:16px;align-items:start;">
+              <div style="width:44px;height:44px;background:#1e3a5f;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🕐</div>
+              <div><div style="color:#1e3a5f;font-weight:600;">Office Hours</div><div style="color:#6b7280;font-size:15px;">Mon-Fri: 8:00 AM - 6:00 PM<br>Sat: 9:00 AM - 1:00 PM<br>24/7 Emergency Line Available</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#1e3a5f;border-radius:16px;height:400px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);font-size:15px;position:relative;overflow:hidden;">
+          <div style="text-align:center;">
+            <div style="font-size:48px;margin-bottom:8px;">🗺️</div>
+            <div>Interactive Map</div>
+            <div style="font-size:13px;margin-top:4px;">Salt Lake City, UT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="background:#0f1f33;padding:60px 24px 24px;">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+            <div style="width:36px;height:36px;background:#1e3a5f;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1px solid #c8a951;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7v2h20V7L12 2zM4 11v8h3v-8H4zm5 0v8h3v-8H9zm5 0v8h3v-8h-3zm5 0v8h3v-8h-3zM2 21h20v2H2v-2z" fill="#c8a951"/></svg>
+            </div>
+            <div style="color:#fff;font-size:18px;font-weight:700;">Summit Legal Group</div>
+          </div>
+          <p style="color:rgba(255,255,255,.5);font-size:14px;line-height:1.7;max-width:300px;">Dedicated to providing exceptional legal representation to individuals and businesses throughout Utah.</p>
+        </div>
+        <div>
+          <h4 style="color:#c8a951;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Practice Areas</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Personal Injury</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Family Law</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Criminal Defense</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Business Law</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color:#c8a951;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Quick Links</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">About Us</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Our Team</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Client Portal</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Blog</a>
+          </div>
+        </div>
+        <div>
+          <h4 style="color:#c8a951;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Connect</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Facebook</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">LinkedIn</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Google Reviews</a>
+            <a href="#" style="color:rgba(255,255,255,.6);font-size:14px;text-decoration:none;">Avvo Profile</a>
+          </div>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <p style="color:rgba(255,255,255,.4);font-size:13px;">© 2026 Summit Legal Group. All rights reserved. | This is a demo website.</p>
+        <div style="display:flex;gap:16px;">
+          <a href="#" style="color:rgba(255,255,255,.4);font-size:13px;text-decoration:none;">Privacy Policy</a>
+          <a href="#" style="color:rgba(255,255,255,.4);font-size:13px;text-decoration:none;">Terms of Service</a>
+          <a href="#" style="color:rgba(255,255,255,.4);font-size:13px;text-decoration:none;">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Client Portal Modal -->
+  <div id="portal-modal" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:24px;">
+    <div style="background:#fff;border-radius:16px;padding:40px;max-width:400px;width:100%;text-align:center;">
+      <div style="width:64px;height:64px;background:#1e3a5f;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;">🔐</div>
+      <h3 style="color:#1e3a5f;font-size:24px;font-weight:700;margin-bottom:8px;">Client Portal</h3>
+      <p style="color:#6b7280;font-size:14px;margin-bottom:24px;">Access your case documents, messages, and billing.</p>
+      <input type="email" placeholder="Email address" style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;margin-bottom:12px;outline:none;box-sizing:border-box;">
+      <input type="password" placeholder="Password" style="width:100%;padding:12px 16px;border:1px solid #d1d5db;border-radius:8px;font-size:15px;margin-bottom:16px;outline:none;box-sizing:border-box;">
+      <button style="width:100%;padding:14px;background:#1e3a5f;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:12px;">Sign In</button>
+      <button onclick="document.getElementById('portal-modal').style.display='none'" style="background:none;border:none;color:#6b7280;font-size:14px;cursor:pointer;">Close</button>
+    </div>
+  </div>
+
+  <!-- Chat Widget -->
+  <div id="chat-btn" onclick="toggleChat()" style="position:fixed;bottom:24px;right:24px;z-index:9998;width:64px;height:64px;background:#1e3a5f;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 20px rgba(30,58,95,.4);transition:transform .2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform=''">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="#c8a951"/></svg>
+    <div style="position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:#ef4444;border-radius:50%;border:2px solid #fff;"></div>
+  </div>
+
+  <div id="chat-box" style="display:none;position:fixed;bottom:100px;right:24px;z-index:9998;width:380px;max-height:520px;background:#fff;border-radius:16px;box-shadow:0 10px 50px rgba(0,0,0,.2);overflow:hidden;flex-direction:column;">
+    <div style="background:#1e3a5f;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;background:rgba(200,169,81,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;">🤖</div>
+        <div>
+          <div style="color:#fff;font-weight:600;font-size:15px;">Summit AI Assistant</div>
+          <div style="color:rgba(255,255,255,.6);font-size:12px;">● Online now</div>
+        </div>
+      </div>
+      <button onclick="toggleChat()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">✕</button>
+    </div>
+    <div id="chat-msgs" style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:300px;max-height:340px;"></div>
+    <div id="chat-quick" style="padding:0 16px 8px;display:flex;flex-wrap:wrap;gap:6px;"></div>
+    <div style="padding:12px 16px;border-top:1px solid #e5e7eb;display:flex;gap:8px;">
+      <input id="chat-input" type="text" placeholder="Type a message..." style="flex:1;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;outline:none;box-sizing:border-box;" onkeydown="if(event.key==='Enter')sendMsg()">
+      <button onclick="sendMsg()" style="background:#1e3a5f;color:#fff;border:none;border-radius:8px;padding:10px 16px;cursor:pointer;font-weight:600;font-size:14px;">Send</button>
+    </div>
+  </div>
+
+  </div>
+
+  <style>
+    @media (max-width:768px) {
+      .lnav-links { display:none !important; }
+      #law-hamburger { display:block !important; }
+      #contact > div > div { grid-template-columns:1fr !important; }
+      footer > div > div:first-child { grid-template-columns:1fr 1fr !important; }
+      #chat-box { right:8px;left:8px;width:auto !important;bottom:88px; }
+      #booking form > div { grid-template-columns:1fr !important; }
+    }
+  </style>
+
+  <script is:inline>
+    function toggleChat(){
+      const b=document.getElementById('chat-box');
+      if(b.style.display==='none'||!b.style.display){b.style.display='flex';if(!window._chatInit){initChat();window._chatInit=true;}}
+      else b.style.display='none';
+    }
+    function initChat(){
+      addBot("Hi! I'm Summit Legal's AI assistant. How can I help you today?");
+      showQuick(["Practice Areas","Book Consultation","Office Hours","Location"]);
+    }
+    function addBot(t){
+      const d=document.getElementById('chat-msgs');
+      const m=document.createElement('div');
+      m.style.cssText='max-width:85%;padding:10px 14px;background:#f0f4f8;border-radius:12px 12px 12px 4px;font-size:14px;color:#1e3a5f;line-height:1.5;';
+      m.textContent=t;d.appendChild(m);d.scrollTop=d.scrollHeight;
+    }
+    function addUser(t){
+      const d=document.getElementById('chat-msgs');
+      const m=document.createElement('div');
+      m.style.cssText='max-width:85%;padding:10px 14px;background:#1e3a5f;color:#fff;border-radius:12px 12px 4px 12px;font-size:14px;line-height:1.5;align-self:flex-end;';
+      m.textContent=t;d.appendChild(m);d.scrollTop=d.scrollHeight;
+    }
+    function showQuick(opts){
+      const q=document.getElementById('chat-quick');q.innerHTML='';
+      opts.forEach(o=>{
+        const b=document.createElement('button');
+        b.textContent=o;
+        b.style.cssText='background:#f0f4f8;border:1px solid #d1d5db;border-radius:16px;padding:6px 14px;font-size:13px;cursor:pointer;color:#1e3a5f;font-weight:500;';
+        b.onclick=()=>{addUser(o);handleInput(o);};
+        q.appendChild(b);
+      });
+    }
+    const responses={
+      'practice areas':"We handle four main areas:\n\n⚖️ Personal Injury — accidents, medical malpractice\n👨‍👩‍👧 Family Law — divorce, custody, adoption\n🛡️ Criminal Defense — DUI, drug charges\n💼 Business Law — contracts, disputes\n\nWhich area interests you?",
+      'book consultation':"I'd love to help you book a free consultation! You can scroll down to our booking form, or I can collect your info right here. What's your name?",
+      'office hours':"Our office hours are:\n\n📅 Mon-Fri: 8:00 AM - 6:00 PM\n📅 Saturday: 9:00 AM - 1:00 PM\n🚨 24/7 Emergency Line Available\n\nWould you like to schedule a visit?",
+      'location':"We're located at:\n\n📍 123 Main Street, Suite 400\nSalt Lake City, UT 84101\n\nFree parking available in the building garage. Would you like directions?"
+    };
+    let bookingStep=0,bookingData={};
+    function handleInput(t){
+      const l=t.toLowerCase().trim();
+      document.getElementById('chat-quick').innerHTML='';
+      setTimeout(()=>{
+        if(bookingStep>0)return handleBooking(t);
+        if(l.includes('practice')||l.includes('area'))addBot(responses['practice areas']),showQuick(["Personal Injury","Family Law","Book Consultation"]);
+        else if(l.includes('book')||l.includes('consult')||l.includes('schedule')||l.includes('appointment')){addBot(responses['book consultation']);bookingStep=1;}
+        else if(l.includes('hour')||l.includes('open'))addBot(responses['office hours']),showQuick(["Book Consultation","Location"]);
+        else if(l.includes('location')||l.includes('address')||l.includes('where')||l.includes('direction'))addBot(responses['location']),showQuick(["Book Consultation","Office Hours"]);
+        else if(l.includes('personal injury')||l.includes('accident'))addBot("Our personal injury team has recovered over $50M for clients. We work on contingency — you don't pay unless we win. Want to book a free case evaluation?"),showQuick(["Book Consultation","Office Hours"]);
+        else if(l.includes('family')||l.includes('divorce')||l.includes('custody'))addBot("Our family law team handles divorce, custody, adoption, and prenuptial agreements with compassion and expertise. Would you like to speak with an attorney?"),showQuick(["Book Consultation","Office Hours"]);
+        else if(l.includes('criminal')||l.includes('dui')||l.includes('defense'))addBot("Facing criminal charges? Time is critical. Our defense attorneys are available 24/7 for emergencies. Let's get you help right away."),showQuick(["Book Consultation","Call Now"]);
+        else if(l.includes('business')||l.includes('contract'))addBot("From LLC formation to complex litigation, our business law team protects your interests. Want to discuss your business needs?"),showQuick(["Book Consultation","Practice Areas"]);
+        else if(l.includes('cost')||l.includes('price')||l.includes('fee'))addBot("We offer free initial consultations for all practice areas. Personal injury cases are on contingency (no win, no fee). Other areas have competitive rates discussed during consultation."),showQuick(["Book Consultation","Practice Areas"]);
+        else addBot("I'd be happy to help with that! You can ask me about our practice areas, office hours, location, or I can help you book a free consultation."),showQuick(["Practice Areas","Book Consultation","Office Hours","Location"]);
+      },500);
+    }
+    function handleBooking(t){
+      setTimeout(()=>{
+        if(bookingStep===1){bookingData.name=t;addBot(`Nice to meet you, ${t}! What's the best email to reach you?`);bookingStep=2;}
+        else if(bookingStep===2){bookingData.email=t;addBot("And your phone number?");bookingStep=3;}
+        else if(bookingStep===3){bookingData.phone=t;addBot("What type of case is this regarding?");showQuick(["Personal Injury","Family Law","Criminal Defense","Business Law"]);bookingStep=4;}
+        else if(bookingStep===4){bookingData.caseType=t;addBot(`✅ Perfect! Here's what I have:\n\n👤 ${bookingData.name}\n📧 ${bookingData.email}\n📞 ${bookingData.phone}\n📋 ${t}\n\nOur team will reach out within 24 hours to schedule your free consultation. Is there anything else I can help with?`);bookingStep=0;bookingData={};showQuick(["Practice Areas","Office Hours","Location"]);}
+      },500);
+    }
+    function sendMsg(){
+      const i=document.getElementById('chat-input');
+      if(!i.value.trim())return;
+      addUser(i.value);handleInput(i.value);i.value='';
+    }
+  </script>
+</Layout>
