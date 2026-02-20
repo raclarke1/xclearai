@@ -368,13 +368,13 @@
     input.focus();
   }
 
-  // Send lead summary when user leaves
+  // Send lead summary when user leaves or after enough messages
   let chatEnded = false;
   function endChat() {
     if (chatEnded || messages.length < 3) return;
     chatEnded = true;
     
-    navigator.sendBeacon(API_URL + '/chat', JSON.stringify({
+    const payload = JSON.stringify({
       action: 'end-chat',
       messages,
       visitorInfo: {
@@ -382,7 +382,21 @@
         referrer: document.referrer,
         timestamp: new Date().toISOString(),
       },
-    }));
+    });
+
+    // sendBeacon with Blob to set correct Content-Type
+    const blob = new Blob([payload], { type: 'application/json' });
+    const sent = navigator.sendBeacon(API_URL + '/chat', blob);
+    
+    // Fallback if sendBeacon fails
+    if (!sent) {
+      fetch(API_URL + '/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true,
+      }).catch(() => {});
+    }
   }
 
   document.addEventListener('visibilitychange', () => {

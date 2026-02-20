@@ -184,7 +184,7 @@ async function handleEndChat(messages, visitorInfo, context, corsHeaders) {
           },
           body: JSON.stringify({
             from: 'XClear AI Chat <onboarding@resend.dev>',
-            to: ['ryan@xclearnetworks.com'],
+            to: ['raclarke1@gmail.com'],
             subject,
             html: emailHtml,
           }),
