@@ -56,11 +56,11 @@ export async function onRequestPost(context) {
           method: 'POST',
           headers: {
             'x-api-key': anthropicKey,
-            'anthropic-version': '2023-06-01',
+            'anthropic-version': '2024-10-22',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
+            model: 'claude-3-haiku-20240307',
             max_tokens: 300,
             system: systemMsg,
             messages: chatMsgs,
@@ -75,7 +75,7 @@ export async function onRequestPost(context) {
       }
     }
 
-    // Option 2: Workers AI (free fallback)
+    // Option 2: Workers AI via binding
     if (!reply && context.env.AI) {
       try {
         const result = await context.env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
@@ -84,7 +84,27 @@ export async function onRequestPost(context) {
         });
         reply = result.response;
       } catch (e) {
-        console.error('Workers AI error:', e.message);
+        console.error('Workers AI binding error:', e.message);
+      }
+    }
+
+    // Option 3: Workers AI via REST API (no binding needed)
+    if (!reply && context.env.CF_ACCOUNT_ID && context.env.CF_API_TOKEN) {
+      try {
+        const res = await fetch(`https://api.cloudflare.com/client/v4/accounts/${context.env.CF_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${context.env.CF_API_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ messages: allMessages, max_tokens: 300 }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          reply = data.result?.response;
+        }
+      } catch (e) {
+        console.error('Workers AI REST error:', e.message);
       }
     }
 
