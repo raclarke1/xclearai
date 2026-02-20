@@ -59,7 +59,7 @@ export async function onRequestPost(context) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-3-5-haiku-20241022',
+        model: 'claude-3-haiku-20240307',
         max_tokens: 300,
         system: systemMsg,
         messages: chatMsgs,
@@ -123,7 +123,7 @@ async function handleEndChat(messages, visitorInfo, env, corsHeaders) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-3-5-haiku-20241022',
+        model: 'claude-3-haiku-20240307',
         max_tokens: 500,
         system: `Analyze this chat and extract a lead summary. Return JSON:
 - name, company, industry, size, email, phone (or "Unknown"/null)
