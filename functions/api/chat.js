@@ -68,9 +68,18 @@ export async function onRequestPost(context) {
 
     const data = await response.json();
 
-    if (data.error) {
-      console.error('Anthropic error:', JSON.stringify(data.error));
-      return new Response(JSON.stringify({ error: 'AI temporarily unavailable' }), {
+    if (data.error || data.type === 'error') {
+      console.error('Anthropic error:', JSON.stringify(data));
+      const debugMsg = data.error?.message || data.message || 'Unknown error';
+      return new Response(JSON.stringify({ error: 'AI temporarily unavailable', debug: debugMsg }), {
+        status: 500,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (!data.content || !data.content[0]) {
+      console.error('Unexpected response:', JSON.stringify(data));
+      return new Response(JSON.stringify({ error: 'AI temporarily unavailable', debug: 'No content in response' }), {
         status: 500,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
